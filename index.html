@@ -24,6 +24,54 @@
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     line-height:1.5;
   }
+  .topnav{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:rgba(11,13,18,.85);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--panel-border);
+  }
+  .topnav-inner{
+    max-width:1200px;
+    margin:0 auto;
+    padding:14px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .topnav .brand{
+    font-size:13px;
+    font-weight:700;
+    color:var(--text);
+    text-decoration:none;
+    letter-spacing:.02em;
+  }
+  .topnav .brand span{color:var(--accent);}
+  .topnav .links{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+  }
+  .topnav .links a{
+    font-size:13px;
+    color:var(--text-dim);
+    text-decoration:none;
+    padding:6px 14px;
+    border-radius:20px;
+    border:1px solid transparent;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .topnav .links a:hover{
+    color:var(--text);
+    border-color:var(--panel-border);
+  }
+  .topnav .links a.active{
+    color:var(--text);
+    border-color:var(--accent-2);
+  }
   header{
     padding:48px 24px 32px;
     max-width:1200px;
@@ -212,6 +260,16 @@
 </head>
 <body>
 
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="index.html">Job Apocalypse <span>· Debunked</span></a>
+    <div class="links">
+      <a href="index.html" class="active">Storyboard</a>
+      <a href="script.html">Script</a>
+    </div>
+  </div>
+</nav>
+
 <header>
   <div class="eyebrow">Previsualization · Storyboard v1</div>
   <h1>Why Elon Musk is Wrong About the Job Apocalypse</h1>
@@ -222,10 +280,6 @@
     <span>Panels: <b>9</b></span>
     <span>Repo: <b>rifaterdemsahin/sep-1-future-of-jobs</b></span>
   </div>
-  <nav style="display:flex;justify-content:center;gap:14px;margin-top:22px;flex-wrap:wrap;">
-    <a href="index.html" style="font-size:13px;color:var(--text);text-decoration:none;border:1px solid var(--accent-2);padding:6px 14px;border-radius:20px;">Storyboard</a>
-    <a href="script.html" style="font-size:13px;color:var(--text-dim);text-decoration:none;border:1px solid var(--panel-border);padding:6px 14px;border-radius:20px;">Script</a>
-  </nav>
 </header>
 
 <main>
