@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Previsualisation — Why Elon Musk is Wrong About the Job Apocalypse</title>
+<title>🎞️ Previsualisation — Why Elon Musk is Wrong About the Job Apocalypse</title>
 <style>
   :root{
     --bg:#0b0d12;
@@ -245,6 +245,22 @@
     font-style:italic;
   }
 
+  .add-asset-btn{
+    align-self:flex-start;
+    margin-top:2px;
+    font-size:11px;
+    padding:4px 10px;
+    border-radius:20px;
+    border:1px solid var(--panel-border);
+    background:transparent;
+    color:var(--text-dim);
+    cursor:pointer;
+    transition:border-color .15s ease,color .15s ease,background .15s ease;
+    white-space:nowrap;
+  }
+  .add-asset-btn:hover{border-color:var(--accent-2);color:var(--text);}
+  .add-asset-btn.added{border-color:var(--warm);color:var(--warm);background:rgba(232,185,74,.08);}
+
   footer{
     max-width:1200px;
     margin:0 auto;
@@ -262,32 +278,33 @@
 
 <nav class="topnav">
   <div class="topnav-inner">
-    <a class="brand" href="index.html">Job Apocalypse <span>· Debunked</span></a>
+    <a class="brand" href="index.html">🎬 Job Apocalypse <span>· Debunked</span></a>
     <div class="links">
-      <a href="index.html">Research</a>
-      <a href="script.html">Script</a>
-      <a href="design.html">Design</a>
-      <a href="previsualisation.html" class="active">Previsualisation</a>
+      <a href="index.html">🔍 Research</a>
+      <a href="script.html">📝 Script</a>
+      <a href="design.html">🎨 Design</a>
+      <a href="previsualisation.html" class="active">🎞️ Previsualisation</a>
+      <a href="assets.html">🗂️ Assets</a>
     </div>
   </div>
 </nav>
 
 <header>
-  <div class="eyebrow">Previsualization · Storyboard v1</div>
+  <div class="eyebrow">🎞️ Previsualization · Storyboard v1</div>
   <h1>Why Elon Musk is Wrong About the Job Apocalypse</h1>
   <p class="sub">A Father's Perspective — 9-panel shot previsualization mapped to the script's hook, historical argument, infinite-permutation thesis, and human-insight conclusion.</p>
   <div class="meta-row">
-    <span>Runtime: <b>~4:30</b></span>
-    <span>Aspect: <b>16:9</b></span>
-    <span>Panels: <b>9</b></span>
-    <span>Repo: <b>rifaterdemsahin/sep-1-future-of-jobs</b></span>
+    <span>⏱️ Runtime: <b>~4:30</b></span>
+    <span>📐 Aspect: <b>16:9</b></span>
+    <span>🖼️ Panels: <b>9</b></span>
+    <span>🐙 Repo: <b>rifaterdemsahin/sep-1-future-of-jobs</b></span>
   </div>
 </header>
 
 <main>
   <div class="legend">
-    <span><span class="swatch cold"></span>Cold / fast-paced — Musk, headlines, apocalyptic framing</span>
-    <span><span class="swatch warm"></span>Warm / cinematic — daughters, history, human potential</span>
+    <span><span class="swatch cold"></span>❄️ Cold / fast-paced — Musk, headlines, apocalyptic framing</span>
+    <span><span class="swatch warm"></span>🔥 Warm / cinematic — daughters, history, human potential</span>
   </div>
 
   <div class="grid">
@@ -304,6 +321,7 @@
         <h3>Headline montage</h3>
         <p>Fast-cut news headlines: "The Future of AI and Jobs," humanoid robot tech coverage, lower-third overlays.</p>
         <p class="vo">"Elon Musk recently made a massive prediction…"</p>
+        <button class="add-asset-btn" data-id="shot-1" data-type="shot" data-source="Previsualisation" data-title="Panel 1 — Headline montage (0:00)" data-desc="Fast-cut news headlines: &quot;The Future of AI and Jobs,&quot; humanoid robot tech coverage, lower-third overlays.">➕ Add to Assets</button>
       </div>
     </div>
 
@@ -319,6 +337,7 @@
         <h3>Host, home studio</h3>
         <p>Warm, personal shot — creator direct to camera in a living-room studio. Establishes authentic personal stake.</p>
         <p class="vo">"I have skin in the game — I have two daughters…"</p>
+        <button class="add-asset-btn" data-id="shot-2" data-type="shot" data-source="Previsualisation" data-title="Panel 2 — Host, home studio (0:10)" data-desc="Warm, personal shot — creator direct to camera in a living-room studio. Establishes authentic personal stake.">➕ Add to Assets</button>
       </div>
     </div>
 
@@ -334,6 +353,7 @@
         <h3>Stone Age → Agriculture</h3>
         <p>Animated arrow transition: hand tool morphs into an early plow. Sets up historical technology-shift pattern.</p>
         <p class="vo">"Every single time humanity undergoes a leap, doom-sayers predict the end of work."</p>
+        <button class="add-asset-btn" data-id="shot-3" data-type="shot" data-source="Previsualisation" data-title="Panel 3 — Stone Age → Agriculture (0:30)" data-desc="Animated arrow transition: hand tool morphs into an early plow. Sets up historical technology-shift pattern.">➕ Add to Assets</button>
       </div>
     </div>
 
@@ -349,6 +369,7 @@
         <h3>Mainframe → PC</h3>
         <p>Vintage beige computer dissolves into a modern desktop with code on screen. Calculator/computer-era proof point.</p>
         <p class="vo">"The cost of doing math dropped to zero…"</p>
+        <button class="add-asset-btn" data-id="shot-4" data-type="shot" data-source="Previsualisation" data-title="Panel 4 — Mainframe → PC (1:05)" data-desc="Vintage beige computer dissolves into a modern desktop with code on screen. Calculator/computer-era proof point.">➕ Add to Assets</button>
       </div>
     </div>
 
@@ -364,6 +385,7 @@
         <h3>"Job Tree" branching diagram</h3>
         <p>Gold tree graphic expanding into new job-title branches: Prompt Engineer, Robot Fleet Manager, AI Safety Auditor.</p>
         <p class="vo">"Automation creates an infinite number of new permutations."</p>
+        <button class="add-asset-btn" data-id="shot-5" data-type="shot" data-source="Previsualisation" data-title="Panel 5 — &quot;Job Tree&quot; branching diagram (1:45)" data-desc="Gold tree graphic expanding into new job-title branches: Prompt Engineer, Robot Fleet Manager, AI Safety Auditor.">➕ Add to Assets</button>
       </div>
     </div>
 
@@ -379,6 +401,7 @@
         <h3>Daughter with holo-tablet</h3>
         <p>Girl in a yellow sweater interacts with a glowing, translucent tablet interface at home — bridges tech to family.</p>
         <p class="vo">"Which brings me back to my daughters."</p>
+        <button class="add-asset-btn" data-id="shot-6" data-type="shot" data-source="Previsualisation" data-title="Panel 6 — Daughter with holo-tablet (2:15)" data-desc="Girl in a yellow sweater interacts with a glowing, translucent tablet interface at home — bridges tech to family.">➕ Add to Assets</button>
       </div>
     </div>
 
@@ -394,6 +417,7 @@
         <h3>Host + daughter, holo-device</h3>
         <p>Father kneels beside daughter as she explores the holographic tablet together — human-tech partnership, not replacement.</p>
         <p class="vo">"My daughters are going to use math more than any generation before them."</p>
+        <button class="add-asset-btn" data-id="shot-7" data-type="shot" data-source="Previsualisation" data-title="Panel 7 — Host + daughter, holo-device (2:45)" data-desc="Father kneels beside daughter as she explores the holographic tablet together — human-tech partnership, not replacement.">➕ Add to Assets</button>
       </div>
     </div>
 
@@ -409,6 +433,7 @@
         <h3>Collaboration split-frame</h3>
         <p>Left: colleagues high-fiving in an office. Right: mentor and teen reviewing notes together — human judgment amplified by tools.</p>
         <p class="vo">"Human judgment, empathy, and creative direction… human potential explodes."</p>
+        <button class="add-asset-btn" data-id="shot-8" data-type="shot" data-source="Previsualisation" data-title="Panel 8 — Collaboration split-frame (3:15)" data-desc="Left: colleagues high-fiving in an office. Right: mentor and teen reviewing notes together — human judgment amplified by tools.">➕ Add to Assets</button>
       </div>
     </div>
 
@@ -424,6 +449,7 @@
         <h3>Host, direct address</h3>
         <p>Return to host on camera, grounded delivery, into subscribe/like CTA and end-screen cards.</p>
         <p class="vo">"The future is bright, jobs will evolve and expand…"</p>
+        <button class="add-asset-btn" data-id="shot-9" data-type="shot" data-source="Previsualisation" data-title="Panel 9 — Host, direct address (3:50)" data-desc="Return to host on camera, grounded delivery, into subscribe/like CTA and end-screen cards.">➕ Add to Assets</button>
       </div>
     </div>
 
@@ -431,8 +457,9 @@
 </main>
 
 <footer>
-  Previsualization board for <a href="https://github.com/rifaterdemsahin/sep-1-future-of-jobs" target="_blank" rel="noopener">rifaterdemsahin/sep-1-future-of-jobs</a> — built for pre-production planning before shoot/edit.
+  🎞️ Previsualization board for <a href="https://github.com/rifaterdemsahin/sep-1-future-of-jobs" target="_blank" rel="noopener">rifaterdemsahin/sep-1-future-of-jobs</a> — built for pre-production planning before shoot/edit. See everything you've saved in 🗂️ <a href="assets.html">Assets</a>.
 </footer>
 
+<script src="assets.js"></script>
 </body>
 </html>

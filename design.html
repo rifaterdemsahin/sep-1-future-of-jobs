@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Design — Why Elon Musk is Wrong About the Job Apocalypse</title>
+<title>🎨 Design — Why Elon Musk is Wrong About the Job Apocalypse</title>
 <style>
   :root{
     --bg:#0b0d12;
@@ -221,24 +221,39 @@
   }
   footer a{color:var(--accent-2);text-decoration:none;}
   footer a:hover{text-decoration:underline;}
+
+  .add-asset-btn{
+    font-size:11px;
+    padding:4px 10px;
+    border-radius:20px;
+    border:1px solid var(--panel-border);
+    background:transparent;
+    color:var(--text-dim);
+    cursor:pointer;
+    transition:border-color .15s ease,color .15s ease,background .15s ease;
+    white-space:nowrap;
+  }
+  .add-asset-btn:hover{border-color:var(--accent-2);color:var(--text);}
+  .add-asset-btn.added{border-color:var(--warm);color:var(--warm);background:rgba(232,185,74,.08);}
 </style>
 </head>
 <body>
 
 <nav class="topnav">
   <div class="topnav-inner">
-    <a class="brand" href="index.html">Job Apocalypse <span>· Debunked</span></a>
+    <a class="brand" href="index.html">🎬 Job Apocalypse <span>· Debunked</span></a>
     <div class="links">
-      <a href="index.html">Research</a>
-      <a href="script.html">Script</a>
-      <a href="design.html" class="active">Design</a>
-      <a href="previsualisation.html">Previsualisation</a>
+      <a href="index.html">🔍 Research</a>
+      <a href="script.html">📝 Script</a>
+      <a href="design.html" class="active">🎨 Design</a>
+      <a href="previsualisation.html">🎞️ Previsualisation</a>
+      <a href="assets.html">🗂️ Assets</a>
     </div>
   </div>
 </nav>
 
 <header>
-  <div class="eyebrow">Visual Style Guide · v1</div>
+  <div class="eyebrow">🎨 Visual Style Guide · v1</div>
   <h1>Design</h1>
   <p class="sub">The look, palette, typography, and pacing rules that carry the video's central visual argument: cold/fast for the apocalyptic framing, warm/cinematic for human potential.</p>
 </header>
@@ -246,10 +261,10 @@
 <main>
 
   <section class="block">
-    <h2>Core Editing Rule</h2>
+    <h2>🎛️ Core Editing Rule</h2>
     <div class="contrast-row">
       <div class="mood-card cold">
-        <h3>Cold &amp; Fast — Musk / Apocalypse beats</h3>
+        <h3>❄️ Cold &amp; Fast — Musk / Apocalypse beats</h3>
         <ul>
           <li>Desaturated blues, high contrast, harder cuts</li>
           <li>News headline overlays, screen-recording textures</li>
@@ -258,7 +273,7 @@
         </ul>
       </div>
       <div class="mood-card warm">
-        <h3>Warm &amp; Cinematic — Family / Human potential beats</h3>
+        <h3>🔥 Warm &amp; Cinematic — Family / Human potential beats</h3>
         <ul>
           <li>Golden-hour tones, soft contrast, steady pacing</li>
           <li>Handheld-but-composed home footage, natural light</li>
@@ -270,7 +285,7 @@
   </section>
 
   <section class="block">
-    <h2>Palette</h2>
+    <h2>🎨 Palette</h2>
     <div class="swatches">
       <div class="swatch-card">
         <div class="swatch-fill" style="background:#0b0d12;"></div>
@@ -300,7 +315,7 @@
   </section>
 
   <section class="block">
-    <h2>Typography</h2>
+    <h2>🔤 Typography</h2>
     <div class="type-sample">
       <div class="label">Title / on-screen headline</div>
       <div class="sample-h">Why Elon Musk is Wrong</div>
@@ -313,24 +328,44 @@
   </section>
 
   <section class="block">
-    <h2>Motion Graphic Specs</h2>
+    <h2>✨ Motion Graphic Specs</h2>
     <table class="spec-table">
-      <tr><th>Graphic</th><th>Style</th><th>Section</th></tr>
-      <tr><td>Stone Age → Agriculture arrow</td><td class="dim">Flat icon morph, cold-to-warm gradient wipe</td><td class="dim">Section 1</td></tr>
-      <tr><td>Mainframe → PC dissolve</td><td class="dim">Cross-dissolve, CRT scanline texture on outgoing frame</td><td class="dim">Section 1</td></tr>
-      <tr><td>"Job Tree" branching diagram</td><td class="dim">Gold line-art, grows outward on VO beat, serif job-title labels</td><td class="dim">Section 2</td></tr>
-      <tr><td>End-screen CTA cards</td><td class="dim">Subscribe/Like icon pop-in, brand gold accent</td><td class="dim">Outro</td></tr>
+      <tr><th>Graphic</th><th>Style</th><th>Section</th><th></th></tr>
+      <tr>
+        <td>🪨 Stone Age → Agriculture arrow</td>
+        <td class="dim">Flat icon morph, cold-to-warm gradient wipe</td>
+        <td class="dim">Section 1</td>
+        <td><button class="add-asset-btn" data-id="spec-stoneage" data-type="spec" data-source="Design" data-title="Stone Age → Agriculture arrow" data-desc="Flat icon morph, cold-to-warm gradient wipe. Section 1.">➕ Add to Assets</button></td>
+      </tr>
+      <tr>
+        <td>🖥️ Mainframe → PC dissolve</td>
+        <td class="dim">Cross-dissolve, CRT scanline texture on outgoing frame</td>
+        <td class="dim">Section 1</td>
+        <td><button class="add-asset-btn" data-id="spec-mainframe" data-type="spec" data-source="Design" data-title="Mainframe → PC dissolve" data-desc="Cross-dissolve, CRT scanline texture on outgoing frame. Section 1.">➕ Add to Assets</button></td>
+      </tr>
+      <tr>
+        <td>🌳 "Job Tree" branching diagram</td>
+        <td class="dim">Gold line-art, grows outward on VO beat, serif job-title labels</td>
+        <td class="dim">Section 2</td>
+        <td><button class="add-asset-btn" data-id="spec-jobtree" data-type="spec" data-source="Design" data-title="&quot;Job Tree&quot; branching diagram" data-desc="Gold line-art, grows outward on VO beat, serif job-title labels. Section 2.">➕ Add to Assets</button></td>
+      </tr>
+      <tr>
+        <td>✅ End-screen CTA cards</td>
+        <td class="dim">Subscribe/Like icon pop-in, brand gold accent</td>
+        <td class="dim">Outro</td>
+        <td><button class="add-asset-btn" data-id="spec-cta" data-type="spec" data-source="Design" data-title="End-screen CTA cards" data-desc="Subscribe/Like icon pop-in, brand gold accent. Outro.">➕ Add to Assets</button></td>
+      </tr>
     </table>
   </section>
 
   <section class="block">
-    <h2>Pacing Across the Timeline</h2>
+    <h2>⏱️ Pacing Across the Timeline</h2>
     <div class="pacing">
-      <div class="p1">Hook</div>
-      <div class="p2">Sec. 1</div>
-      <div class="p3">Sec. 2</div>
-      <div class="p4">Sec. 3</div>
-      <div class="p5">Outro</div>
+      <div class="p1">🪝 Hook</div>
+      <div class="p2">🪨 Sec. 1</div>
+      <div class="p3">🌳 Sec. 2</div>
+      <div class="p4">🧮 Sec. 3</div>
+      <div class="p5">🎬 Outro</div>
     </div>
     <div class="pacing-legend">
       <span>0:00</span>
@@ -342,8 +377,9 @@
 </main>
 
 <footer>
-  Design guide for <a href="https://github.com/rifaterdemsahin/sep-1-future-of-jobs" target="_blank" rel="noopener">rifaterdemsahin/sep-1-future-of-jobs</a> — see the <a href="previsualisation.html">previsualisation</a> for how this applies shot-by-shot.
+  🎨 Design guide for <a href="https://github.com/rifaterdemsahin/sep-1-future-of-jobs" target="_blank" rel="noopener">rifaterdemsahin/sep-1-future-of-jobs</a> — see the <a href="previsualisation.html">previsualisation</a> for how this applies shot-by-shot. See everything you've saved in 🗂️ <a href="assets.html">Assets</a>.
 </footer>
 
+<script src="assets.js"></script>
 </body>
 </html>
