@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Storyboard — Why Elon Musk is Wrong About the Job Apocalypse</title>
+<title>Research — Why Elon Musk is Wrong About the Job Apocalypse</title>
 <style>
   :root{
     --bg:#0b0d12;
@@ -22,7 +22,7 @@
     background:var(--bg);
     color:var(--text);
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    line-height:1.5;
+    line-height:1.6;
   }
   .topnav{
     position:sticky;
@@ -50,11 +50,7 @@
     letter-spacing:.02em;
   }
   .topnav .brand span{color:var(--accent);}
-  .topnav .links{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-  }
+  .topnav .links{display:flex;gap:8px;flex-wrap:wrap;}
   .topnav .links a{
     font-size:13px;
     color:var(--text-dim);
@@ -64,17 +60,12 @@
     border:1px solid transparent;
     transition:border-color .15s ease, color .15s ease;
   }
-  .topnav .links a:hover{
-    color:var(--text);
-    border-color:var(--panel-border);
-  }
-  .topnav .links a.active{
-    color:var(--text);
-    border-color:var(--accent-2);
-  }
+  .topnav .links a:hover{color:var(--text);border-color:var(--panel-border);}
+  .topnav .links a.active{color:var(--text);border-color:var(--accent-2);}
+
   header{
     padding:48px 24px 32px;
-    max-width:1200px;
+    max-width:1000px;
     margin:0 auto;
     text-align:center;
   }
@@ -86,167 +77,117 @@
     font-weight:600;
   }
   header h1{
-    font-size:clamp(24px,4vw,40px);
+    font-size:clamp(24px,4vw,38px);
     margin:10px 0 12px;
     font-weight:700;
   }
   header p.sub{
     color:var(--text-dim);
-    max-width:680px;
+    max-width:640px;
     margin:0 auto;
     font-size:15px;
   }
-  .meta-row{
-    display:flex;
-    justify-content:center;
-    gap:24px;
-    flex-wrap:wrap;
-    margin-top:24px;
-    font-size:13px;
-    color:var(--text-dim);
-  }
-  .meta-row span b{color:var(--text);}
 
   main{
-    max-width:1200px;
+    max-width:1000px;
     margin:0 auto;
-    padding:0 24px 80px;
+    padding:0 24px 90px;
   }
 
-  .legend{
-    display:flex;
-    justify-content:center;
-    gap:28px;
-    flex-wrap:wrap;
-    margin:32px 0 40px;
+  section.block{margin-bottom:44px;}
+  section.block h2{
     font-size:13px;
-    color:var(--text-dim);
-  }
-  .legend .swatch{
-    display:inline-block;
-    width:12px;height:12px;
-    border-radius:3px;
-    margin-right:6px;
-    vertical-align:middle;
-  }
-  .swatch.cold{background:var(--cold);}
-  .swatch.warm{background:var(--warm);}
-
-  .grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-  }
-  @media (max-width:900px){
-    .grid{grid-template-columns:repeat(2,1fr);}
-  }
-  @media (max-width:600px){
-    .grid{grid-template-columns:1fr;}
-  }
-
-  .card{
-    background:var(--panel);
-    border:1px solid var(--panel-border);
-    border-radius:12px;
-    overflow:hidden;
-    display:flex;
-    flex-direction:column;
-    transition:transform .15s ease, border-color .15s ease;
-  }
-  .card:hover{
-    transform:translateY(-2px);
-    border-color:#3a4258;
-  }
-  .card.cold{border-top:3px solid var(--cold);}
-  .card.warm{border-top:3px solid var(--warm);}
-
-  .frame{
-    aspect-ratio:16/9;
-    position:relative;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:
-      radial-gradient(circle at 30% 20%, rgba(90,176,255,.10), transparent 60%),
-      linear-gradient(135deg,#171b26,#0e1017);
-    border-bottom:1px solid var(--panel-border);
-    overflow:hidden;
-  }
-  .frame .num{
-    position:absolute;
-    top:10px;
-    left:10px;
-    width:26px;height:26px;
-    border-radius:50%;
-    background:rgba(0,0,0,.55);
-    border:1px solid rgba(255,255,255,.15);
-    display:flex;align-items:center;justify-content:center;
-    font-size:13px;font-weight:700;
-    color:var(--text);
-  }
-  .frame .tc{
-    position:absolute;
-    top:10px;right:10px;
-    font-size:11px;
-    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
-    background:rgba(0,0,0,.55);
-    border:1px solid rgba(255,255,255,.15);
-    padding:3px 8px;
-    border-radius:20px;
-    color:var(--text-dim);
-  }
-  .frame .icon{
-    font-size:44px;
-    opacity:.85;
-    filter:drop-shadow(0 2px 8px rgba(0,0,0,.4));
-  }
-  .frame .shot-tag{
-    position:absolute;
-    bottom:10px;left:10px;
-    font-size:10.5px;
-    letter-spacing:.06em;
     text-transform:uppercase;
-    color:var(--text-dim);
-    background:rgba(0,0,0,.5);
-    padding:3px 8px;
-    border-radius:20px;
-  }
-
-  .body{
-    padding:16px 18px 18px;
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-    flex:1;
-  }
-  .body h3{
-    margin:0;
-    font-size:15px;
-    font-weight:650;
-  }
-  .body .section{
-    font-size:11px;
-    text-transform:uppercase;
-    letter-spacing:.08em;
+    letter-spacing:.1em;
     color:var(--accent-2);
     font-weight:700;
+    margin:0 0 16px;
   }
-  .body p{
-    margin:0;
-    font-size:13px;
+  section.block p.intro{
     color:var(--text-dim);
-  }
-  .body .vo{
-    margin-top:6px;
-    padding-top:8px;
-    border-top:1px dashed var(--panel-border);
-    font-size:12.5px;
-    color:#c8cdd8;
-    font-style:italic;
+    font-size:14px;
+    margin:-8px 0 18px;
   }
 
+  .link-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+    gap:14px;
+  }
+  .link-card{
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    border-radius:10px;
+    padding:16px 18px;
+    text-decoration:none;
+    color:var(--text);
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    transition:border-color .15s ease, transform .15s ease;
+  }
+  .link-card:hover{border-color:var(--accent-2);transform:translateY(-2px);}
+  .link-card .tag{
+    font-size:10.5px;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:var(--accent);
+    font-weight:700;
+  }
+  .link-card .title{font-size:14px;font-weight:600;}
+  .link-card .url{font-size:11.5px;color:var(--text-dim);word-break:break-all;}
+
+  table.cmp{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    border-radius:10px;
+    overflow:hidden;
+    font-size:13px;
+  }
+  table.cmp th, table.cmp td{
+    text-align:left;
+    padding:12px 14px;
+    border-bottom:1px solid var(--panel-border);
+    vertical-align:top;
+  }
+  table.cmp th{
+    color:var(--accent-2);
+    text-transform:uppercase;
+    font-size:10.5px;
+    letter-spacing:.05em;
+  }
+  table.cmp tr:last-child td{border-bottom:none;}
+  table.cmp td.dim{color:var(--text-dim);}
+  .wrap-scroll{overflow-x:auto;}
+
+  .shotlist{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .shot-row{
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    border-left:3px solid var(--cold);
+    border-radius:8px;
+    padding:14px 18px;
+  }
+  .shot-row.warm{border-left-color:var(--warm);}
+  .shot-row .sec{
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:var(--text-dim);
+    font-weight:700;
+    margin-bottom:4px;
+  }
+  .shot-row .items{font-size:13.5px;color:var(--text-dim);}
+  .shot-row .items b{color:var(--text);font-weight:600;}
+
   footer{
-    max-width:1200px;
+    max-width:1000px;
     margin:0 auto;
     padding:24px;
     text-align:center;
@@ -264,172 +205,155 @@
   <div class="topnav-inner">
     <a class="brand" href="index.html">Job Apocalypse <span>· Debunked</span></a>
     <div class="links">
-      <a href="index.html" class="active">Storyboard</a>
+      <a href="index.html" class="active">Research</a>
       <a href="script.html">Script</a>
+      <a href="design.html">Design</a>
+      <a href="previsualisation.html">Previsualisation</a>
     </div>
   </div>
 </nav>
 
 <header>
-  <div class="eyebrow">Previsualization · Storyboard v1</div>
-  <h1>Why Elon Musk is Wrong About the Job Apocalypse</h1>
-  <p class="sub">A Father's Perspective — 9-panel shot previsualization mapped to the script's hook, historical argument, infinite-permutation thesis, and human-insight conclusion.</p>
-  <div class="meta-row">
-    <span>Runtime: <b>~4:30</b></span>
-    <span>Aspect: <b>16:9</b></span>
-    <span>Panels: <b>9</b></span>
-    <span>Repo: <b>rifaterdemsahin/sep-1-future-of-jobs</b></span>
-  </div>
+  <div class="eyebrow">Pre-production · Research v1</div>
+  <h1>Research</h1>
+  <p class="sub">Source material, counter-arguments, and footage leads gathered before writing the script — the raw inputs for "Why Elon Musk is Wrong About the Job Apocalypse."</p>
 </header>
 
 <main>
-  <div class="legend">
-    <span><span class="swatch cold"></span>Cold / fast-paced — Musk, headlines, apocalyptic framing</span>
-    <span><span class="swatch warm"></span>Warm / cinematic — daughters, history, human potential</span>
-  </div>
 
-  <div class="grid">
+  <section class="block">
+    <h2>Source Links</h2>
+    <p class="intro">Primary references used to build the argument and counter-argument.</p>
+    <div class="link-grid">
+      <a class="link-card" href="https://github.com/rifaterdemsahin/sep-1-future-of-jobs" target="_blank" rel="noopener">
+        <span class="tag">Repo</span>
+        <span class="title">rifaterdemsahin/sep-1-future-of-jobs</span>
+        <span class="url">github.com/rifaterdemsahin/sep-1-future-of-jobs</span>
+      </a>
+      <a class="link-card" href="https://gemini.google.com/app/732deb1f1441e2fd" target="_blank" rel="noopener">
+        <span class="tag">Research chat</span>
+        <span class="title">Musk's Job Apocalypse Debunked — Gemini</span>
+        <span class="url">gemini.google.com/app/732deb1f1441e2fd</span>
+      </a>
+      <a class="link-card" href="https://flow.google.com/u/1/project/ec557d11-2773-4887-babb-f12b65e4b7b7/edit/88f11cfc-17da-476b-8ff3-7e8bb5790963" target="_blank" rel="noopener">
+        <span class="tag">Google Flow</span>
+        <span class="title">Sep 07 · elon sep1 project</span>
+        <span class="url">flow.google.com/…/88f11cfc-17da-476b-8ff3-7e8bb5790963</span>
+      </a>
+      <a class="link-card" href="https://www.youtube.com/watch?v=BZo3n3Bkpn0" target="_blank" rel="noopener">
+        <span class="tag">YouTube · Musk thesis</span>
+        <span class="title">'Work Will Be Optional': Elon Musk's BIG Prediction</span>
+        <span class="url">youtube.com/watch?v=BZo3n3Bkpn0</span>
+      </a>
+      <a class="link-card" href="https://www.youtube.com/watch?v=HUP6Z5voiS8" target="_blank" rel="noopener">
+        <span class="tag">YouTube · Optimus</span>
+        <span class="title">Elon Musk REVEALS Tesla Bot (full presentation)</span>
+        <span class="url">youtube.com/watch?v=HUP6Z5voiS8</span>
+      </a>
+      <a class="link-card" href="https://www.youtube.com/shorts/r0uuhk2RhGM" target="_blank" rel="noopener">
+        <span class="tag">YouTube · Optimus</span>
+        <span class="title">Tesla Optimus V3 Mass production by 2026</span>
+        <span class="url">youtube.com/shorts/r0uuhk2RhGM</span>
+      </a>
+      <a class="link-card" href="https://www.youtube.com/watch?v=YxjL1wLLnHE" target="_blank" rel="noopener">
+        <span class="tag">YouTube · counterpoint</span>
+        <span class="title">OpenAI's Sam Altman on Astra Model Debut, Benefits of AI</span>
+        <span class="url">youtube.com/watch?v=YxjL1wLLnHE</span>
+      </a>
+      <a class="link-card" href="https://www.youtube.com/watch?v=U4zGLSlLo5A" target="_blank" rel="noopener">
+        <span class="tag">YouTube · counterpoint</span>
+        <span class="title">Bill Gates Changes His Mind on AI</span>
+        <span class="url">youtube.com/watch?v=U4zGLSlLo5A</span>
+      </a>
+      <a class="link-card" href="https://www.youtube.com/watch?v=cpraXaw7dyc" target="_blank" rel="noopener">
+        <span class="tag">YouTube · Optimus</span>
+        <span class="title">Optimus — Gen 2 | Tesla</span>
+        <span class="url">youtube.com/watch?v=cpraXaw7dyc</span>
+      </a>
+      <a class="link-card" href="https://www.youtube.com/watch?v=h3AtWdeu_G0" target="_blank" rel="noopener">
+        <span class="tag">YouTube · debate</span>
+        <span class="title">Bernie vs. Claude</span>
+        <span class="url">youtube.com/watch?v=h3AtWdeu_G0</span>
+      </a>
+    </div>
+  </section>
 
-    <div class="card cold">
-      <div class="frame">
-        <div class="num">1</div>
-        <div class="tc">0:00</div>
-        <div class="icon">📰🤖</div>
-        <div class="shot-tag">Montage · Screen Overlay</div>
+  <section class="block">
+    <h2>Perspective Comparison</h2>
+    <p class="intro">The three main framings found while researching, weighed against the video's own thesis.</p>
+    <div class="wrap-scroll">
+      <table class="cmp">
+        <tr>
+          <th>View</th>
+          <th>Core Argument</th>
+          <th>Pros</th>
+          <th>Cons</th>
+        </tr>
+        <tr>
+          <td><b>Job Apocalypse</b><br><span class="dim">Musk, alt-tech, doom projections</span></td>
+          <td class="dim">AI + humanoid robotics make human labor optional — cognitive and physical tasks scale at near-zero marginal cost.</td>
+          <td class="dim">Unlocks an "era of abundance"; eliminates dangerous, repetitive labor.</td>
+          <td class="dim">Risk of mass structural unemployment before markets adjust; concentrates power in a few platforms.</td>
+        </tr>
+        <tr>
+          <td><b>Infinite Permutation</b><br><span class="dim">This video's thesis</span></td>
+          <td class="dim">Technology lowers baseline task costs, unleashing new demand, markets, and specialized industries.</td>
+          <td class="dim">Historical precedent (calculators, PCs, internet) multiplied net employment; human judgment becomes more valuable.</td>
+          <td class="dim">Requires major re-skilling; short-term displacement during the transition.</td>
+        </tr>
+        <tr>
+          <td><b>Skeptic / Marketing</b><br><span class="dim">Economic analysts, media critics</span></td>
+          <td class="dim">Apocalypse predictions are hype that inflates AI-startup valuations.</td>
+          <td class="dim">Prevents panic; focuses on real near-term gains over sci-fi scenarios.</td>
+          <td class="dim">Underestimating real progress could leave workforce policy unprepared.</td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Footage Shot List</h2>
+    <p class="intro">B-roll and archival categories mapped to script sections, with YouTube search terms to source them.</p>
+    <div class="shotlist">
+      <div class="shot-row">
+        <div class="sec">Hook</div>
+        <div class="items"><b>Tesla Optimus / Elon clips</b> — search "Tesla Bot presentation AI Day", "Elon Musk unveils Optimus robot". <b>Headlines overlay</b> — screen-recorded news headline graphics.</div>
       </div>
-      <div class="body">
-        <div class="section">Hook</div>
-        <h3>Headline montage</h3>
-        <p>Fast-cut news headlines: "The Future of AI and Jobs," humanoid robot tech coverage, lower-third overlays.</p>
-        <p class="vo">"Elon Musk recently made a massive prediction…"</p>
+      <div class="shot-row warm">
+        <div class="sec">Hook — personal</div>
+        <div class="items">Candid home footage or stylized shot with the creator's daughters, to establish the personal stake.</div>
+      </div>
+      <div class="shot-row">
+        <div class="sec">Section 1 — History</div>
+        <div class="items">Stone Age / early agriculture illustrations; black-and-white assembly-line archive (Ford Model T); 1980s office footage — search "1980s USA office workers on phones and computers Kinolibrary".</div>
+      </div>
+      <div class="shot-row">
+        <div class="sec">Section 1 — Modern contrast</div>
+        <div class="items">Automated EV plant with robotic welding arms; financial graphs animating across a laptop screen.</div>
+      </div>
+      <div class="shot-row warm">
+        <div class="sec">Section 2 — Emerging jobs</div>
+        <div class="items">Technician with VR/AR headset and a holographic digital twin; warehouse AGV robot fleet oversight; creator editing video with AI tools.</div>
+      </div>
+      <div class="shot-row warm">
+        <div class="sec">Section 3 — Math &amp; human insight</div>
+        <div class="items">Kids on tablets, coding, or building with Lego Mindstorms; teenager solving equations on a glass whiteboard; engineers collaborating around blueprints.</div>
+      </div>
+      <div class="shot-row">
+        <div class="sec">Advanced robotics reference</div>
+        <div class="items">Boston Dynamics Atlas — search "Boston Dynamics Atlas humanoid upgrade" or "Boston Dynamics research run" for high-energy contrast footage.</div>
+      </div>
+      <div class="shot-row warm">
+        <div class="sec">Outro</div>
+        <div class="items">Sunrise over a futuristic city skyline; a young girl looking toward the horizon — closing image of optimism.</div>
       </div>
     </div>
+  </section>
 
-    <div class="card warm">
-      <div class="frame">
-        <div class="num">2</div>
-        <div class="tc">0:10</div>
-        <div class="icon">🎙️</div>
-        <div class="shot-tag">Talking Head</div>
-      </div>
-      <div class="body">
-        <div class="section">Hook</div>
-        <h3>Host, home studio</h3>
-        <p>Warm, personal shot — creator direct to camera in a living-room studio. Establishes authentic personal stake.</p>
-        <p class="vo">"I have skin in the game — I have two daughters…"</p>
-      </div>
-    </div>
-
-    <div class="card cold">
-      <div class="frame">
-        <div class="num">3</div>
-        <div class="tc">0:30</div>
-        <div class="icon">🪨➡️🌾</div>
-        <div class="shot-tag">Graphic · Transition</div>
-      </div>
-      <div class="body">
-        <div class="section">Section 1</div>
-        <h3>Stone Age → Agriculture</h3>
-        <p>Animated arrow transition: hand tool morphs into an early plow. Sets up historical technology-shift pattern.</p>
-        <p class="vo">"Every single time humanity undergoes a leap, doom-sayers predict the end of work."</p>
-      </div>
-    </div>
-
-    <div class="card cold">
-      <div class="frame">
-        <div class="num">4</div>
-        <div class="tc">1:05</div>
-        <div class="icon">🖥️➡️💻</div>
-        <div class="shot-tag">Graphic · Transition</div>
-      </div>
-      <div class="body">
-        <div class="section">Section 1</div>
-        <h3>Mainframe → PC</h3>
-        <p>Vintage beige computer dissolves into a modern desktop with code on screen. Calculator/computer-era proof point.</p>
-        <p class="vo">"The cost of doing math dropped to zero…"</p>
-      </div>
-    </div>
-
-    <div class="card warm">
-      <div class="frame">
-        <div class="num">5</div>
-        <div class="tc">1:45</div>
-        <div class="icon">🌳</div>
-        <div class="shot-tag">Motion Graphic</div>
-      </div>
-      <div class="body">
-        <div class="section">Section 2</div>
-        <h3>"Job Tree" branching diagram</h3>
-        <p>Gold tree graphic expanding into new job-title branches: Prompt Engineer, Robot Fleet Manager, AI Safety Auditor.</p>
-        <p class="vo">"Automation creates an infinite number of new permutations."</p>
-      </div>
-    </div>
-
-    <div class="card warm">
-      <div class="frame">
-        <div class="num">6</div>
-        <div class="tc">2:15</div>
-        <div class="icon">🧒📱</div>
-        <div class="shot-tag">B-Roll · Close-up</div>
-      </div>
-      <div class="body">
-        <div class="section">Section 2 → 3</div>
-        <h3>Daughter with holo-tablet</h3>
-        <p>Girl in a yellow sweater interacts with a glowing, translucent tablet interface at home — bridges tech to family.</p>
-        <p class="vo">"Which brings me back to my daughters."</p>
-      </div>
-    </div>
-
-    <div class="card warm">
-      <div class="frame">
-        <div class="num">7</div>
-        <div class="tc">2:45</div>
-        <div class="icon">👨‍👧✨</div>
-        <div class="shot-tag">B-Roll · Two-shot</div>
-      </div>
-      <div class="body">
-        <div class="section">Section 3</div>
-        <h3>Host + daughter, holo-device</h3>
-        <p>Father kneels beside daughter as she explores the holographic tablet together — human-tech partnership, not replacement.</p>
-        <p class="vo">"My daughters are going to use math more than any generation before them."</p>
-      </div>
-    </div>
-
-    <div class="card warm">
-      <div class="frame">
-        <div class="num">8</div>
-        <div class="tc">3:15</div>
-        <div class="icon">🤝📝</div>
-        <div class="shot-tag">Split Screen · B-Roll</div>
-      </div>
-      <div class="body">
-        <div class="section">Section 3</div>
-        <h3>Collaboration split-frame</h3>
-        <p>Left: colleagues high-fiving in an office. Right: mentor and teen reviewing notes together — human judgment amplified by tools.</p>
-        <p class="vo">"Human judgment, empathy, and creative direction… human potential explodes."</p>
-      </div>
-    </div>
-
-    <div class="card cold">
-      <div class="frame">
-        <div class="num">9</div>
-        <div class="tc">3:50</div>
-        <div class="icon">🎙️✅</div>
-        <div class="shot-tag">Talking Head · CTA</div>
-      </div>
-      <div class="body">
-        <div class="section">Outro</div>
-        <h3>Host, direct address</h3>
-        <p>Return to host on camera, grounded delivery, into subscribe/like CTA and end-screen cards.</p>
-        <p class="vo">"The future is bright, jobs will evolve and expand…"</p>
-      </div>
-    </div>
-
-  </div>
 </main>
 
 <footer>
-  Previsualization board for <a href="https://github.com/rifaterdemsahin/sep-1-future-of-jobs" target="_blank" rel="noopener">rifaterdemsahin/sep-1-future-of-jobs</a> — built for pre-production planning before shoot/edit.
+  Research notes for <a href="https://github.com/rifaterdemsahin/sep-1-future-of-jobs" target="_blank" rel="noopener">rifaterdemsahin/sep-1-future-of-jobs</a> — continues into the <a href="script.html">script</a>.
 </footer>
 
 </body>
