@@ -1,0 +1,112 @@
+(function(){
+  // The pre-production pipeline: each stage feeds the next.
+  // Research -> Script -> Design -> Previsualisation
+  var STAGES = [
+    {
+      id: 'research',
+      emoji: '🔍',
+      label: 'Research',
+      file: 'index.html',
+      tagline: 'Source links, counter-arguments, footage leads',
+      feeds: 'Feeds the script: arguments and footage leads become voiceover beats and shot direction.'
+    },
+    {
+      id: 'script',
+      emoji: '📝',
+      label: 'Script',
+      file: 'script.html',
+      tagline: 'Voiceover beats, timed sections',
+      feeds: 'Feeds the design: each beat\'s mood (cold/apocalypse vs warm/human) drives the visual style rules.'
+    },
+    {
+      id: 'design',
+      emoji: '🎨',
+      label: 'Design',
+      file: 'design.html',
+      tagline: 'Palette, typography, pacing, motion specs',
+      feeds: 'Feeds the previsualisation: the three-act pacing and motion specs become the shot list.'
+    },
+    {
+      id: 'previsualisation',
+      emoji: '🎞️',
+      label: 'Previsualisation',
+      file: 'previsualisation.html',
+      tagline: 'Shot-by-shot board, ready for the edit',
+      feeds: 'Final stage before shoot/edit.'
+    }
+  ];
+
+  function injectStyles(){
+    if(document.getElementById('pipeline-styles')) return;
+    var style = document.createElement('style');
+    style.id = 'pipeline-styles';
+    style.textContent =
+      '.pipeline-wrap{max-width:1000px;margin:0 auto;padding:0 24px 32px;}'+
+      '.pipeline-track{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;'+
+        'background:var(--panel,#13161f);border:1px solid var(--panel-border,#232838);'+
+        'border-radius:12px;padding:14px 10px;}'+
+      '.pipeline-node{flex:1;min-width:120px;display:flex;flex-direction:column;align-items:center;'+
+        'gap:2px;text-decoration:none;padding:8px 6px;border-radius:8px;text-align:center;'+
+        'transition:background .15s ease;}'+
+      '.pipeline-node:hover{background:rgba(255,255,255,.04);}'+
+      '.pipeline-node .pn-num{font-size:10px;color:var(--text-dim,#9aa1b0);font-weight:700;}'+
+      '.pipeline-node .pn-emoji{font-size:20px;line-height:1.2;}'+
+      '.pipeline-node .pn-label{font-size:12px;font-weight:600;color:var(--text-dim,#9aa1b0);}'+
+      '.pipeline-node .pn-tagline{font-size:10px;color:var(--text-dim,#9aa1b0);opacity:.75;max-width:140px;}'+
+      '.pipeline-node.current .pn-label{color:var(--accent-2,#5ab0ff);}'+
+      '.pipeline-node.current{background:rgba(90,176,255,.08);border:1px solid var(--accent-2,#5ab0ff);}'+
+      '.pipeline-node.done .pn-label{color:var(--text,#eef0f4);}'+
+      '.pipeline-node.done .pn-emoji{opacity:.85;}'+
+      '.pipeline-arrow{align-self:center;color:var(--text-dim,#9aa1b0);font-size:16px;padding:0 4px;opacity:.5;}'+
+      '.pipeline-arrow.done{opacity:1;color:var(--accent,#e8b94a);}'+
+      '.pipeline-feeds{margin:10px 2px 0;font-size:12px;color:var(--text-dim,#9aa1b0);}'+
+      '.pipeline-nextprev{display:flex;justify-content:space-between;margin-top:10px;font-size:12.5px;}'+
+      '.pipeline-nextprev a{color:var(--accent-2,#5ab0ff);text-decoration:none;}'+
+      '.pipeline-nextprev a:hover{text-decoration:underline;}'+
+      '.pipeline-nextprev span{color:var(--text-dim,#9aa1b0);}';
+    document.head.appendChild(style);
+  }
+
+  function render(currentId){
+    var mount = document.getElementById('pipeline-stepper');
+    if(!mount) return;
+    injectStyles();
+
+    var idx = STAGES.findIndex(function(s){ return s.id === currentId; });
+    var track = '<div class="pipeline-track">';
+    STAGES.forEach(function(s, i){
+      var state = i < idx ? 'done' : (i === idx ? 'current' : 'upcoming');
+      track +=
+        '<a class="pipeline-node ' + state + '" href="' + s.file + '">' +
+          '<span class="pn-num">STAGE ' + (i + 1) + '</span>' +
+          '<span class="pn-emoji">' + s.emoji + '</span>' +
+          '<span class="pn-label">' + s.label + '</span>' +
+          '<span class="pn-tagline">' + s.tagline + '</span>' +
+        '</a>';
+      if(i < STAGES.length - 1){
+        track += '<span class="pipeline-arrow ' + (i < idx ? 'done' : '') + '">→</span>';
+      }
+    });
+    track += '</div>';
+
+    var current = STAGES[idx];
+    var feeds = current && current.feeds
+      ? '<p class="pipeline-feeds">➡️ ' + current.feeds + '</p>'
+      : '';
+
+    var prev = STAGES[idx - 1];
+    var next = STAGES[idx + 1];
+    var nextprev =
+      '<div class="pipeline-nextprev">' +
+        (prev ? '<a href="' + prev.file + '">← Back to ' + prev.label + '</a>' : '<span></span>') +
+        (next ? '<a href="' + next.file + '">Next: ' + next.label + ' →</a>' : '<span></span>') +
+      '</div>';
+
+    mount.innerHTML = track + feeds + nextprev;
+  }
+
+  window.Pipeline = {
+    STAGES: STAGES,
+    render: render
+  };
+})();
