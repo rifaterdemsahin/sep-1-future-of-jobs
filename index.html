@@ -153,6 +153,37 @@
   .add-asset-btn:hover{border-color:var(--accent-2);color:var(--text);}
   .add-asset-btn.added{border-color:var(--warm);color:var(--warm);background:rgba(232,185,74,.08);}
 
+  .star-rating{display:flex;gap:2px;}
+  .star-rating .star{
+    font-size:15px;
+    line-height:1;
+    color:var(--panel-border);
+    cursor:pointer;
+    user-select:none;
+    transition:color .1s ease;
+  }
+  .star-rating .star:hover{color:var(--accent);}
+  .star-rating .star.filled{color:var(--accent);}
+
+  .sort-bar{
+    display:flex;
+    justify-content:flex-end;
+    margin:-8px 0 14px;
+  }
+  .reset-order-btn{
+    align-self:flex-start;
+    font-size:11px;
+    padding:4px 10px;
+    border-radius:20px;
+    border:1px solid var(--panel-border);
+    background:transparent;
+    color:var(--text-dim);
+    cursor:pointer;
+    transition:border-color .15s ease,color .15s ease;
+    white-space:nowrap;
+  }
+  .reset-order-btn:hover{border-color:var(--accent-2);color:var(--text);}
+
   table.cmp{
     width:100%;
     border-collapse:collapse;
@@ -176,6 +207,7 @@
   }
   table.cmp tr:last-child td{border-bottom:none;}
   table.cmp td.dim{color:var(--text-dim);}
+  table.cmp td.star-cell{white-space:nowrap;}
   .wrap-scroll{overflow-x:auto;}
 
   .shotlist{
@@ -249,8 +281,11 @@
 
   <section class="block">
     <h2>🔗 Source Links</h2>
-    <p class="intro">Primary references used to build the argument and counter-argument.</p>
-    <div class="link-grid">
+    <p class="intro">Primary references used to build the argument and counter-argument. Rate each source and it re-sorts by stars automatically — your ratings are saved in a cookie on this browser.</p>
+    <div class="sort-bar">
+      <button class="reset-order-btn" data-reset-for="source-link-grid">↕ Reset order</button>
+    </div>
+    <div class="link-grid" id="source-link-grid">
       <div class="link-card">
         <span class="tag">🐙 Repo</span>
         <a class="title" href="https://github.com/rifaterdemsahin/sep-1-future-of-jobs" target="_blank" rel="noopener">rifaterdemsahin/sep-1-future-of-jobs</a>
@@ -336,55 +371,66 @@
   <section class="block">
     <h2>📺 Support / Pro / Con Videos</h2>
     <p class="intro">Where each video sits on the apocalypse-vs-growth spectrum, with the argument it's useful for.</p>
+    <div class="sort-bar">
+      <button class="reset-order-btn" data-reset-for="pro-con-table">↕ Reset order</button>
+    </div>
     <div class="wrap-scroll">
-      <table class="cmp">
+      <table class="cmp" id="pro-con-table">
         <tr>
           <th>Video</th>
           <th>Angle</th>
           <th>Use it for (pro)</th>
           <th>Watch out for (con)</th>
+          <th>⭐ Rating</th>
         </tr>
-        <tr>
+        <tr data-id="cmp-musk-optional">
           <td><a href="https://www.youtube.com/watch?v=55QWJHQw1MQ" target="_blank" rel="noopener">Elon Musk: "Working Will Be Optional in 10 Years"</a><br><span class="dim">AI Prediction</span></td>
           <td class="dim">💥 Job Apocalypse</td>
           <td class="dim">Primary source for Musk's own thesis — cold open / hook material.</td>
           <td class="dim">Assumes fixed-labor ("lump of labor") fallacy; no counter-evidence offered.</td>
+          <td class="star-cell"></td>
         </tr>
-        <tr>
+        <tr data-id="cmp-musk-big-prediction">
           <td><a href="https://www.youtube.com/watch?v=BZo3n3Bkpn0" target="_blank" rel="noopener">'Work Will Be Optional': Elon Musk's BIG Prediction</a><br><span class="dim">How AI &amp; Robotics Will Change Everything</span></td>
           <td class="dim">💥 Job Apocalypse</td>
           <td class="dim">Longer-form version of the same thesis with more B-roll of robotics.</td>
           <td class="dim">Same fixed-labor assumption; treats abundance as automatic, not earned.</td>
+          <td class="star-cell"></td>
         </tr>
-        <tr>
+        <tr data-id="cmp-atlas">
           <td><a href="https://www.youtube.com/watch?v=5eMSMiL7F2o" target="_blank" rel="noopener">ATLAS: Hyundai and Boston Dynamics Reveal Their Humanoid Robots at CES 2026</a></td>
           <td class="dim">💥 Job Apocalypse (grounding footage)</td>
           <td class="dim">Real, current-day dexterity footage — good for the Moravec's Paradox segment (shows how far robots have actually come).</td>
           <td class="dim">Commercial deployment is factory-only and doesn't start until 2028 — don't let the footage imply general-purpose readiness.</td>
+          <td class="star-cell"></td>
         </tr>
-        <tr>
+        <tr data-id="cmp-altman">
           <td><a href="https://www.youtube.com/watch?v=YxjL1wLLnHE" target="_blank" rel="noopener">OpenAI's Sam Altman on Astra Model Debut, Benefits of AI</a></td>
           <td class="dim">🌳 Infinite Permutation</td>
           <td class="dim">Counterpoint voice from inside the AI industry itself, softens the "all doom" framing.</td>
           <td class="dim">Still an interested party (OpenAI benefits from optimistic framing too).</td>
+          <td class="star-cell"></td>
         </tr>
-        <tr>
+        <tr data-id="cmp-gates">
           <td><a href="https://www.youtube.com/watch?v=U4zGLSlLo5A" target="_blank" rel="noopener">Bill Gates Changes His Mind on AI</a></td>
           <td class="dim">🌳 Infinite Permutation</td>
           <td class="dim">Credible, non-AI-vendor voice moving toward the optimistic camp — good for the "skeptic converted" beat.</td>
           <td class="dim">Gates' framing is closer to "some jobs safe" than "net job growth" — don't overstate it.</td>
+          <td class="star-cell"></td>
         </tr>
-        <tr>
+        <tr data-id="cmp-bernie">
           <td><a href="https://www.youtube.com/watch?v=h3AtWdeu_G0" target="_blank" rel="noopener">Bernie vs. Claude</a></td>
           <td class="dim">🧐 Skeptic / Marketing</td>
           <td class="dim">Political-economy framing of who captures AI's gains — useful for the wealth-concentration counter-argument section.</td>
           <td class="dim">Debate format, not a documentary source — cite the specific claim, not the whole video.</td>
+          <td class="star-cell"></td>
         </tr>
-        <tr>
+        <tr data-id="cmp-real-reason">
           <td><a href="https://www.youtube.com/watch?v=3LjuyW5Lr-c&amp;t=1229s" target="_blank" rel="noopener">The REAL Reason Everything Is About To Change</a><br><span class="dim">Full <a href="transcripts/3LjuyW5Lr-c-the-real-reason-everything-is-about-to-change.txt" target="_blank" rel="noopener">transcript</a></span></td>
           <td class="dim">🌳 Infinite Permutation</td>
           <td class="dim">Strong, directly-on-thesis counterpoint: walks through the 1963 "computers will take all the jobs" Newsweek scare, the '80s desktop-computer panic, and the Adobe Photoshop/photographer example — argues job counts have never declined after a tech revolution, only shifted and grown (farming 60%→2% of labor). Good source for the historical-precedent beat and the "fixed pie" fallacy.</td>
           <td class="dim">Conversational/debate format between two founders, not neutral — pull specific data points (Newsweek 1963, farming labor %) rather than citing wholesale; auto-generated captions, verify quotes before using on screen.</td>
+          <td class="star-cell"></td>
         </tr>
       </table>
     </div>
@@ -393,31 +439,38 @@
   <section class="block">
     <h2>⚖️ Perspective Comparison</h2>
     <p class="intro">The three main framings found while researching, weighed against the video's own thesis.</p>
+    <div class="sort-bar">
+      <button class="reset-order-btn" data-reset-for="perspective-table">↕ Reset order</button>
+    </div>
     <div class="wrap-scroll">
-      <table class="cmp">
+      <table class="cmp" id="perspective-table">
         <tr>
           <th>View</th>
           <th>Core Argument</th>
           <th>Pros</th>
           <th>Cons</th>
+          <th>⭐ Rating</th>
         </tr>
-        <tr>
+        <tr data-id="persp-apocalypse">
           <td><b>💥 Job Apocalypse</b><br><span class="dim">Musk, alt-tech, doom projections</span></td>
           <td class="dim">AI + humanoid robotics make human labor optional — cognitive and physical tasks scale at near-zero marginal cost.</td>
           <td class="dim">Unlocks an "era of abundance"; eliminates dangerous, repetitive labor.</td>
           <td class="dim">Risk of mass structural unemployment before markets adjust; concentrates power in a few platforms.</td>
+          <td class="star-cell"></td>
         </tr>
-        <tr>
+        <tr data-id="persp-permutation">
           <td><b>🌳 Infinite Permutation</b><br><span class="dim">This video's thesis</span></td>
           <td class="dim">Technology lowers baseline task costs, unleashing new demand, markets, and specialized industries.</td>
           <td class="dim">Historical precedent (calculators, PCs, internet) multiplied net employment; human judgment becomes more valuable.</td>
           <td class="dim">Requires major re-skilling; short-term displacement during the transition.</td>
+          <td class="star-cell"></td>
         </tr>
-        <tr>
+        <tr data-id="persp-skeptic">
           <td><b>🧐 Skeptic / Marketing</b><br><span class="dim">Economic analysts, media critics</span></td>
           <td class="dim">Apocalypse predictions are hype that inflates AI-startup valuations.</td>
           <td class="dim">Prevents panic; focuses on real near-term gains over sci-fi scenarios.</td>
           <td class="dim">Underestimating real progress could leave workforce policy unprepared.</td>
+          <td class="star-cell"></td>
         </tr>
       </table>
     </div>
@@ -426,7 +479,10 @@
   <section class="block">
     <h2>🎥 Footage Shot List</h2>
     <p class="intro">B-roll and archival categories mapped to script sections, with YouTube search terms to source them.</p>
-    <div class="shotlist">
+    <div class="sort-bar">
+      <button class="reset-order-btn" data-reset-for="shotlist-container">↕ Reset order</button>
+    </div>
+    <div class="shotlist" id="shotlist-container">
       <div class="shot-row">
         <div class="row-head">
           <div class="sec">🪝 Hook</div>
@@ -494,6 +550,46 @@
 
 <script src="pipeline.js"></script>
 <script src="assets.js"></script>
-<script>Pipeline.render('research');</script>
+<script src="ratings.js"></script>
+<script>
+  Pipeline.render('research');
+
+  var byId = function(el){ return el.querySelector('[data-id]').getAttribute('data-id'); };
+  var beforeIdEl = function(item, starEl){ item.insertBefore(starEl, item.querySelector('[data-id]')); };
+
+  var sortables = {
+    'source-link-grid': Ratings.makeSortable({
+      container: document.getElementById('source-link-grid'),
+      itemSelector: '.link-card',
+      getId: byId,
+      mountStars: beforeIdEl
+    }),
+    'pro-con-table': Ratings.makeSortable({
+      container: document.getElementById('pro-con-table').tBodies[0] || document.getElementById('pro-con-table'),
+      itemSelector: 'tr[data-id]',
+      getId: function(row){ return row.getAttribute('data-id'); },
+      mountStars: function(row, starEl){ row.querySelector('.star-cell').appendChild(starEl); }
+    }),
+    'perspective-table': Ratings.makeSortable({
+      container: document.getElementById('perspective-table').tBodies[0] || document.getElementById('perspective-table'),
+      itemSelector: 'tr[data-id]',
+      getId: function(row){ return row.getAttribute('data-id'); },
+      mountStars: function(row, starEl){ row.querySelector('.star-cell').appendChild(starEl); }
+    }),
+    'shotlist-container': Ratings.makeSortable({
+      container: document.getElementById('shotlist-container'),
+      itemSelector: '.shot-row',
+      getId: byId,
+      mountStars: function(row, starEl){ row.querySelector('.row-head').insertBefore(starEl, row.querySelector('[data-id]')); }
+    })
+  };
+
+  Array.prototype.forEach.call(document.querySelectorAll('.reset-order-btn'), function(btn){
+    btn.addEventListener('click', function(){
+      var target = sortables[btn.getAttribute('data-reset-for')];
+      if(target) target.reset();
+    });
+  });
+</script>
 </body>
 </html>
