@@ -94,7 +94,7 @@
     backdrop.addEventListener('click', function(e){
       if(e.target === backdrop) cancel();
     });
-    backdrop.querySelector('[data-action="skip"]').addEventListener('click', function(){ finish(''); });
+    backdrop.querySelector('[data-action="skip"]').addEventListener('click', function(){ cancel(); });
     backdrop.querySelector('[data-action="save"]').addEventListener('click', function(){ finish(textarea.value); });
   }
 
