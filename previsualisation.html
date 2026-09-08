@@ -465,6 +465,10 @@
 
 <script src="pipeline.js"></script>
 <script src="assets.js"></script>
-<script>Pipeline.render('previsualisation');</script>
+<script src="links.js"></script>
+<script>
+  Pipeline.render('previsualisation');
+  PipelineLinks.init({ file: 'previsualisation.html', sourceFile: 'design.html', sourceLabel: 'Design' });
+</script>
 </body>
 </html>

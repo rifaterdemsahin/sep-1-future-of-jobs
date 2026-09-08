@@ -450,6 +450,10 @@
 
 <script src="pipeline.js"></script>
 <script src="assets.js"></script>
-<script>Pipeline.render('design');</script>
+<script src="links.js"></script>
+<script>
+  Pipeline.render('design');
+  PipelineLinks.init({ file: 'design.html', sourceFile: 'script.html', sourceLabel: 'Script' });
+</script>
 </body>
 </html>

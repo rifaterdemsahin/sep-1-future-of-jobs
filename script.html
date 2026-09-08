@@ -358,6 +358,10 @@
 
 <script src="pipeline.js"></script>
 <script src="assets.js"></script>
-<script>Pipeline.render('script');</script>
+<script src="links.js"></script>
+<script>
+  Pipeline.render('script');
+  PipelineLinks.init({ file: 'script.html', sourceFile: 'index.html', sourceLabel: 'Research' });
+</script>
 </body>
 </html>
