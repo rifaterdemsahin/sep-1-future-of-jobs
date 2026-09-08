@@ -74,6 +74,12 @@
     color:var(--accent); white-space:nowrap; padding-top:1px;
   }
   .video-summary dd{ margin:0; color:var(--text); font-size:14px; }
+  .vs-share{
+    display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+    margin-top:18px; padding-top:16px; border-top:1px solid var(--panel-border);
+  }
+  .vs-share-hint{ font-size:12.5px; color:var(--text-dim); }
+  #whatsappShareBtn{ text-decoration:none; display:inline-flex; align-items:center; }
 
   .toolbar{
     display:flex; align-items:center; justify-content:space-between;
@@ -205,10 +211,15 @@
       <dt>🛠️ How</dt>
       <dd>Built through the 🔍 Research → 📝 Script → 🎨 Design → 🎞️ Previsualisation pipeline (see <a href="index.html">Research</a> for the full stage breakdown), sourced footage tracked here in the Asset Database.</dd>
       <dt>⏰ When</dt>
-      <dd>In pre-production now — assets and pipeline pages are updated as research, sourcing, and boarding progress.</dd>
+      <dd>After generative AI — this is a post-ChatGPT/LLM-era argument; the job-apocalypse claims it's debunking only started circulating once generative AI went mainstream.</dd>
       <dt>📍 Where</dt>
-      <dd>Published to YouTube once shot and edited; pre-production lives in this repo — <a href="https://github.com/rifaterdemsahin/sep-1-future-of-jobs" target="_blank" rel="noopener">rifaterdemsahin/sep-1-future-of-jobs</a> — and on GitHub Pages at <a href="https://rifaterdemsahin.github.io/sep-1-future-of-jobs/index.html" target="_blank" rel="noopener">rifaterdemsahin.github.io/sep-1-future-of-jobs</a>.</dd>
+      <dd>Globally — the effect of AI on jobs isn't confined to one country or industry, so the video's argument and evidence are drawn from and apply worldwide.</dd>
     </dl>
+    <div class="vs-share">
+      <button class="btn" id="copySummaryBtn">📋 Copy summary</button>
+      <a class="btn" id="whatsappShareBtn" target="_blank" rel="noopener">💬 Share on WhatsApp</a>
+      <span class="vs-share-hint">Copy or share this summary to collect feedback 🙌</span>
+    </div>
   </section>
 
   <div class="toolbar">
@@ -301,6 +312,32 @@
       container.appendChild(el);
     });
   }
+
+  (function(){
+    var summaryText =
+      '🎬 Why Elon Musk is Wrong About the Job Apocalypse\n\n' +
+      '❓ Why: To push back on the "work will be optional in 10 years" narrative with counter-evidence — history, economics, and current labor data — rather than vibes.\n\n' +
+      '🤔 What: A researched rebuttal video that lays Elon Musk\'s job-apocalypse claims side-by-side with the pro/con case, then argues for a more grounded, human-in-the-loop future of work.\n\n' +
+      '🛠️ How: Built through the 🔍 Research → 📝 Script → 🎨 Design → 🎞️ Previsualisation pipeline.\n\n' +
+      '⏰ When: After generative AI — a post-ChatGPT/LLM-era argument.\n\n' +
+      '📍 Where: Globally — AI\'s effect on jobs isn\'t confined to one country or industry.\n\n' +
+      '💬 Got feedback? Reply here!\n' +
+      window.location.href;
+
+    document.getElementById('copySummaryBtn').addEventListener('click', function(){
+      navigator.clipboard.writeText(summaryText).then(function(){
+        var btn = document.getElementById('copySummaryBtn');
+        var original = btn.textContent;
+        btn.textContent = '✅ Copied';
+        setTimeout(function(){ btn.textContent = original; }, 1200);
+      }).catch(function(){
+        alert('Copy failed — your browser may be blocking clipboard access.');
+      });
+    });
+
+    document.getElementById('whatsappShareBtn').href =
+      'https://wa.me/?text=' + encodeURIComponent(summaryText);
+  })();
 
   document.getElementById('copyBtn').addEventListener('click', function(){
     var data = JSON.stringify(AssetDB.getAssets(), null, 2);
