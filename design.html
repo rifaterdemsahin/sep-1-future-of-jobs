@@ -210,6 +210,36 @@
     margin-top:6px;
   }
 
+  /* Three-act structure */
+  .acts{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+  }
+  @media (max-width:720px){.acts{grid-template-columns:1fr;}}
+  .act-card{
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    border-radius:12px;
+    padding:18px 20px;
+    border-top:3px solid var(--cold);
+  }
+  .act-card.act2{border-top-color:var(--accent-2);}
+  .act-card.act3{border-top-color:var(--warm);}
+  .act-card .act-eyebrow{
+    font-size:10.5px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--text-dim);
+    font-weight:700;
+  }
+  .act-card h3{margin:6px 0 4px;font-size:16px;}
+  .act-card .act-tc{font-size:12px;color:var(--accent);font-weight:600;margin-bottom:10px;}
+  .act-card ul{margin:0;padding-left:18px;font-size:13px;color:var(--text-dim);}
+  .act-card li{margin-bottom:4px;}
+  .act-card a.act-link{font-size:11.5px;color:var(--accent-2);text-decoration:none;}
+  .act-card a.act-link:hover{text-decoration:underline;}
+
   footer{
     max-width:1000px;
     margin:0 auto;
@@ -259,6 +289,43 @@
 </header>
 
 <main>
+
+  <section class="block">
+    <h2>🎬 Three-Act Structure</h2>
+    <p class="sub" style="margin:-10px 0 16px;text-align:left;max-width:none;">The script's five beats collapse into a classic three-act shape — this is the structure design and pacing decisions should key off, not the individual sections.</p>
+    <div class="acts">
+      <div class="act-card act1">
+        <div class="act-eyebrow">Act 1 · Setup</div>
+        <h3>❄️ The Apocalypse Claim</h3>
+        <div class="act-tc">0:00 – 1:45</div>
+        <ul>
+          <li>🪝 Hook — Musk/Optimus headline montage → personal cut to camera</li>
+          <li>🪨 Section 1 — The Productivity Fallacy &amp; historical proof</li>
+        </ul>
+        <a class="act-link" href="script.html#hook">→ Script: Hook</a>
+      </div>
+      <div class="act-card act2">
+        <div class="act-eyebrow">Act 2 · Confrontation</div>
+        <h3>🌳 The Counter-Argument</h3>
+        <div class="act-tc">1:45 – 3:45</div>
+        <ul>
+          <li>🌳 Section 2 — The Infinite Permutation Principle</li>
+          <li>🧮 Section 3 — Math &amp; human insight matter more, not less</li>
+        </ul>
+        <a class="act-link" href="script.html#section2">→ Script: Section 2</a>
+      </div>
+      <div class="act-card act3">
+        <div class="act-eyebrow">Act 3 · Resolution</div>
+        <h3>🔥 The Human Takeaway</h3>
+        <div class="act-tc">3:45 – 4:30</div>
+        <ul>
+          <li>🎬 Conclusion &amp; Outro — host direct to camera, optimistic close</li>
+          <li>CTA cards, warm/cinematic tone throughout</li>
+        </ul>
+        <a class="act-link" href="script.html#outro">→ Script: Outro</a>
+      </div>
+    </div>
+  </section>
 
   <section class="block">
     <h2>🎛️ Core Editing Rule</h2>
@@ -361,11 +428,9 @@
   <section class="block">
     <h2>⏱️ Pacing Across the Timeline</h2>
     <div class="pacing">
-      <div class="p1">🪝 Hook</div>
-      <div class="p2">🪨 Sec. 1</div>
-      <div class="p3">🌳 Sec. 2</div>
-      <div class="p4">🧮 Sec. 3</div>
-      <div class="p5">🎬 Outro</div>
+      <div class="p1" style="flex:105;">❄️ Act 1 — Setup</div>
+      <div class="p3" style="flex:120;">🌳 Act 2 — Confrontation</div>
+      <div class="p5" style="flex:45;background:var(--warm);">🔥 Act 3 — Resolution</div>
     </div>
     <div class="pacing-legend">
       <span>0:00</span>
