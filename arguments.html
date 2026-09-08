@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🧩 Arguments — Why Elon Musk is Wrong About the Job Apocalypse</title>
+<style>
+  :root{
+    --bg:#0b0d12;
+    --panel:#13161f;
+    --panel-border:#232838;
+    --accent:#e8b94a;
+    --accent-2:#5ab0ff;
+    --text:#eef0f4;
+    --text-dim:#9aa1b0;
+    --cold:#5ab0ff;
+    --warm:#e8b94a;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6;
+  }
+  .topnav{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:rgba(11,13,18,.85);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--panel-border);
+  }
+  .topnav-inner{
+    max-width:1200px;
+    margin:0 auto;
+    padding:14px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .topnav .brand{
+    font-size:13px;
+    font-weight:700;
+    color:var(--text);
+    text-decoration:none;
+    letter-spacing:.02em;
+  }
+  .topnav .brand span{color:var(--accent);}
+  .topnav .links{display:flex;gap:8px;flex-wrap:wrap;}
+  .topnav .links a{
+    font-size:13px;
+    color:var(--text-dim);
+    text-decoration:none;
+    padding:6px 14px;
+    border-radius:20px;
+    border:1px solid transparent;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .topnav .links a:hover{color:var(--text);border-color:var(--panel-border);}
+  .topnav .links a.active{color:var(--text);border-color:var(--accent-2);}
+
+  header{
+    padding:48px 24px 32px;
+    max-width:1000px;
+    margin:0 auto;
+    text-align:center;
+  }
+  header .eyebrow{
+    color:var(--accent);
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-size:12px;
+    font-weight:600;
+  }
+  header h1{
+    font-size:clamp(24px,4vw,38px);
+    margin:10px 0 12px;
+    font-weight:700;
+  }
+  header p.sub{
+    color:var(--text-dim);
+    max-width:640px;
+    margin:0 auto;
+    font-size:15px;
+  }
+
+  main{
+    max-width:1000px;
+    margin:0 auto;
+    padding:0 24px 90px;
+  }
+
+  section.block{margin-bottom:44px;}
+  section.block h2{
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    color:var(--accent-2);
+    font-weight:700;
+    margin:0 0 16px;
+  }
+  section.block p.intro{
+    color:var(--text-dim);
+    font-size:14px;
+    margin:-8px 0 18px;
+  }
+
+  .premise-card{
+    background:var(--panel);
+    border:1px solid var(--accent-2);
+    border-radius:12px;
+    padding:22px 24px;
+  }
+  .premise-card p{margin:0;font-size:16px;}
+  .premise-card strong{color:var(--accent);}
+
+  .arg-list{display:flex;flex-direction:column;gap:14px;}
+  .arg-card{
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    border-radius:10px;
+    padding:18px 20px;
+  }
+  .arg-card .arg-num{
+    display:inline-block;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.06em;
+    color:var(--accent);
+    text-transform:uppercase;
+    margin-bottom:6px;
+  }
+  .arg-card h3{margin:0 0 8px;font-size:16px;}
+  .arg-card p{margin:0;color:var(--text-dim);font-size:14px;}
+  .arg-card .arg-link{
+    display:inline-block;
+    margin-top:10px;
+    font-size:12.5px;
+    color:var(--accent-2);
+    text-decoration:none;
+  }
+  .arg-card .arg-link:hover{text-decoration:underline;}
+
+  .conclusion-card{
+    background:linear-gradient(135deg, rgba(232,185,74,.08), rgba(90,176,255,.08));
+    border:1px solid var(--panel-border);
+    border-radius:12px;
+    padding:22px 24px;
+  }
+  .conclusion-card p{margin:0 0 10px;font-size:15px;}
+  .conclusion-card p:last-child{margin-bottom:0;}
+  .conclusion-card strong{color:var(--accent);}
+
+  footer{
+    max-width:1000px;
+    margin:0 auto;
+    padding:24px;
+    text-align:center;
+    color:var(--text-dim);
+    font-size:12.5px;
+    border-top:1px solid var(--panel-border);
+  }
+  footer a{color:var(--accent-2);text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+</style>
+<script src="theme.js"></script>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="index.html">🎬 Job Apocalypse <span>· Debunked</span></a>
+    <div class="links">
+      <a href="index.html">🔍 Research</a>
+      <a href="arguments.html" class="active">🧩 Arguments</a>
+      <a href="script.html">📝 Script</a>
+      <a href="design.html">🎨 Design</a>
+      <a href="previsualisation.html">🎞️ Previsualisation</a>
+      <a href="assets.html">🗂️ Assets</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="eyebrow">🧩 Pre-production · Arguments v1</div>
+  <h1>Arguments</h1>
+  <p class="sub">The premise, supporting arguments, and conclusion of "Why Elon Musk is Wrong About the Job Apocalypse" — distilled from 🔍 Research before it's written into the 📝 Script.</p>
+</header>
+
+<div class="pipeline-wrap" id="pipeline-stepper"></div>
+
+<main>
+
+  <section class="block">
+    <h2>🌱 Premise</h2>
+    <div class="premise-card">
+      <p>AI doesn't shrink the total amount of human work — it <strong>relocates and multiplies</strong> it. Applied together, knowledge and AI open entirely new sectors that don't exist yet, rather than simply automating away the sectors that do.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>🧩 Arguments</h2>
+    <p class="intro">Each argument here becomes a script beat — see the link on each card.</p>
+    <div class="arg-list">
+      <div class="arg-card">
+        <span class="arg-num">Argument 1</span>
+        <h3>🪨 The Productivity Fallacy, Historically Debunked</h3>
+        <p>Every prior wave of automation — industrial machinery, computing, the internet — was predicted to end work, and instead grew the total number of jobs by creating categories of work that didn't previously exist. There's no historical precedent for technology producing a net "job apocalypse."</p>
+        <a class="arg-link" href="script.html#section1">→ Script: Section 1 — Productivity Fallacy</a>
+      </div>
+      <div class="arg-card">
+        <span class="arg-num">Argument 2</span>
+        <h3>🌳 Knowledge + AI = New Sectors, Not a Fixed Pie</h3>
+        <p>Musk's thesis treats labor as a fixed pool that AI drains. In reality, combining domain knowledge with AI tooling produces near-infinite new permutations of problems to solve — new sectors (prompting, AI-ops, synthetic-media production, agent orchestration) are already opening up, worldwide, precisely because generative AI exists.</p>
+        <a class="arg-link" href="script.html#section2">→ Script: Section 2 — Infinite Permutations</a>
+      </div>
+      <div class="arg-card">
+        <span class="arg-num">Argument 3</span>
+        <h3>🧮 Judgment and Human Insight Remain the Bottleneck</h3>
+        <p>AI output is only as useful as the judgment, taste, and context applied to direct and evaluate it. As AI capability scales, the leverage on human insight scales with it — making people the multiplier, not the bottleneck to be removed.</p>
+        <a class="arg-link" href="script.html#section3">→ Script: Section 3 — Math &amp; Human Insight</a>
+      </div>
+      <div class="arg-card">
+        <span class="arg-num">Argument 4</span>
+        <h3>🌍 The Effect Is Global and Already Underway</h3>
+        <p>This isn't a hypothetical for one country or industry — since generative AI went mainstream, new sector formation has been visible globally, giving present-day evidence rather than a 10-years-out prediction to argue from.</p>
+        <a class="arg-link" href="script.html#outro">→ Script: Conclusion &amp; Outro</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>🎬 Conclusion</h2>
+    <div class="conclusion-card">
+      <p>Musk's "work will be optional" prediction assumes a <strong>fixed pool of labor</strong> that AI simply empties out. History, the economics of knowledge work, and what's already happening globally since generative AI all point the other way.</p>
+      <p><strong>Humans are going to have more jobs, not fewer</strong> — because knowledge combined with AI doesn't just automate old sectors, it generates new ones.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  🧩 Arguments for <a href="https://github.com/rifaterdemsahin/sep-1-future-of-jobs" target="_blank" rel="noopener">rifaterdemsahin/sep-1-future-of-jobs</a> — built from 🔍 <a href="index.html">Research</a>, feeds the 📝 <a href="script.html">Script</a>. See everything you've saved in 🗂️ <a href="assets.html">Assets</a>.
+</footer>
+
+<script src="pipeline.js"></script>
+<script>
+  Pipeline.render('arguments');
+</script>
+</body>
+</html>

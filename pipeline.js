@@ -1,6 +1,6 @@
 (function(){
   // The pre-production pipeline: each stage feeds the next.
-  // Research -> Script -> Design -> Previsualisation
+  // Research -> Arguments -> Script -> Design -> Previsualisation
   var STAGES = [
     {
       id: 'research',
@@ -8,7 +8,15 @@
       label: 'Research',
       file: 'index.html',
       tagline: 'Source links, counter-arguments, footage leads',
-      feeds: 'Feeds the script: arguments and footage leads become voiceover beats and shot direction.'
+      feeds: 'Feeds Arguments: raw sources and counter-evidence get distilled into a premise, arguments, and conclusion.'
+    },
+    {
+      id: 'arguments',
+      emoji: '🧩',
+      label: 'Arguments',
+      file: 'arguments.html',
+      tagline: 'Premise, arguments, conclusion',
+      feeds: 'Feeds the script: each argument becomes a voiceover beat and shot direction.'
     },
     {
       id: 'script',
