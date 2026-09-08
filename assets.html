@@ -54,6 +54,27 @@
 
   main{ max-width:1000px; margin:0 auto; padding:0 24px 90px; }
 
+  .video-summary{
+    margin:28px 0 0;
+    padding:20px 22px;
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    border-radius:12px;
+  }
+  .video-summary h2{ margin:0 0 4px; font-size:15px; }
+  .video-summary .vs-intro{ color:var(--text-dim); font-size:13.5px; margin:0 0 16px; }
+  .video-summary dl{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:10px 16px;
+    margin:0;
+  }
+  .video-summary dt{
+    font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--accent); white-space:nowrap; padding-top:1px;
+  }
+  .video-summary dd{ margin:0; color:var(--text); font-size:14px; }
+
   .toolbar{
     display:flex; align-items:center; justify-content:space-between;
     flex-wrap:wrap; gap:12px;
@@ -173,6 +194,23 @@
 </header>
 
 <main>
+  <section class="video-summary">
+    <h2>🎬 About this video</h2>
+    <p class="vs-intro">The 5W1H behind "Why Elon Musk is Wrong About the Job Apocalypse" — the story this asset library exists to support.</p>
+    <dl>
+      <dt>❓ Why</dt>
+      <dd>To push back on the "work will be optional in 10 years" narrative with counter-evidence — history, economics, and current labor data — rather than vibes.</dd>
+      <dt>🤔 What</dt>
+      <dd>A researched rebuttal video that lays Elon Musk's job-apocalypse claims side-by-side with the pro/con case, then argues for a more grounded, human-in-the-loop future of work.</dd>
+      <dt>🛠️ How</dt>
+      <dd>Built through the 🔍 Research → 📝 Script → 🎨 Design → 🎞️ Previsualisation pipeline (see <a href="index.html">Research</a> for the full stage breakdown), sourced footage tracked here in the Asset Database.</dd>
+      <dt>⏰ When</dt>
+      <dd>In pre-production now — assets and pipeline pages are updated as research, sourcing, and boarding progress.</dd>
+      <dt>📍 Where</dt>
+      <dd>Published to YouTube once shot and edited; pre-production lives in this repo — <a href="https://github.com/rifaterdemsahin/sep-1-future-of-jobs" target="_blank" rel="noopener">rifaterdemsahin/sep-1-future-of-jobs</a> — and on GitHub Pages at <a href="https://rifaterdemsahin.github.io/sep-1-future-of-jobs/index.html" target="_blank" rel="noopener">rifaterdemsahin.github.io/sep-1-future-of-jobs</a>.</dd>
+    </dl>
+  </section>
+
   <div class="toolbar">
     <div class="count"><b id="count">0</b> items saved</div>
     <div class="actions">

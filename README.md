@@ -5,7 +5,13 @@ Apocalypse."** Static HTML, no build step, no framework — open a file in a
 browser and it works.
 
 - **Repo:** https://github.com/rifaterdemsahin/sep-1-future-of-jobs
-- **Live pages:** open any `.html` file directly, or run a local static
+- **Live site (GitHub Pages):**
+  - 🔍 [Research](https://rifaterdemsahin.github.io/sep-1-future-of-jobs/index.html)
+  - 📝 [Script](https://rifaterdemsahin.github.io/sep-1-future-of-jobs/script.html)
+  - 🎨 [Design](https://rifaterdemsahin.github.io/sep-1-future-of-jobs/design.html)
+  - 🎞️ [Previsualisation](https://rifaterdemsahin.github.io/sep-1-future-of-jobs/previsualisation.html)
+  - 🗂️ [Assets](https://rifaterdemsahin.github.io/sep-1-future-of-jobs/assets.html)
+- **Run locally:** open any `.html` file directly, or run a local static
   server (`python3 -m http.server`) and browse to `index.html`.
 
 ## The pipeline
