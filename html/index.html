@@ -205,6 +205,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="../js/supabase-client.js"></script>
 <script src="../js/nav.js"></script>
+<script src="../js/content-db.js"></script>
 <script src="../js/theme.js"></script>
 <script src="../js/notes.js"></script>
 </head>
@@ -229,98 +230,7 @@
     <div class="sort-bar">
       <button class="reset-order-btn" data-reset-for="source-link-grid">↕ Reset order</button>
     </div>
-    <div class="link-grid" id="source-link-grid">
-      <div class="link-card">
-        <span class="tag">🐙 Repo</span>
-        <a class="title" href="https://github.com/rifaterdemsahin/sep-1-future-of-jobs" target="_blank" rel="noopener">rifaterdemsahin/sep-1-future-of-jobs</a>
-        <span class="url">github.com/rifaterdemsahin/sep-1-future-of-jobs</span>
-        <button class="add-asset-btn" data-id="link-repo" data-type="link" data-source="Research" data-title="rifaterdemsahin/sep-1-future-of-jobs" data-desc="Repo" data-url="https://github.com/rifaterdemsahin/sep-1-future-of-jobs">➕ Add to Assets</button>
-      </div>
-      <div class="link-card">
-        <span class="tag">✨ Research chat</span>
-        <a class="title" href="https://gemini.google.com/app/732deb1f1441e2fd" target="_blank" rel="noopener">Musk's Job Apocalypse Debunked — Gemini</a>
-        <span class="url">gemini.google.com/app/732deb1f1441e2fd</span>
-        <button class="add-asset-btn" data-id="link-gemini" data-type="link" data-source="Research" data-title="Musk's Job Apocalypse Debunked — Gemini" data-desc="Research chat" data-url="https://gemini.google.com/app/732deb1f1441e2fd">➕ Add to Assets</button>
-      </div>
-      <div class="link-card">
-        <span class="tag">🌊 Google Flow</span>
-        <a class="title" href="https://flow.google.com/u/1/project/ec557d11-2773-4887-babb-f12b65e4b7b7/edit/88f11cfc-17da-476b-8ff3-7e8bb5790963" target="_blank" rel="noopener">Sep 07 · elon sep1 project</a>
-        <span class="url">flow.google.com/…/88f11cfc-17da-476b-8ff3-7e8bb5790963</span>
-        <button class="add-asset-btn" data-id="link-flow" data-type="link" data-source="Research" data-title="Sep 07 · elon sep1 project" data-desc="Google Flow" data-url="https://flow.google.com/u/1/project/ec557d11-2773-4887-babb-f12b65e4b7b7/edit/88f11cfc-17da-476b-8ff3-7e8bb5790963">➕ Add to Assets</button>
-      </div>
-      <div class="link-card">
-        <span class="tag">▶️ YouTube · Musk thesis</span>
-        <a class="title" href="https://www.youtube.com/watch?v=BZo3n3Bkpn0" target="_blank" rel="noopener">'Work Will Be Optional': Elon Musk's BIG Prediction</a>
-        <span class="url">youtube.com/watch?v=BZo3n3Bkpn0</span>
-        <button class="add-asset-btn" data-id="link-yt-bzo3n3" data-type="link" data-source="Research" data-title="'Work Will Be Optional': Elon Musk's BIG Prediction" data-desc="YouTube · Musk thesis" data-url="https://www.youtube.com/watch?v=BZo3n3Bkpn0">➕ Add to Assets</button>
-      </div>
-      <div class="link-card">
-        <span class="tag">🤖 YouTube · Optimus</span>
-        <a class="title" href="https://www.youtube.com/watch?v=HUP6Z5voiS8" target="_blank" rel="noopener">Elon Musk REVEALS Tesla Bot (full presentation)</a>
-        <span class="url">youtube.com/watch?v=HUP6Z5voiS8</span>
-        <button class="add-asset-btn" data-id="link-yt-hup6z5" data-type="link" data-source="Research" data-title="Elon Musk REVEALS Tesla Bot (full presentation)" data-desc="YouTube · Optimus" data-url="https://www.youtube.com/watch?v=HUP6Z5voiS8">➕ Add to Assets</button>
-      </div>
-      <div class="link-card">
-        <span class="tag">🤖 YouTube · Optimus</span>
-        <a class="title" href="https://www.youtube.com/shorts/r0uuhk2RhGM" target="_blank" rel="noopener">Tesla Optimus V3 Mass production by 2026</a>
-        <span class="url">youtube.com/shorts/r0uuhk2RhGM</span>
-        <button class="add-asset-btn" data-id="link-yt-r0uuhk" data-type="link" data-source="Research" data-title="Tesla Optimus V3 Mass production by 2026" data-desc="YouTube · Optimus" data-url="https://www.youtube.com/shorts/r0uuhk2RhGM">➕ Add to Assets</button>
-      </div>
-      <div class="link-card">
-        <span class="tag">💬 YouTube · counterpoint</span>
-        <a class="title" href="https://www.youtube.com/watch?v=YxjL1wLLnHE" target="_blank" rel="noopener">OpenAI's Sam Altman on Astra Model Debut, Benefits of AI</a>
-        <span class="url">youtube.com/watch?v=YxjL1wLLnHE</span>
-        <button class="add-asset-btn" data-id="link-yt-yxjl1w" data-type="link" data-source="Research" data-title="OpenAI's Sam Altman on Astra Model Debut, Benefits of AI" data-desc="YouTube · counterpoint" data-url="https://www.youtube.com/watch?v=YxjL1wLLnHE">➕ Add to Assets</button>
-      </div>
-      <div class="link-card">
-        <span class="tag">💬 YouTube · counterpoint</span>
-        <a class="title" href="https://www.youtube.com/watch?v=U4zGLSlLo5A" target="_blank" rel="noopener">Bill Gates Changes His Mind on AI</a>
-        <span class="url">youtube.com/watch?v=U4zGLSlLo5A</span>
-        <button class="add-asset-btn" data-id="link-yt-u4zgls" data-type="link" data-source="Research" data-title="Bill Gates Changes His Mind on AI" data-desc="YouTube · counterpoint" data-url="https://www.youtube.com/watch?v=U4zGLSlLo5A">➕ Add to Assets</button>
-      </div>
-      <div class="link-card">
-        <span class="tag">🤖 YouTube · Optimus</span>
-        <a class="title" href="https://www.youtube.com/watch?v=cpraXaw7dyc" target="_blank" rel="noopener">Optimus — Gen 2 | Tesla</a>
-        <span class="url">youtube.com/watch?v=cpraXaw7dyc</span>
-        <button class="add-asset-btn" data-id="link-yt-cprax" data-type="link" data-source="Research" data-title="Optimus — Gen 2 | Tesla" data-desc="YouTube · Optimus" data-url="https://www.youtube.com/watch?v=cpraXaw7dyc">➕ Add to Assets</button>
-      </div>
-      <div class="link-card">
-        <span class="tag">🗣️ YouTube · debate</span>
-        <a class="title" href="https://www.youtube.com/watch?v=h3AtWdeu_G0" target="_blank" rel="noopener">Bernie vs. Claude</a>
-        <span class="url">youtube.com/watch?v=h3AtWdeu_G0</span>
-        <button class="add-asset-btn" data-id="link-yt-h3atwd" data-type="link" data-source="Research" data-title="Bernie vs. Claude" data-desc="YouTube · debate" data-url="https://www.youtube.com/watch?v=h3AtWdeu_G0">➕ Add to Assets</button>
-      </div>
-      <div class="link-card">
-        <span class="tag">💥 YouTube · Musk thesis</span>
-        <a class="title" href="https://www.youtube.com/watch?v=55QWJHQw1MQ" target="_blank" rel="noopener">Elon Musk: "Working Will Be Optional in 10 Years" | AI Prediction</a>
-        <span class="url">youtube.com/watch?v=55QWJHQw1MQ</span>
-        <button class="add-asset-btn" data-id="link-yt-55qwjh" data-type="link" data-source="Research" data-title="Elon Musk: &quot;Working Will Be Optional in 10 Years&quot; | AI Prediction" data-desc="YouTube · Musk thesis" data-url="https://www.youtube.com/watch?v=55QWJHQw1MQ">➕ Add to Assets</button>
-      </div>
-      <div class="link-card">
-        <span class="tag">🦿 YouTube · Advanced robotics</span>
-        <a class="title" href="https://www.youtube.com/watch?v=5eMSMiL7F2o" target="_blank" rel="noopener">ATLAS: Hyundai and Boston Dynamics Reveal Their Humanoid Robots at CES 2026</a>
-        <span class="url">youtube.com/watch?v=5eMSMiL7F2o</span>
-        <button class="add-asset-btn" data-id="link-yt-5emsmi" data-type="link" data-source="Research" data-title="ATLAS: Hyundai and Boston Dynamics Reveal Their Humanoid Robots at CES 2026" data-desc="YouTube · Advanced robotics" data-url="https://www.youtube.com/watch?v=5eMSMiL7F2o">➕ Add to Assets</button>
-      </div>
-      <div class="link-card">
-        <span class="tag">📊 The Economist · Data</span>
-        <a class="title" href="https://www.economist.com/" target="_blank" rel="noopener">The Economist: Net AI Jobs Impact (2023–2026)</a>
-        <span class="url">economist.com · Hard-hat labour &amp; STEM charts</span>
-        <button class="add-asset-btn" data-id="link-economist-jobs" data-type="link" data-source="Research" data-title="The Economist: Net AI Jobs Impact (2023–2026)" data-desc="The Economist · Data" data-url="https://www.economist.com/">➕ Add to Assets</button>
-      </div>
-      <div class="link-card">
-        <span class="tag">🌳 YouTube · counterpoint</span>
-        <a class="title" href="https://www.youtube.com/watch?v=3LjuyW5Lr-c&amp;t=1229s" target="_blank" rel="noopener">The REAL Reason Everything Is About To Change</a>
-        <span class="url">youtube.com/watch?v=3LjuyW5Lr-c</span>
-        <button class="add-asset-btn" data-id="link-yt-3ljuyw" data-type="link" data-source="Research" data-title="The REAL Reason Everything Is About To Change" data-desc="YouTube · counterpoint" data-url="https://www.youtube.com/watch?v=3LjuyW5Lr-c&t=1229s">➕ Add to Assets</button>
-      </div>
-      <div class="link-card">
-        <span class="tag">🎓 YouTube · Education</span>
-        <a class="title" href="https://www.youtube.com/shorts/urgbQCxcLG8" target="_blank" rel="noopener">Rethinking Education Stress &amp; AI-Driven Learning</a>
-        <span class="url">youtube.com/shorts/urgbQCxcLG8</span>
-        <button class="add-asset-btn" data-id="link-yt-urgbqc" data-type="link" data-source="Research" data-title="Rethinking Education Stress &amp; AI-Driven Learning" data-desc="YouTube · Education &amp; Family Participation" data-url="https://www.youtube.com/shorts/urgbQCxcLG8">➕ Add to Assets</button>
-      </div>
-    </div>
+    <div class="link-grid" id="source-link-grid"></div>
     <p class="intro" style="margin-top:14px;">Note: two videos referenced in the chat notes — a "Refreshing AI Latest" skeptic clip and a "Tipping Spears Podcast" jobs-debate clip — couldn't be matched to a verifiable YouTube URL, so they're left out rather than guessed. Closest verified stand-ins for that angle are in the table below.</p>
   </section>
 
@@ -338,62 +248,6 @@
           <th>Use it for (pro)</th>
           <th>Watch out for (con)</th>
           <th>⭐ Rating</th>
-        </tr>
-        <tr data-id="cmp-musk-optional">
-          <td><a href="https://www.youtube.com/watch?v=55QWJHQw1MQ" target="_blank" rel="noopener">Elon Musk: "Working Will Be Optional in 10 Years"</a><br><span class="dim">AI Prediction</span></td>
-          <td class="dim">💥 Job Apocalypse</td>
-          <td class="dim">Primary source for Musk's own thesis — cold open / hook material.</td>
-          <td class="dim">Assumes fixed-labor ("lump of labor") fallacy; no counter-evidence offered.</td>
-          <td class="star-cell"></td>
-        </tr>
-        <tr data-id="cmp-musk-big-prediction">
-          <td><a href="https://www.youtube.com/watch?v=BZo3n3Bkpn0" target="_blank" rel="noopener">'Work Will Be Optional': Elon Musk's BIG Prediction</a><br><span class="dim">How AI &amp; Robotics Will Change Everything</span></td>
-          <td class="dim">💥 Job Apocalypse</td>
-          <td class="dim">Longer-form version of the same thesis with more B-roll of robotics.</td>
-          <td class="dim">Same fixed-labor assumption; treats abundance as automatic, not earned.</td>
-          <td class="star-cell"></td>
-        </tr>
-        <tr data-id="cmp-atlas">
-          <td><a href="https://www.youtube.com/watch?v=5eMSMiL7F2o" target="_blank" rel="noopener">ATLAS: Hyundai and Boston Dynamics Reveal Their Humanoid Robots at CES 2026</a></td>
-          <td class="dim">💥 Job Apocalypse (grounding footage)</td>
-          <td class="dim">Real, current-day dexterity footage — good for the Moravec's Paradox segment (shows how far robots have actually come).</td>
-          <td class="dim">Commercial deployment is factory-only and doesn't start until 2028 — don't let the footage imply general-purpose readiness.</td>
-          <td class="star-cell"></td>
-        </tr>
-        <tr data-id="cmp-altman">
-          <td><a href="https://www.youtube.com/watch?v=YxjL1wLLnHE" target="_blank" rel="noopener">OpenAI's Sam Altman on Astra Model Debut, Benefits of AI</a></td>
-          <td class="dim">🌳 Infinite Permutation</td>
-          <td class="dim">Counterpoint voice from inside the AI industry itself, softens the "all doom" framing.</td>
-          <td class="dim">Still an interested party (OpenAI benefits from optimistic framing too).</td>
-          <td class="star-cell"></td>
-        </tr>
-        <tr data-id="cmp-gates">
-          <td><a href="https://www.youtube.com/watch?v=U4zGLSlLo5A" target="_blank" rel="noopener">Bill Gates Changes His Mind on AI</a></td>
-          <td class="dim">🌳 Infinite Permutation</td>
-          <td class="dim">Credible, non-AI-vendor voice moving toward the optimistic camp — good for the "skeptic converted" beat.</td>
-          <td class="dim">Gates' framing is closer to "some jobs safe" than "net job growth" — don't overstate it.</td>
-          <td class="star-cell"></td>
-        </tr>
-        <tr data-id="cmp-bernie">
-          <td><a href="https://www.youtube.com/watch?v=h3AtWdeu_G0" target="_blank" rel="noopener">Bernie vs. Claude</a></td>
-          <td class="dim">🧐 Skeptic / Marketing</td>
-          <td class="dim">Political-economy framing of who captures AI's gains — useful for the wealth-concentration counter-argument section.</td>
-          <td class="dim">Debate format, not a documentary source — cite the specific claim, not the whole video.</td>
-          <td class="star-cell"></td>
-        </tr>
-        <tr data-id="cmp-real-reason">
-          <td><a href="https://www.youtube.com/watch?v=3LjuyW5Lr-c&amp;t=1229s" target="_blank" rel="noopener">The REAL Reason Everything Is About To Change</a><br><span class="dim">Full <a href="../transcripts/3LjuyW5Lr-c-the-real-reason-everything-is-about-to-change.txt" target="_blank" rel="noopener">transcript</a></span></td>
-          <td class="dim">🌳 Infinite Permutation</td>
-          <td class="dim">Strong, directly-on-thesis counterpoint: walks through the 1963 "computers will take all the jobs" Newsweek scare, the '80s desktop-computer panic, and the Adobe Photoshop/photographer example — argues job counts have never declined after a tech revolution, only shifted and grown (farming 60%→2% of labor). Good source for the historical-precedent beat and the "fixed pie" fallacy.</td>
-          <td class="dim">Conversational/debate format between two founders, not neutral — pull specific data points (Newsweek 1963, farming labor %) rather than citing wholesale; auto-generated captions, verify quotes before using on screen.</td>
-          <td class="star-cell"></td>
-        </tr>
-        <tr data-id="cmp-education-urgbqc">
-          <td><a href="https://www.youtube.com/shorts/urgbQCxcLG8" target="_blank" rel="noopener">Rethinking Education &amp; Student Stress</a><br><span class="dim">YouTube Short</span></td>
-          <td class="dim">🌳 Infinite Permutation / Education</td>
-          <td class="dim">AI drops the cost of personalized education toward zero, unlocking universal family participation and relieving rote learning stress.</td>
-          <td class="dim">Short-form format — best paired with data on personalized AI tutoring and accessible STEM learning.</td>
-          <td class="star-cell"></td>
         </tr>
       </table>
     </div>
@@ -414,74 +268,11 @@
           <th>Cons</th>
           <th>⭐ Rating</th>
         </tr>
-        <tr data-id="persp-apocalypse">
-          <td><b>💥 Job Apocalypse</b><br><span class="dim">Musk, alt-tech, doom projections</span></td>
-          <td class="dim">AI + humanoid robotics make human labor optional — cognitive and physical tasks scale at near-zero marginal cost.</td>
-          <td class="dim">Unlocks an "era of abundance"; eliminates dangerous, repetitive labor.</td>
-          <td class="dim">Risk of mass structural unemployment before markets adjust; concentrates power in a few platforms.</td>
-          <td class="star-cell"></td>
-        </tr>
-        <tr data-id="persp-permutation">
-          <td><b>🌳 Infinite Permutation</b><br><span class="dim">This video's thesis</span></td>
-          <td class="dim">Technology lowers baseline task costs, unleashing new demand, markets, and specialized industries.</td>
-          <td class="dim">Historical precedent (calculators, PCs, internet) multiplied net employment; human judgment becomes more valuable.</td>
-          <td class="dim">Requires major re-skilling; short-term displacement during the transition.</td>
-          <td class="star-cell"></td>
-        </tr>
-        <tr data-id="persp-skeptic">
-          <td><b>🧐 Skeptic / Marketing</b><br><span class="dim">Economic analysts, media critics</span></td>
-          <td class="dim">Apocalypse predictions are hype that inflates AI-startup valuations.</td>
-          <td class="dim">Prevents panic; focuses on real near-term gains over sci-fi scenarios.</td>
-          <td class="dim">Underestimating real progress could leave workforce policy unprepared.</td>
-          <td class="star-cell"></td>
-        </tr>
       </table>
     </div>
   </section>
 
-  <section class="block">
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
-      <h2 style="margin:0;">📊 The Economist — Net AI Jobs Impact (2023–2026)</h2>
-      <span style="font-size:11.5px;color:var(--text-dim);background:var(--panel);border:1px solid var(--panel-border);padding:3px 10px;border-radius:20px;">🕒 Added: 9 Sep 2026, 10:02 BST</span>
-    </div>
-    <p class="intro">These two charts from <i>The Economist</i> measure the net impact of the AI boom on US employment from 2023 through 2026 by comparing actual job counts to expected baseline hiring trends (<i>"Actual jobs minus jobs expected if sectors followed broader hiring trends"</i>).</p>
-
-    <div style="background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;padding:20px 22px;margin-bottom:18px;">
-      <h3 style="margin-top:0;color:var(--accent);">🧱 Chart 1: Hard-hat labour</h3>
-      <p>This chart displays <b>additional AI-related infrastructure jobs</b> (blue-collar/trades), showing a steady, accelerating rise from 2023 into 2026, reaching around 300,000 net additional jobs.</p>
-      <ul>
-        <li><b>Physical Data Center Boom:</b> Building out the physical infrastructure required to train and run AI models (data centers, power grids, cooling systems) requires physical labor that cannot be automated by software.</li>
-        <li><b>Key Sectors Driving Growth:</b>
-          <ul>
-            <li><b>Electrical contractors</b> (red) and <b>utility-system construction</b> (blue) make up the largest share, as AI facilities require massive electrical power grid expansions.</li>
-            <li><b>Commercial construction</b>, <b>HVAC &amp; plumbing</b> (for liquid and air cooling in server farms), and <b>electrical-equipment manufacturing</b> contribute the rest.</li>
-          </ul>
-        </li>
-      </ul>
-
-      <hr style="border:none;border-top:1px solid var(--panel-border);margin:18px 0;">
-
-      <h3 style="color:var(--accent-2);">💻 Chart 2: STEM with the flow</h3>
-      <p>This chart tracks <b>additional AI-related white-collar jobs</b>, total gain approaching ~600,000–700,000 net jobs by 2026, but with a distinct mid-period dip in specific roles.</p>
-      <ul>
-        <li><b>The Software Developer Dip (2024):</b> Notice how <b>Software developers</b> (red) dipped into negative territory throughout 2024 (down to around -100k relative to baseline). Early AI adoption increased code efficiency and enabled tech layoffs, briefly slowing hiring for entry-to-mid-level coders.</li>
-        <li><b>The Rebound &amp; Expansion (2025–2026):</b> By 2025, software developer hiring recovered back into positive growth alongside major increases in:
-          <ul>
-            <li><b>Maths &amp; data science</b> (orange) and <b>Info-security analysts</b> (light blue)</li>
-            <li><b>Engineers</b> (dark blue)</li>
-            <li><b>Other computer occupations</b> (grey), which forms the largest overall category as AI integration broadens across non-coding tech roles.</li>
-          </ul>
-        </li>
-      </ul>
-
-      <hr style="border:none;border-top:1px solid var(--panel-border);margin:18px 0;">
-
-      <h3 style="color:var(--warm);">🎯 Core Takeaway</h3>
-      <p style="margin-bottom:0;">The AI boom isn't just creating digital jobs—it is driving massive demand for physical infrastructure. While software engineering underwent a temporary correction in 2024 as companies adapted to AI tools, both physical infrastructure trades and white-collar STEM fields show strong overall net job creation driven by AI investment.</p>
-    </div>
-
-    <button class="add-asset-btn" data-id="link-economist-jobs-charts" data-type="link" data-source="Research" data-title="The Economist — Hard-hat labour &amp; STEM with the flow charts" data-desc="Net AI jobs impact 2023-2026" data-url="https://www.economist.com/">➕ Add to Assets</button>
-  </section>
+  <section class="block" id="economist-report"></section>
 
   <section class="block">
     <h2>🎥 Footage Shot List</h2>
@@ -489,64 +280,7 @@
     <div class="sort-bar">
       <button class="reset-order-btn" data-reset-for="shotlist-container">↕ Reset order</button>
     </div>
-    <div class="shotlist" id="shotlist-container">
-      <div class="shot-row">
-        <div class="row-head">
-          <div class="sec">🪝 Hook</div>
-          <button class="add-asset-btn" data-id="footage-hook-optimus" data-type="footage" data-source="Research" data-title="Tesla Optimus / Elon clips + headlines overlay" data-desc="Search &quot;Tesla Bot presentation AI Day&quot;, &quot;Elon Musk unveils Optimus robot&quot;. Screen-recorded news headline overlay graphics.">➕ Add to Assets</button>
-        </div>
-        <div class="items"><b>Tesla Optimus / Elon clips</b> — search "Tesla Bot presentation AI Day", "Elon Musk unveils Optimus robot". <b>Headlines overlay</b> — screen-recorded news headline graphics.</div>
-      </div>
-      <div class="shot-row warm">
-        <div class="row-head">
-          <div class="sec">👨‍👧 Hook — personal</div>
-          <button class="add-asset-btn" data-id="footage-hook-personal" data-type="footage" data-source="Research" data-title="Candid family footage" data-desc="Candid home footage or stylized shot with the creator's daughters, to establish the personal stake.">➕ Add to Assets</button>
-        </div>
-        <div class="items">Candid home footage or stylized shot with the creator's daughters, to establish the personal stake.</div>
-      </div>
-      <div class="shot-row">
-        <div class="row-head">
-          <div class="sec">🪨 Section 1 — History</div>
-          <button class="add-asset-btn" data-id="footage-sec1-history" data-type="footage" data-source="Research" data-title="Historical technology-shift archival" data-desc="Stone Age / early agriculture illustrations; black-and-white assembly-line archive (Ford Model T); 1980s office footage — search &quot;1980s USA office workers on phones and computers Kinolibrary&quot;.">➕ Add to Assets</button>
-        </div>
-        <div class="items">Stone Age / early agriculture illustrations; black-and-white assembly-line archive (Ford Model T); 1980s office footage — search "1980s USA office workers on phones and computers Kinolibrary".</div>
-      </div>
-      <div class="shot-row">
-        <div class="row-head">
-          <div class="sec">🏭 Section 1 — Modern contrast</div>
-          <button class="add-asset-btn" data-id="footage-sec1-modern" data-type="footage" data-source="Research" data-title="Modern automation contrast" data-desc="Automated EV plant with robotic welding arms; financial graphs animating across a laptop screen.">➕ Add to Assets</button>
-        </div>
-        <div class="items">Automated EV plant with robotic welding arms; financial graphs animating across a laptop screen.</div>
-      </div>
-      <div class="shot-row warm">
-        <div class="row-head">
-          <div class="sec">🌳 Section 2 — Emerging jobs</div>
-          <button class="add-asset-btn" data-id="footage-sec2-jobs" data-type="footage" data-source="Research" data-title="Emerging job roles b-roll" data-desc="Technician with VR/AR headset and a holographic digital twin; warehouse AGV robot fleet oversight; creator editing video with AI tools.">➕ Add to Assets</button>
-        </div>
-        <div class="items">Technician with VR/AR headset and a holographic digital twin; warehouse AGV robot fleet oversight; creator editing video with AI tools.</div>
-      </div>
-      <div class="shot-row warm">
-        <div class="row-head">
-          <div class="sec">🧮 Section 3 — Education &amp; Math</div>
-          <button class="add-asset-btn" data-id="footage-sec3-math" data-type="footage" data-source="Research" data-title="Math, AI tutoring &amp; family participation b-roll" data-desc="Kids learning with personalized AI tutors, coding, or building with Lego Mindstorms; family learning together at home; teenager solving equations on a glass whiteboard; engineers collaborating around blueprints.">➕ Add to Assets</button>
-        </div>
-        <div class="items">Kids with personalized AI tutors on tablets (ref: <b>yt/urgbQCxcLG8</b>); family learning together at home; teenager solving equations on a glass whiteboard; engineers collaborating around blueprints.</div>
-      </div>
-      <div class="shot-row">
-        <div class="row-head">
-          <div class="sec">🦿 Advanced robotics reference</div>
-          <button class="add-asset-btn" data-id="footage-robotics-ref" data-type="footage" data-source="Research" data-title="Boston Dynamics Atlas reference" data-desc="Search &quot;Boston Dynamics Atlas humanoid upgrade&quot; or &quot;Boston Dynamics research run&quot; for high-energy contrast footage.">➕ Add to Assets</button>
-        </div>
-        <div class="items">Boston Dynamics Atlas — search "Boston Dynamics Atlas humanoid upgrade" or "Boston Dynamics research run" for high-energy contrast footage.</div>
-      </div>
-      <div class="shot-row warm">
-        <div class="row-head">
-          <div class="sec">🌅 Outro</div>
-          <button class="add-asset-btn" data-id="footage-outro" data-type="footage" data-source="Research" data-title="Closing optimism imagery" data-desc="Sunrise over a futuristic city skyline; a young girl looking toward the horizon — closing image of optimism.">➕ Add to Assets</button>
-        </div>
-        <div class="items">Sunrise over a futuristic city skyline; a young girl looking toward the horizon — closing image of optimism.</div>
-      </div>
-    </div>
+    <div class="shotlist" id="shotlist-container"></div>
   </section>
 
 </main>
@@ -564,7 +298,74 @@
   var byId = function(el){ return el.querySelector('[data-id]').getAttribute('data-id'); };
   var beforeIdEl = function(item, starEl){ item.insertBefore(starEl, item.querySelector('[data-id]')); };
 
-  Ratings.ready.then(function(){
+  function esc(s){ return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/"/g, '&quot;'); }
+
+  function renderContent(){
+    var linkCards = ContentDB.getBlocks('index.html', 'source-links');
+    document.getElementById('source-link-grid').innerHTML = linkCards.map(function(b){
+      var d = b.data;
+      return '<div class="link-card">' +
+        '<span class="tag">' + d.tag + '</span>' +
+        '<a class="title" href="' + esc(d.url) + '" target="_blank" rel="noopener">' + d.title + '</a>' +
+        '<span class="url">' + d.urlDisplay + '</span>' +
+        '<button class="add-asset-btn" data-id="' + b.id + '" data-type="link" data-source="Research" data-title="' + esc(d.title) + '" data-desc="' + esc(d.desc) + '" data-url="' + esc(d.url) + '">➕ Add to Assets</button>' +
+      '</div>';
+    }).join('');
+
+    var videoRows = ContentDB.getBlocks('index.html', 'pro-con-videos');
+    document.getElementById('pro-con-table').tBodies[0].innerHTML = videoRows.map(function(b){
+      var d = b.data;
+      var titleCell = '<a href="' + esc(d.href) + '" target="_blank" rel="noopener">' + d.title + '</a>' +
+        (d.sub ? '<br><span class="dim">' + d.sub + '</span>' : '') +
+        (d.transcript ? '<br><span class="dim">Full <a href="' + esc(d.transcript) + '" target="_blank" rel="noopener">transcript</a></span>' : '');
+      return '<tr data-id="' + b.id + '">' +
+        '<td>' + titleCell + '</td>' +
+        '<td class="dim">' + d.angle + '</td>' +
+        '<td class="dim">' + d.pro + '</td>' +
+        '<td class="dim">' + d.con + '</td>' +
+        '<td class="star-cell"></td>' +
+      '</tr>';
+    }).join('');
+
+    var perspRows = ContentDB.getBlocks('index.html', 'perspective-comparison');
+    document.getElementById('perspective-table').tBodies[0].innerHTML = perspRows.map(function(b){
+      var d = b.data;
+      return '<tr data-id="' + b.id + '">' +
+        '<td><b>' + d.emojiLabel + '</b><br><span class="dim">' + d.sub + '</span></td>' +
+        '<td class="dim">' + d.argument + '</td>' +
+        '<td class="dim">' + d.pros + '</td>' +
+        '<td class="dim">' + d.cons + '</td>' +
+        '<td class="star-cell"></td>' +
+      '</tr>';
+    }).join('');
+
+    var econ = ContentDB.getBlocks('index.html', 'economist-report')[0];
+    if(econ){
+      var d = econ.data;
+      document.getElementById('economist-report').innerHTML =
+        '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px;">' +
+          '<h2 style="margin:0;">📊 The Economist — Net AI Jobs Impact (2023–2026)</h2>' +
+          '<span style="font-size:11.5px;color:var(--text-dim);background:var(--panel);border:1px solid var(--panel-border);padding:3px 10px;border-radius:20px;">' + d.addedLabel + '</span>' +
+        '</div>' +
+        '<p class="intro">' + d.intro + '</p>' +
+        '<div style="background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;padding:20px 22px;margin-bottom:18px;">' + d.html + '</div>' +
+        '<button class="add-asset-btn" data-id="link-economist-jobs-charts" data-type="link" data-source="Research" data-title="The Economist — Hard-hat labour &amp; STEM with the flow charts" data-desc="Net AI jobs impact 2023-2026" data-url="https://www.economist.com/">➕ Add to Assets</button>';
+    }
+
+    var shotRows = ContentDB.getBlocks('index.html', 'footage-shot-list');
+    document.getElementById('shotlist-container').innerHTML = shotRows.map(function(b){
+      var d = b.data;
+      return '<div class="shot-row' + (d.warm ? ' warm' : '') + '">' +
+        '<div class="row-head">' +
+          '<div class="sec">' + d.sec + '</div>' +
+          '<button class="add-asset-btn" data-id="' + b.id + '" data-type="footage" data-source="Research" data-title="' + esc(d.title) + '" data-desc="' + esc(d.desc) + '">➕ Add to Assets</button>' +
+        '</div>' +
+        '<div class="items">' + d.items + '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  ContentDB.ready.then(renderContent).then(function(){ return Ratings.ready; }).then(function(){
 
   var sortables = {
     'source-link-grid': Ratings.makeSortable({

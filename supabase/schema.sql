@@ -61,13 +61,37 @@ create table if not exists public.links (
 );
 
 -- ---------------------------------------------------------------------
+-- content_blocks: the hand-authored production content that used to be
+-- static markup on each page (source links, arguments, script beats,
+-- design specs, shot-board panels). One row per card/row/panel; `data`
+-- holds whatever fields that block type needs, so each page's renderer
+-- interprets `type` to build the same markup that used to be hardcoded.
+--   page    = html filename, e.g. "index.html"
+--   section = the section id within the page, e.g. "source-links"
+--   type    = block type, e.g. "link-card", "argument", "beat", "shot"
+-- ---------------------------------------------------------------------
+create table if not exists public.content_blocks (
+  id         text primary key,           -- stable item id (matches previous data-id)
+  page       text not null,
+  section    text not null,
+  position   integer not null default 0,
+  type       text not null,
+  data       jsonb not null default '{}'::jsonb,
+  updated_at timestamptz not null default now()
+);
+
+create index if not exists content_blocks_page_section_idx
+  on public.content_blocks (page, section, position);
+
+-- ---------------------------------------------------------------------
 -- Row Level Security: public tool, no auth, anon key does everything.
 -- ---------------------------------------------------------------------
-alter table public.assets     enable row level security;
-alter table public.notes      enable row level security;
-alter table public.item_notes enable row level security;
-alter table public.ratings    enable row level security;
-alter table public.links      enable row level security;
+alter table public.assets         enable row level security;
+alter table public.notes          enable row level security;
+alter table public.item_notes     enable row level security;
+alter table public.ratings        enable row level security;
+alter table public.links          enable row level security;
+alter table public.content_blocks enable row level security;
 
 drop policy if exists "anon full access" on public.assets;
 create policy "anon full access" on public.assets
@@ -87,4 +111,8 @@ create policy "anon full access" on public.ratings
 
 drop policy if exists "anon full access" on public.links;
 create policy "anon full access" on public.links
+  for all using (true) with check (true);
+
+drop policy if exists "anon full access" on public.content_blocks;
+create policy "anon full access" on public.content_blocks
   for all using (true) with check (true);
