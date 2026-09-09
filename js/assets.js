@@ -160,6 +160,8 @@
         }
       }
       refresh();
+      if(btn.dataset.wired) return;
+      btn.dataset.wired = '1';
       btn.addEventListener('click', function(){
         if(hasAsset(id)){
           removeAsset(id);

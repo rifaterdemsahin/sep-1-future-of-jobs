@@ -118,7 +118,32 @@
         'color:var(--text-dim,#9aa1b0);border-radius:7px;padding:4px 10px;font-size:11px;cursor:pointer;' +
         'font-family:inherit;transition:border-color .15s ease,color .15s ease;}' +
       '.item-note-actions button:hover{border-color:var(--accent-2,#5ab0ff);color:var(--text,#eef0f4);}' +
-      '.item-note-actions .in-delete:hover{border-color:#e05a5a;color:#e05a5a;}';
+      '.item-note-actions .in-delete:hover{border-color:#e05a5a;color:#e05a5a;}' +
+      '.nb-db-btn{font-size:11px;padding:4px 10px;border-radius:20px;' +
+        'border:1px solid var(--accent-2,#5ab0ff);background:transparent;color:var(--accent-2,#5ab0ff);' +
+        'cursor:pointer;white-space:nowrap;font-family:inherit;}' +
+      '.nb-db-btn:hover{background:var(--accent-2,#5ab0ff);color:var(--bg,#0b0d12);}' +
+      '.db-modal-overlay{position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.6);' +
+        'display:flex;align-items:center;justify-content:center;padding:20px;}' +
+      '.db-modal-overlay[hidden]{display:none;}' +
+      '.db-modal-card{max-width:560px;width:100%;max-height:80vh;overflow-y:auto;' +
+        'background:var(--panel,#13161f);border:1px solid var(--panel-border,#232838);' +
+        'border-radius:12px;padding:22px 24px;color:var(--text,#eef0f4);' +
+        'font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}' +
+      '.db-modal-card h3{margin:0 0 4px;font-size:17px;}' +
+      '.db-modal-card .db-sub{color:var(--text-dim,#9aa1b0);font-size:12.5px;margin-bottom:14px;}' +
+      '.db-modal-card table{width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:14px;}' +
+      '.db-modal-card th{text-align:left;color:var(--text-dim,#9aa1b0);font-weight:600;' +
+        'padding:4px 8px 4px 0;border-bottom:1px solid var(--panel-border,#232838);}' +
+      '.db-modal-card td{padding:6px 8px 6px 0;border-bottom:1px solid var(--panel-border,#232838);' +
+        'vertical-align:top;}' +
+      '.db-modal-card td code{color:var(--accent,#e8b94a);font-family:ui-monospace,Menlo,monospace;' +
+        'font-size:11.5px;}' +
+      '.db-modal-card ol{margin:0 0 14px;padding-left:18px;font-size:13px;line-height:1.6;}' +
+      '.db-modal-card .db-close{border:1px solid var(--panel-border,#232838);background:transparent;' +
+        'color:var(--text,#eef0f4);border-radius:8px;padding:7px 14px;font-size:12.5px;cursor:pointer;' +
+        'font-family:inherit;}' +
+      '.db-modal-card .db-close:hover{border-color:var(--accent-2,#5ab0ff);}';
     document.head.appendChild(style);
   }
 
@@ -136,8 +161,10 @@
       '<span>📝</span>' +
       '<span class="nb-title">Notes for Video Production Agent</span>' +
       '<span class="nb-count"></span>' +
+      '<button type="button" class="nb-db-btn">🗄️ Database</button>' +
       '<span class="nb-caret">▲</span>';
     var countEl = header.querySelector('.nb-count');
+    var dbBtn = header.querySelector('.nb-db-btn');
 
     var body = document.createElement('div');
     body.className = 'notes-body';
@@ -250,6 +277,51 @@
 
     header.addEventListener('click', function(){
       bar.classList.toggle('open');
+    });
+
+    function openDbModal(){
+      var page = currentPage();
+      var overlay = document.getElementById('db-modal-overlay');
+      if(!overlay){
+        overlay = document.createElement('div');
+        overlay.id = 'db-modal-overlay';
+        overlay.className = 'db-modal-overlay';
+        overlay.hidden = true;
+        overlay.innerHTML =
+          '<div class="db-modal-card">' +
+            '<h3>🗄️ How this page loads from the database</h3>' +
+            '<div class="db-sub">Page: <code>' + page + '</code> — everything below is fetched from Supabase (Postgres) at load time, not hardcoded in the HTML.</div>' +
+            '<ol>' +
+              '<li>A single shared client (<code>window.sb</code>) is created once per page from the Supabase project URL + anon key.</li>' +
+              '<li>Each data module below fires its own <code>window.sb.from(table).select(\'*\')</code> as soon as its script loads, and exposes a <code>.ready</code> promise.</li>' +
+              '<li>The page\'s render code does <code>Promise.all([...ready promises]).then(render)</code> — nothing is drawn until the real rows come back.</li>' +
+              '<li>Edits (add/remove/rate/comment/link) update the in-memory copy immediately for a snappy UI, then write to Supabase in the background.</li>' +
+            '</ol>' +
+            '<table>' +
+              '<tr><th>Table</th><th>What it holds on this page</th></tr>' +
+              '<tr><td><code>content_blocks</code></td><td>The cards/rows/panels you see (filtered to <code>page = \'' + page + '\'</code>) — source links, arguments, script beats, design specs, or shot panels.</td></tr>' +
+              '<tr><td><code>assets</code></td><td>Items saved via any "➕ Add to Assets" button, shown on the Assets page.</td></tr>' +
+              '<tr><td><code>ratings</code></td><td>⭐ star ratings attached to an item id.</td></tr>' +
+              '<tr><td><code>notes</code> / <code>item_notes</code></td><td>This notes bar, plus the 💬 per-item note boxes.</td></tr>' +
+              '<tr><td><code>links</code></td><td>The "🔗 Linked to…" cross-stage pickers.</td></tr>' +
+              '<tr><td><code>audio_clips</code></td><td>Manifest of Kokoro voice-over clips already saved to Azure Blob Storage, so re-listening skips the API.</td></tr>' +
+            '</table>' +
+            '<button type="button" class="db-close">Close</button>' +
+          '</div>';
+        document.body.appendChild(overlay);
+        overlay.addEventListener('click', function(e){
+          if(e.target === overlay) overlay.hidden = true;
+        });
+        overlay.querySelector('.db-close').addEventListener('click', function(){
+          overlay.hidden = true;
+        });
+      }
+      overlay.hidden = false;
+    }
+
+    dbBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      openDbModal();
     });
 
     addBtn.addEventListener('click', function(e){

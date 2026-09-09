@@ -456,6 +456,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="../js/supabase-client.js"></script>
 <script src="../js/nav.js"></script>
+<script src="../js/content-db.js"></script>
 <script src="../js/theme.js"></script>
 <script src="../js/notes.js"></script>
 </head>
@@ -541,130 +542,7 @@
     </ol>
   </div>
 
-  <section id="hook" class="beat">
-    <div class="beat-head">
-      <h2>🪝 Hook</h2>
-      <div class="head-actions">
-        <span class="tc">0:00 – 0:30</span>
-        <button class="listen-beat-btn" onclick="togglePlayBeat('hook', 'Hook', this)">🔊 Listen</button>
-        <button class="azure-save-btn" onclick="saveBeatToAzure('hook', 'Hook', this)" title="Save audio to Azure Blob Storage">☁️ Save</button>
-        <button class="audio-delete-btn" onclick="deleteBeatAudio('hook', 'Hook', this)" title="Delete audio from Azure &amp; local storage">🗑️</button>
-        <button class="copy-beat-btn" onclick="copyBeatScript('hook', this)" title="Copy this section's script to clipboard">📋 Copy</button>
-        <button class="audio-download-btn" onclick="downloadBeatAudio('hook', 'Hook', this)" title="Download this section's audio as MP3">⬇️ Audio</button>
-        <button class="add-asset-btn" data-id="beat-hook" data-type="beat" data-source="Script" data-title="Hook (0:00–0:30)" data-desc="Fast-cut montage of headlines featuring Elon Musk predicting AI and humanoid robots replacing human labor, transitioning to a warm, personal shot of the creator in a home studio or living room." data-url="script.html#hook">➕ Add to Assets</button>
-      </div>
-    </div>
-    <div class="visual-note">🎥 Visual</div>
-    <p class="visual-desc">Fast-cut montage of headlines featuring Elon Musk predicting AI and humanoid robots replacing human labor, transitioning to a warm, personal shot of the creator in a home studio or living room.</p>
-    <div class="vo">
-      <div class="vo-label">🎙️ Host VO</div>
-      <p>Elon Musk recently made a massive prediction: over the next five years, as AI and humanoid robotics scale, total global productivity will soar, but human labor as we know it will become largely optional — or flat-out obsolete.</p>
-      <p>He sees a world run by machines. But I'm here to argue the exact opposite: <strong>humans are going to have more jobs, not fewer.</strong></p>
-      <p>And look, this isn't just fluffy, wishful thinking. I have skin in the game — I have two daughters growing up in this exact world. When I look at where technology is heading, I don't see a job apocalypse. I see an explosion of brand-new possibilities.</p>
-      <p>Here is why the future is bright, and why my kids — and yours — are going to thrive.</p>
-    </div>
-  </section>
-
-  <section id="section1" class="beat">
-    <div class="beat-head">
-      <h2>🪨 Section 1 — The Productivity Fallacy &amp; Historical Proof</h2>
-      <div class="head-actions">
-        <span class="tc">0:30 – 1:45</span>
-        <button class="listen-beat-btn" onclick="togglePlayBeat('section1', 'Section 1', this)">🔊 Listen</button>
-        <button class="azure-save-btn" onclick="saveBeatToAzure('section1', 'Section 1', this)" title="Save audio to Azure Blob Storage">☁️ Save</button>
-        <button class="audio-delete-btn" onclick="deleteBeatAudio('section1', 'Section 1', this)" title="Delete audio from Azure &amp; local storage">🗑️</button>
-        <button class="copy-beat-btn" onclick="copyBeatScript('section1', this)" title="Copy this section's script to clipboard">📋 Copy</button>
-        <button class="audio-download-btn" onclick="downloadBeatAudio('section1', 'Section 1', this)" title="Download this section's audio as MP3">⬇️ Audio</button>
-        <button class="add-asset-btn" data-id="beat-section1" data-type="beat" data-source="Script" data-title="Section 1 — Productivity Fallacy & Historical Proof (0:30–1:45)" data-desc="B-roll / on-screen animations showing historical shifts: Stone Age tools, early agricultural farming, mechanical calculators, and 1980s personal computers." data-url="script.html#section1">➕ Add to Assets</button>
-      </div>
-    </div>
-    <div class="visual-note">🎥 Visual</div>
-    <p class="visual-desc">B-roll / on-screen animations showing historical shifts: Stone Age tools, early agricultural farming, mechanical calculators, and 1980s personal computers.</p>
-    <div class="vo">
-      <div class="vo-label">🎙️ Host VO</div>
-      <p>Let's give credit where it's due: Elon is right about productivity rising. When you combine human capability with robotics and artificial intelligence, total economic output goes through the roof. Where he gets it wrong is what happens to us afterward.</p>
-      <p>Every single time humanity undergoes a massive technological leap, doom-sayers predict the end of work.</p>
-      <p>Think about the transition from hunter-gatherers in the Stone Age to early agriculture.</p>
-      <p>Think about the Industrial Revolution, or when electronic calculators and mainframe computers entered offices.</p>
-      <p>When calculators were invented, people thought mathematicians and accountants would disappear. Instead, financial modeling blew up. The cost of doing math dropped to zero, which allowed us to build hyper-complex global financial systems, modern architecture, and space programs.</p>
-      <p><strong>Tools don't destroy human intent; they multiply the permutations of what humans can create.</strong></p>
-    </div>
-  </section>
-
-  <section id="section2" class="beat warm">
-    <div class="beat-head">
-      <h2>🌳 Section 2 — The Infinite Permutation Principle</h2>
-      <div class="head-actions">
-        <span class="tc">1:45 – 2:45</span>
-        <button class="listen-beat-btn" onclick="togglePlayBeat('section2', 'Section 2', this)">🔊 Listen</button>
-        <button class="azure-save-btn" onclick="saveBeatToAzure('section2', 'Section 2', this)" title="Save audio to Azure Blob Storage">☁️ Save</button>
-        <button class="audio-delete-btn" onclick="deleteBeatAudio('section2', 'Section 2', this)" title="Delete audio from Azure &amp; local storage">🗑️</button>
-        <button class="copy-beat-btn" onclick="copyBeatScript('section2', this)" title="Copy this section's script to clipboard">📋 Copy</button>
-        <button class="audio-download-btn" onclick="downloadBeatAudio('section2', 'Section 2', this)" title="Download this section's audio as MP3">⬇️ Audio</button>
-        <button class="add-asset-btn" data-id="beat-section2" data-type="beat" data-source="Script" data-title="Section 2 — The Infinite Permutation Principle (1:45–2:45)" data-desc="Graphics displaying a tree diagram expanding infinitely into new, specialized job roles (e.g., Prompt Engineer, Robot Fleet Manager, Bio-data Analyst, Custom Experience Designer)." data-url="script.html#section2">➕ Add to Assets</button>
-      </div>
-    </div>
-    <div class="visual-note">🎥 Visual</div>
-    <p class="visual-desc">Graphics displaying a tree diagram expanding infinitely into new, specialized job roles (e.g., Prompt Engineer, Robot Fleet Manager, Bio-data Analyst, Custom Experience Designer).</p>
-    <div class="vo">
-      <div class="vo-label">🎙️ Host VO</div>
-      <p>Here's the mechanism people miss: technology lowers the cost of basic tasks, which creates brand-new industries that couldn't exist before.</p>
-      <p>Before the internet, nobody's job title was "App Developer," "Cloud Architect," or "YouTube Creator."</p>
-      <p>When robotics handle repetitive physical labor and AI handles raw baseline calculations, humans are freed up to move into vastly more complex, creative, and highly specialized roles.</p>
-      <p>Instead of a fixed pie of jobs that gets taken away, automation creates an infinite number of new permutations. We won't just be doing the old jobs faster; we'll be solving entirely new categories of problems.</p>
-    </div>
-  </section>
-
-  <section id="section3" class="beat warm">
-    <div class="beat-head">
-      <h2>🧮 Section 3 — Education Democratization, Math &amp; Human Insight</h2>
-      <div class="head-actions">
-        <span class="tc">2:45 – 3:45</span>
-        <button class="listen-beat-btn" onclick="togglePlayBeat('section3', 'Section 3', this)">🔊 Listen</button>
-        <button class="azure-save-btn" onclick="saveBeatToAzure('section3', 'Section 3', this)" title="Save audio to Azure Blob Storage">☁️ Save</button>
-        <button class="audio-delete-btn" onclick="deleteBeatAudio('section3', 'Section 3', this)" title="Delete audio from Azure &amp; local storage">🗑️</button>
-        <button class="copy-beat-btn" onclick="copyBeatScript('section3', this)" title="Copy this section's script to clipboard">📋 Copy</button>
-        <button class="audio-download-btn" onclick="downloadBeatAudio('section3', 'Section 3', this)" title="Download this section's audio as MP3">⬇️ Audio</button>
-        <button class="add-asset-btn" data-id="beat-section3" data-type="beat" data-source="Script" data-title="Section 3 — Education Democratization, Math & Human Insight (2:45–3:45)" data-desc="Cut to host speaking candidly, followed by visuals of kids learning with personalized AI tutors (ref: YouTube Short yt/urgbQCxcLG8), interactive STEM modeling, and family empowerment." data-url="script.html#section3">➕ Add to Assets</button>
-      </div>
-    </div>
-    <div class="visual-note">🎥 Visual</div>
-    <p class="visual-desc">Cut to host speaking candidly, followed by visuals of kids learning with personalized AI tutors, interactive STEM modeling, and family collaboration (Ref: <a href="https://www.youtube.com/shorts/urgbQCxcLG8" target="_blank" rel="noopener" style="color:var(--accent-2);">YouTube Short: Rethinking Education &amp; Student Stress</a>).</p>
-    <div class="vo">
-      <div class="vo-label">🎙️ Host VO</div>
-      <p>Which brings me back to my daughters — and families everywhere.</p>
-      <p>There's a massive economic transformation taking place that doom-sayers completely miss: <strong>the cost of high-quality education is collapsing toward zero because of AI.</strong></p>
-      <p>For generations, elite tutoring and advanced technical education were expensive luxuries, causing immense academic anxiety and locking millions of households out of the modern economy. But with AI-driven personalized learning, the cost barrier evaporates. Most families who were previously priced out will now be able to participate, learn at their own pace, and master complex disciplines.</p>
-      <p>Some people ask: "If AI can calculate and code anything instantly, why bother teaching our kids advanced math and technical skills?"</p>
-      <p>Because tools don't eliminate the need for understanding — they elevate it. My daughters won't be wasting hours on tedious rote memorization or manual arithmetic. Instead, they'll use mathematical logic, systems thinking, and data modeling to command AI and solve real-world problems.</p>
-      <p>Math isn't just arithmetic; it's the language of problem-solving. When you combine democratized, accessible education with human judgment, empathy, and creative direction, human potential explodes.</p>
-    </div>
-  </section>
-
-  <section id="outro" class="beat">
-    <div class="beat-head">
-      <h2>🎬 Conclusion &amp; Outro</h2>
-      <div class="head-actions">
-        <span class="tc">3:45 – 4:30</span>
-        <button class="listen-beat-btn" onclick="togglePlayBeat('outro', 'Outro', this)">🔊 Listen</button>
-        <button class="azure-save-btn" onclick="saveBeatToAzure('outro', 'Outro', this)" title="Save audio to Azure Blob Storage">☁️ Save</button>
-        <button class="audio-delete-btn" onclick="deleteBeatAudio('outro', 'Outro', this)" title="Delete audio from Azure &amp; local storage">🗑️</button>
-        <button class="copy-beat-btn" onclick="copyBeatScript('outro', this)" title="Copy this section's script to clipboard">📋 Copy</button>
-        <button class="audio-download-btn" onclick="downloadBeatAudio('outro', 'Outro', this)" title="Download this section's audio as MP3">⬇️ Audio</button>
-        <button class="add-asset-btn" data-id="beat-outro" data-type="beat" data-source="Script" data-title="Conclusion & Outro (3:45–4:30)" data-desc="Host back on camera, direct and grounded. On-screen graphic showcasing the Skool Community, cloud &amp; AI certification roadmaps, and student success stories, transitioning to link in description and pinned comment." data-url="script.html#outro">➕ Add to Assets</button>
-      </div>
-    </div>
-    <div class="visual-note">🎥 Visual</div>
-    <p class="visual-desc">Host back on camera, direct and grounded. On-screen graphic showcasing our Skool Community, cloud &amp; AI certification roadmaps, and career placement resources, transitioning to link in description and pinned comment.</p>
-    <div class="vo">
-      <div class="vo-label">🎙️ Host VO</div>
-      <p>The narrative that robotics will leave humans with nothing to do ignores the entire history of human ambition. We don't run out of things to do when tasks get easier; we just set our sights higher.</p>
-      <p>The future isn't a dark dystopia where humans are rendered useless by machines. It's an era where the barrier to entry for building great things has never been lower.</p>
-      <p><strong>The future is bright, jobs will evolve and expand, and the next generation is going to accomplish things we haven't even dreamed of yet.</strong></p>
-      <p>If you want to stay ahead of this curve and future-proof your own career, we've built a dedicated <strong>Skool community</strong> focused entirely on helping you get certified, master modern AI and cloud tools, and land high-demand future roles. You'll get step-by-step roadmaps, hands-on certification guidance, and real-world project support.</p>
-      <p>Check the link in the description or pinned comment below to join our Skool community today. What do you think about Elon's prediction? Let me know in the comments below, hit that like button, and subscribe for more. Thanks for watching! 🙌</p>
-    </div>
-  </section>
+  <div id="beats-container"></div>
 </main>
 
 <footer>
@@ -677,6 +555,38 @@
 <script>
   Pipeline.render('script');
   PipelineLinks.init({ file: 'script.html', sourceFile: 'index.html', sourceLabel: 'Research' });
+
+  function escAttr(s){ return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/"/g, '&quot;'); }
+
+  function renderBeats(){
+    var beats = ContentDB.getBlocks('script.html', 'beats');
+    document.getElementById('beats-container').innerHTML = beats.map(function(b){
+      var d = b.data;
+      var vo = d.vo.map(function(p){ return '<p>' + p + '</p>'; }).join('');
+      return '<section id="' + d.sectionId + '" class="beat' + (d.warm ? ' warm' : '') + '">' +
+        '<div class="beat-head">' +
+          '<h2>' + d.title + '</h2>' +
+          '<div class="head-actions">' +
+            '<span class="tc">' + d.tc + '</span>' +
+            '<button class="listen-beat-btn" onclick="togglePlayBeat(\'' + d.sectionId + '\', \'' + escAttr(d.title.replace(/<[^>]+>/g,'')) + '\', this)">🔊 Listen</button>' +
+            '<button class="azure-save-btn" onclick="saveBeatToAzure(\'' + d.sectionId + '\', \'' + escAttr(d.title.replace(/<[^>]+>/g,'')) + '\', this)" title="Save audio to Azure Blob Storage">☁️ Save</button>' +
+            '<button class="audio-delete-btn" onclick="deleteBeatAudio(\'' + d.sectionId + '\', \'' + escAttr(d.title.replace(/<[^>]+>/g,'')) + '\', this)" title="Delete audio from Azure &amp; local storage">🗑️</button>' +
+            '<button class="copy-beat-btn" onclick="copyBeatScript(\'' + d.sectionId + '\', this)" title="Copy this section\'s script to clipboard">📋 Copy</button>' +
+            '<button class="audio-download-btn" onclick="downloadBeatAudio(\'' + d.sectionId + '\', \'' + escAttr(d.title.replace(/<[^>]+>/g,'')) + '\', this)" title="Download this section\'s audio as MP3">⬇️ Audio</button>' +
+            '<button class="add-asset-btn" data-id="' + b.id + '" data-type="beat" data-source="Script" data-title="' + escAttr(d.addTitle) + '" data-desc="' + escAttr(d.addDesc) + '" data-url="script.html#' + d.sectionId + '">➕ Add to Assets</button>' +
+          '</div>' +
+        '</div>' +
+        '<div class="visual-note">🎥 Visual</div>' +
+        '<p class="visual-desc">' + d.visualDesc + '</p>' +
+        '<div class="vo"><div class="vo-label">🎙️ Host VO</div>' + vo + '</div>' +
+      '</section>';
+    }).join('');
+  }
+
+  Promise.all([ContentDB.ready, AssetDB.ready]).then(function(){
+    renderBeats();
+    AssetDB.initAddButtons();
+  });
 
   // Shared clipboard helper
   function copyTextToClipboard(text, onDone){

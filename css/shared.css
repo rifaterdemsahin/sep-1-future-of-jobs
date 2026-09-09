@@ -48,7 +48,7 @@ body{
 .topnav .links{display:flex;gap:8px;flex-wrap:wrap;}
 .topnav .links a{
   font-size:13px;
-  color:var(--text-dim);
+  color:var(--nav-color, var(--text-dim));
   text-decoration:none;
   padding:6px 14px;
   border-radius:20px;
@@ -56,6 +56,6 @@ body{
   transition:border-color .15s ease, color .15s ease;
 }
 .topnav .links a:hover{color:var(--text);border-color:var(--panel-border);}
-.topnav .links a.active{color:var(--text);border-color:var(--accent-2);}
+.topnav .links a.active{color:var(--nav-color, var(--text));}
 .topnav .links a.live{color:var(--accent);border-color:var(--accent);}
 .topnav .links a.live:hover{color:var(--bg);background:var(--accent);}

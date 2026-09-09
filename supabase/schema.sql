@@ -84,6 +84,24 @@ create index if not exists content_blocks_page_section_idx
   on public.content_blocks (page, section, position);
 
 -- ---------------------------------------------------------------------
+-- audio_clips: manifest of Kokoro voice-over audio saved to Azure Blob
+-- Storage, so the app knows what's already backed up without depending
+-- solely on per-browser IndexedDB. blob_path excludes the SAS query
+-- string (that's a short-lived credential, not something to persist) —
+-- it's re-joined with whatever SAS URL is currently configured.
+--   id = "<page>|<card_id>|<voice>|<speed>"
+-- ---------------------------------------------------------------------
+create table if not exists public.audio_clips (
+  id         text primary key,
+  page       text not null,
+  card_id    text not null,
+  voice      text not null,
+  speed      text not null,
+  blob_path  text not null,
+  updated_at timestamptz not null default now()
+);
+
+-- ---------------------------------------------------------------------
 -- Row Level Security: public tool, no auth, anon key does everything.
 -- ---------------------------------------------------------------------
 alter table public.assets         enable row level security;
@@ -92,6 +110,7 @@ alter table public.item_notes     enable row level security;
 alter table public.ratings        enable row level security;
 alter table public.links          enable row level security;
 alter table public.content_blocks enable row level security;
+alter table public.audio_clips    enable row level security;
 
 drop policy if exists "anon full access" on public.assets;
 create policy "anon full access" on public.assets
@@ -115,4 +134,8 @@ create policy "anon full access" on public.links
 
 drop policy if exists "anon full access" on public.content_blocks;
 create policy "anon full access" on public.content_blocks
+  for all using (true) with check (true);
+
+drop policy if exists "anon full access" on public.audio_clips;
+create policy "anon full access" on public.audio_clips
   for all using (true) with check (true);

@@ -22,24 +22,21 @@
   }
 
   // Cross-stage catalogs are read live from the previous stage's own
-  // "Add to Assets" buttons, so linking options always match its real
-  // content instead of a hand-maintained duplicate list.
+  // content_blocks rows (the same content its "Add to Assets" buttons
+  // render from), so linking options always match its real content
+  // instead of a hand-maintained duplicate list.
   function fetchCatalog(sourceFile){
     if(catalogCache[sourceFile]) return catalogCache[sourceFile];
-    catalogCache[sourceFile] = fetch(sourceFile)
-      .then(function(res){ return res.text(); })
-      .then(function(html){
-        var doc = new DOMParser().parseFromString(html, 'text/html');
-        var items = [];
-        doc.querySelectorAll('.add-asset-btn[data-id]').forEach(function(btn){
-          items.push({
-            id: btn.getAttribute('data-id'),
-            title: btn.getAttribute('data-title') || btn.getAttribute('data-id'),
-            url: btn.getAttribute('data-url') || sourceFile
-          });
-        });
-        return items;
+    catalogCache[sourceFile] = ContentDB.ready.then(function(){
+      return ContentDB.getBlocks(sourceFile).map(function(b){
+        var d = b.data || {};
+        return {
+          id: b.id,
+          title: d.title || d.fullTitle || d.emojiLabel || b.id,
+          url: d.url || d.href || (sourceFile + (d.cardId ? '#' + d.cardId : ''))
+        };
       });
+    });
     return catalogCache[sourceFile];
   }
 

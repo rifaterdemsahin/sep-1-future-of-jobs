@@ -365,7 +365,10 @@
     }).join('');
   }
 
-  ContentDB.ready.then(renderContent).then(function(){ return Ratings.ready; }).then(function(){
+  Promise.all([ContentDB.ready, AssetDB.ready]).then(function(){
+    renderContent();
+    AssetDB.initAddButtons();
+  }).then(function(){ return Ratings.ready; }).then(function(){
 
   var sortables = {
     'source-link-grid': Ratings.makeSortable({

@@ -269,6 +269,13 @@
   <div class="toolbar">
     <div class="count"><b id="count">0</b> items saved</div>
     <div class="actions">
+      <label style="font-size:13px;color:var(--text-dim);display:flex;align-items:center;gap:6px;">
+        Sort:
+        <select id="sortSelect" class="btn" style="padding:6px 10px;">
+          <option value="added">🕒 Newest first</option>
+          <option value="timecode">🎬 Expected time code</option>
+        </select>
+      </label>
       <button class="btn" id="uploadImageBtn" style="border-color:var(--accent);color:var(--accent);">🖼️ Upload Image</button>
       <input type="file" id="uploadImageInput" accept="image/*" multiple hidden>
       <button class="btn" id="azureSyncBtn" title="Configure optional Azure Blob Storage sync">☁️ Azure Sync</button>
@@ -336,8 +343,33 @@
     return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
   }
 
+  // Parses the "(0:30–1:45)" / "(3:45-4:30)" style time-code range that
+  // script-beat and footage titles/descriptions end with, into seconds
+  // from the start of the video. Returns null when nothing is found, so
+  // items with no expected time code sort after ones that have one.
+  function expectedTimecodeSeconds(item){
+    var text = (item.title || '') + ' ' + (item.description || '');
+    var m = text.match(/(\d{1,2}):(\d{2})\s*[–-]\s*\d{1,2}:\d{2}/);
+    if(!m) return null;
+    return parseInt(m[1], 10) * 60 + parseInt(m[2], 10);
+  }
+
+  function getSortMode(){
+    var sel = document.getElementById('sortSelect');
+    return sel ? sel.value : 'added';
+  }
+
   function render(){
-    var list = AssetDB.getAssets().slice().sort(function(a,b){
+    var mode = getSortMode();
+    var list = AssetDB.getAssets().slice().sort(function(a, b){
+      if(mode === 'timecode'){
+        var ta = expectedTimecodeSeconds(a);
+        var tb = expectedTimecodeSeconds(b);
+        if(ta === null && tb === null) return new Date(b.addedAt) - new Date(a.addedAt);
+        if(ta === null) return 1;
+        if(tb === null) return -1;
+        return ta - tb;
+      }
       return new Date(b.addedAt) - new Date(a.addedAt);
     });
     document.getElementById('count').textContent = list.length;
@@ -688,6 +720,8 @@
       }
     });
   })();
+
+  document.getElementById('sortSelect').addEventListener('change', render);
 
   AssetDB.ready.then(render);
 </script>

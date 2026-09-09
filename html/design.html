@@ -299,6 +299,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="../js/supabase-client.js"></script>
 <script src="../js/nav.js"></script>
+<script src="../js/content-db.js"></script>
 <script src="../js/theme.js"></script>
 <script src="../js/notes.js"></script>
 </head>
@@ -320,62 +321,12 @@
   <section class="block">
     <h2>🎬 Three-Act Structure</h2>
     <p class="sub" style="margin:-10px 0 16px;text-align:left;max-width:none;">The script's five beats collapse into a classic three-act shape — this is the structure design and pacing decisions should key off, not the individual sections.</p>
-    <div class="acts">
-      <div class="act-card act1">
-        <div class="act-eyebrow">Act 1 · Setup</div>
-        <h3>❄️ The Apocalypse Claim</h3>
-        <div class="act-tc">0:00 – 1:45</div>
-        <ul>
-          <li>🪝 Hook — Musk/Optimus headline montage → personal cut to camera</li>
-          <li>🪨 Section 1 — The Productivity Fallacy &amp; historical proof</li>
-        </ul>
-        <a class="act-link" href="script.html#hook">→ Script: Hook</a>
-      </div>
-      <div class="act-card act2">
-        <div class="act-eyebrow">Act 2 · Confrontation</div>
-        <h3>🌳 The Counter-Argument</h3>
-        <div class="act-tc">1:45 – 3:45</div>
-        <ul>
-          <li>🌳 Section 2 — The Infinite Permutation Principle</li>
-          <li>🧮 Section 3 — Math &amp; human insight matter more, not less</li>
-        </ul>
-        <a class="act-link" href="script.html#section2">→ Script: Section 2</a>
-      </div>
-      <div class="act-card act3">
-        <div class="act-eyebrow">Act 3 · Resolution</div>
-        <h3>🔥 The Human Takeaway</h3>
-        <div class="act-tc">3:45 – 4:30</div>
-        <ul>
-          <li>🎬 Conclusion &amp; Outro — host direct to camera, optimistic close</li>
-          <li>CTA cards, warm/cinematic tone throughout</li>
-        </ul>
-        <a class="act-link" href="script.html#outro">→ Script: Outro</a>
-      </div>
-    </div>
+    <div class="acts" id="acts-mount"></div>
   </section>
 
   <section class="block">
     <h2>🎛️ Core Editing Rule</h2>
-    <div class="contrast-row">
-      <div class="mood-card cold">
-        <h3>❄️ Cold &amp; Fast — Musk / Apocalypse beats</h3>
-        <ul>
-          <li>Desaturated blues, high contrast, harder cuts</li>
-          <li>News headline overlays, screen-recording textures</li>
-          <li>Faster cut rate (roughly 1–2s per shot)</li>
-          <li>Used for: hook headlines, Musk/Optimus clips, "job apocalypse" claims</li>
-        </ul>
-      </div>
-      <div class="mood-card warm">
-        <h3>🔥 Warm &amp; Cinematic — Family / Human potential beats</h3>
-        <ul>
-          <li>Golden-hour tones, soft contrast, steady pacing</li>
-          <li>Handheld-but-composed home footage, natural light</li>
-          <li>Slower cut rate (3–5s+ per shot), lets moments breathe</li>
-          <li>Used for: daughters, history/human-achievement, outro CTA</li>
-        </ul>
-      </div>
-    </div>
+    <div class="contrast-row" id="editing-rule-mount"></div>
   </section>
 
   <section class="block" id="palette-section">
@@ -392,55 +343,20 @@
 
   <section class="block">
     <h2>🔤 Typography</h2>
-    <div class="type-sample">
-      <div class="label">Title / on-screen headline</div>
-      <div class="sample-h">Why Elon Musk is Wrong</div>
-      <div class="sample-sub">System sans-serif, bold, tight tracking. Used for section title cards.</div>
-    </div>
-    <div class="type-sample">
-      <div class="label">Lower-third / tag</div>
-      <div class="sample-lower">The Future of AI and Jobs</div>
-    </div>
+    <div id="typography-mount"></div>
   </section>
 
   <section class="block">
     <h2>✨ Motion Graphic Specs</h2>
     <table class="spec-table">
       <tr><th>Graphic</th><th>Style</th><th>Section</th><th></th></tr>
-      <tr>
-        <td>🪨 Stone Age → Agriculture arrow</td>
-        <td class="dim">Flat icon morph, cold-to-warm gradient wipe</td>
-        <td class="dim">Section 1</td>
-        <td><button class="add-asset-btn" data-id="spec-stoneage" data-type="spec" data-source="Design" data-title="Stone Age → Agriculture arrow" data-desc="Flat icon morph, cold-to-warm gradient wipe. Section 1.">➕ Add to Assets</button></td>
-      </tr>
-      <tr>
-        <td>🖥️ Mainframe → PC dissolve</td>
-        <td class="dim">Cross-dissolve, CRT scanline texture on outgoing frame</td>
-        <td class="dim">Section 1</td>
-        <td><button class="add-asset-btn" data-id="spec-mainframe" data-type="spec" data-source="Design" data-title="Mainframe → PC dissolve" data-desc="Cross-dissolve, CRT scanline texture on outgoing frame. Section 1.">➕ Add to Assets</button></td>
-      </tr>
-      <tr>
-        <td>🌳 "Job Tree" branching diagram</td>
-        <td class="dim">Gold line-art, grows outward on VO beat, serif job-title labels</td>
-        <td class="dim">Section 2</td>
-        <td><button class="add-asset-btn" data-id="spec-jobtree" data-type="spec" data-source="Design" data-title="&quot;Job Tree&quot; branching diagram" data-desc="Gold line-art, grows outward on VO beat, serif job-title labels. Section 2.">➕ Add to Assets</button></td>
-      </tr>
-      <tr>
-        <td>🎓 Skool Community &amp; End-screen CTA</td>
-        <td class="dim">Skool community logo, certification badges pop-in, brand gold accent</td>
-        <td class="dim">Outro</td>
-        <td><button class="add-asset-btn" data-id="spec-cta" data-type="spec" data-source="Design" data-title="Skool Community &amp; End-screen CTA" data-desc="Skool community logo, certification badges pop-in, brand gold accent. Outro.">➕ Add to Assets</button></td>
-      </tr>
+      <tbody id="motion-specs-mount"></tbody>
     </table>
   </section>
 
   <section class="block">
     <h2>⏱️ Pacing Across the Timeline</h2>
-    <div class="pacing">
-      <div class="p1" style="flex:105;">❄️ Act 1 — Setup</div>
-      <div class="p3" style="flex:120;">🌳 Act 2 — Confrontation</div>
-      <div class="p5" style="flex:45;background:var(--warm);">🔥 Act 3 — Resolution</div>
-    </div>
+    <div class="pacing" id="pacing-mount"></div>
     <div class="pacing-legend">
       <span>0:00</span>
       <span>fast → slower →</span>
@@ -460,6 +376,70 @@
 <script>
   Pipeline.render('design');
   PipelineLinks.init({ file: 'design.html', sourceFile: 'script.html', sourceLabel: 'Script' });
+
+  function escAttr(s){ return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/"/g, '&quot;'); }
+
+  function renderDesignContent(){
+    var acts = ContentDB.getBlocks('design.html', 'three-act-structure');
+    document.getElementById('acts-mount').innerHTML = acts.map(function(b){
+      var d = b.data;
+      return '<div class="act-card ' + d.cls + '">' +
+        '<div class="act-eyebrow">' + d.eyebrow + '</div>' +
+        '<h3>' + d.title + '</h3>' +
+        '<div class="act-tc">' + d.tc + '</div>' +
+        '<ul>' + d.items.map(function(li){ return '<li>' + li + '</li>'; }).join('') + '</ul>' +
+        '<a class="act-link" href="' + d.linkHref + '">' + d.linkLabel + '</a>' +
+      '</div>';
+    }).join('');
+
+    var rule = ContentDB.getBlocks('design.html', 'editing-rule')[0];
+    if(rule){
+      var moodCard = function(m, cls){
+        return '<div class="mood-card ' + cls + '"><h3>' + m.title + '</h3><ul>' + m.items.map(function(li){ return '<li>' + li + '</li>'; }).join('') + '</ul></div>';
+      };
+      document.getElementById('editing-rule-mount').innerHTML = moodCard(rule.data.cold, 'cold') + moodCard(rule.data.warm, 'warm');
+    }
+
+    var typo = ContentDB.getBlocks('design.html', 'typography')[0];
+    if(typo){
+      var d = typo.data;
+      document.getElementById('typography-mount').innerHTML =
+        '<div class="type-sample">' +
+          '<div class="label">' + d.title.label + '</div>' +
+          '<div class="sample-h">' + d.title.sample + '</div>' +
+          '<div class="sample-sub">' + d.title.sub + '</div>' +
+        '</div>' +
+        '<div class="type-sample">' +
+          '<div class="label">' + d.lower.label + '</div>' +
+          '<div class="sample-lower">' + d.lower.sample + '</div>' +
+        '</div>';
+    }
+
+    var specs = ContentDB.getBlocks('design.html', 'motion-specs');
+    document.getElementById('motion-specs-mount').innerHTML = specs.map(function(b){
+      var d = b.data;
+      return '<tr>' +
+        '<td>' + d.graphic + '</td>' +
+        '<td class="dim">' + d.style + '</td>' +
+        '<td class="dim">' + d.section + '</td>' +
+        '<td><button class="add-asset-btn" data-id="' + b.id + '" data-type="spec" data-source="Design" data-title="' + escAttr(d.addTitle) + '" data-desc="' + escAttr(d.addDesc) + '">➕ Add to Assets</button></td>' +
+      '</tr>';
+    }).join('');
+
+    var pacing = ContentDB.getBlocks('design.html', 'pacing')[0];
+    if(pacing){
+      var p = pacing.data;
+      document.getElementById('pacing-mount').innerHTML =
+        '<div class="p1" style="flex:' + p.act1Flex + ';">❄️ Act 1 — Setup</div>' +
+        '<div class="p3" style="flex:' + p.act2Flex + ';">🌳 Act 2 — Confrontation</div>' +
+        '<div class="p5" style="flex:' + p.act3Flex + ';background:var(--warm);">🔥 Act 3 — Resolution</div>';
+    }
+  }
+
+  Promise.all([ContentDB.ready, AssetDB.ready]).then(function(){
+    renderDesignContent();
+    AssetDB.initAddButtons();
+  });
 
   (function(){
     var chipsContainer = document.getElementById('theme-chips-container');
