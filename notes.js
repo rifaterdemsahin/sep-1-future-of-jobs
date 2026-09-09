@@ -12,12 +12,21 @@
       ';expires=' + expires + ';path=/;SameSite=Lax';
   }
 
+  function currentPage(){
+    var path = window.location.pathname.split('/').pop();
+    return path || 'index.html';
+  }
+
   function loadNotes(){
     var raw = getCookie(COOKIE_KEY);
     if(!raw) return [];
     try{
       var parsed = JSON.parse(raw);
-      return Array.isArray(parsed) ? parsed : [];
+      if(!Array.isArray(parsed)) return [];
+      // Migrate older cookie format (plain strings, no page tag).
+      return parsed.map(function(n){
+        return typeof n === 'string' ? { text: n, page: currentPage() } : n;
+      });
     }catch(e){ return []; }
   }
   function saveNotes(notes){
@@ -67,7 +76,11 @@
       '.notes-list:empty{display:none;}' +
       '.notes-item{display:flex;align-items:flex-start;gap:8px;background:var(--bg,#0b0d12);' +
         'border:1px solid var(--panel-border,#232838);border-radius:8px;padding:8px 10px;}' +
-      '.notes-item .ni-text{flex:1;font-size:13px;line-height:1.45;color:var(--text,#eef0f4);' +
+      '.notes-item .ni-body{flex:1;min-width:0;}' +
+      '.notes-item .ni-page{display:inline-block;font-size:10.5px;font-weight:700;' +
+        'text-transform:uppercase;letter-spacing:.04em;color:var(--accent,#e8b94a);' +
+        'background:rgba(232,185,74,.12);border-radius:4px;padding:1px 6px;margin-bottom:4px;}' +
+      '.notes-item .ni-text{font-size:13px;line-height:1.45;color:var(--text,#eef0f4);' +
         'white-space:pre-wrap;word-break:break-word;}' +
       '.notes-item button{flex-shrink:0;border:1px solid var(--panel-border,#232838);' +
         'background:transparent;color:var(--text-dim,#9aa1b0);border-radius:6px;' +
@@ -117,7 +130,7 @@
     var inputRow = document.createElement('div');
     inputRow.className = 'notes-input-row';
     var textarea = document.createElement('textarea');
-    textarea.placeholder = 'Jot an update you want to prompt back with, e.g. "swap the hero image on index.html"…';
+    textarea.placeholder = 'Jot an update you want to prompt back with, e.g. "swap the hero image on index.html"… (Enter to add, Shift+Enter for a new line)';
     var addBtn = document.createElement('button');
     addBtn.type = 'button';
     addBtn.textContent = '➕ Add';
@@ -147,8 +160,12 @@
     bar.appendChild(header);
     bar.appendChild(body);
 
+    function noteText(note){
+      return '[' + note.page + '] ' + note.text;
+    }
+
     function allNotesText(){
-      return notes.map(function(n){ return '- ' + n; }).join('\n');
+      return notes.map(function(n){ return '- ' + noteText(n); }).join('\n');
     }
 
     function refreshCount(){
@@ -161,16 +178,26 @@
         var item = document.createElement('div');
         item.className = 'notes-item';
 
+        var bodyEl = document.createElement('div');
+        bodyEl.className = 'ni-body';
+
+        var pageEl = document.createElement('div');
+        pageEl.className = 'ni-page';
+        pageEl.textContent = note.page;
+
         var textEl = document.createElement('div');
         textEl.className = 'ni-text';
-        textEl.textContent = note;
+        textEl.textContent = note.text;
+
+        bodyEl.appendChild(pageEl);
+        bodyEl.appendChild(textEl);
 
         var copyOneBtn = document.createElement('button');
         copyOneBtn.type = 'button';
         copyOneBtn.title = 'Copy this note';
         copyOneBtn.textContent = '📋';
         copyOneBtn.addEventListener('click', function(){
-          copyText(note, status);
+          copyText(noteText(note), status);
         });
 
         var removeBtn = document.createElement('button');
@@ -184,7 +211,7 @@
           refreshCount();
         });
 
-        item.appendChild(textEl);
+        item.appendChild(bodyEl);
         item.appendChild(copyOneBtn);
         item.appendChild(removeBtn);
         list.appendChild(item);
@@ -195,7 +222,7 @@
     function addNote(){
       var text = textarea.value.trim();
       if(!text) return;
-      notes.push(text);
+      notes.push({ text: text, page: currentPage() });
       saveNotes(notes);
       textarea.value = '';
       renderList();
@@ -212,7 +239,7 @@
     });
 
     textarea.addEventListener('keydown', function(e){
-      if((e.metaKey || e.ctrlKey) && e.key === 'Enter'){
+      if(e.key === 'Enter' && !e.shiftKey){
         e.preventDefault();
         addNote();
       }

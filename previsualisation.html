@@ -72,6 +72,14 @@
     color:var(--text);
     border-color:var(--accent-2);
   }
+  .topnav .links a.live{
+    color:var(--accent);
+    border-color:var(--accent);
+  }
+  .topnav .links a.live:hover{
+    color:var(--bg);
+    background:var(--accent);
+  }
   header{
     padding:48px 24px 32px;
     max-width:1200px;
@@ -261,6 +269,91 @@
   .add-asset-btn:hover{border-color:var(--accent-2);color:var(--text);}
   .add-asset-btn.added{border-color:var(--warm);color:var(--warm);background:rgba(232,185,74,.08);}
 
+  .body .actions{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  .prompt-btn{
+    align-self:flex-start;
+    font-size:11px;
+    padding:4px 10px;
+    border-radius:20px;
+    border:1px solid var(--panel-border);
+    background:transparent;
+    color:var(--text-dim);
+    cursor:pointer;
+    transition:border-color .15s ease,color .15s ease,background .15s ease;
+    white-space:nowrap;
+  }
+  .prompt-btn:hover{border-color:var(--accent);color:var(--accent);}
+
+  .modal-overlay{
+    position:fixed;
+    inset:0;
+    z-index:600;
+    background:rgba(5,6,9,.72);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+  .modal-overlay[hidden]{display:none;}
+  .modal-box{
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    border-radius:14px;
+    max-width:560px;
+    width:100%;
+    max-height:80vh;
+    display:flex;
+    flex-direction:column;
+    box-shadow:0 20px 60px rgba(0,0,0,.5);
+  }
+  .modal-head{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:16px 20px;
+    border-bottom:1px solid var(--panel-border);
+  }
+  .modal-head h4{margin:0;font-size:14px;flex:1;}
+  .modal-close{
+    border:none;
+    background:transparent;
+    color:var(--text-dim);
+    font-size:18px;
+    cursor:pointer;
+    line-height:1;
+    padding:2px 6px;
+  }
+  .modal-close:hover{color:var(--text);}
+  .modal-body{
+    padding:18px 20px;
+    overflow-y:auto;
+    font-size:13.5px;
+    line-height:1.6;
+    color:var(--text);
+    white-space:pre-wrap;
+  }
+  .modal-actions{
+    padding:14px 20px 18px;
+    display:flex;
+    justify-content:flex-end;
+    gap:8px;
+  }
+  .modal-actions button{
+    border:1px solid var(--panel-border);
+    background:var(--bg);
+    color:var(--text);
+    border-radius:7px;
+    padding:7px 14px;
+    font-size:12.5px;
+    cursor:pointer;
+  }
+  .modal-actions button:hover{border-color:var(--accent-2);}
+
   footer{
     max-width:1200px;
     margin:0 auto;
@@ -288,6 +381,7 @@
       <a href="design.html">🎨 Design</a>
       <a href="previsualisation.html" class="active">🎞️ Previsualisation</a>
       <a href="assets.html">🗂️ Assets</a>
+      <a class="live" href="https://rifaterdemsahin.github.io/sep-1-future-of-jobs/previsualisation.html" target="_blank" rel="noopener">🌐 Live</a>
     </div>
   </div>
 </nav>
@@ -326,7 +420,10 @@
         <h3>Headline montage</h3>
         <p>Fast-cut news headlines: "The Future of AI and Jobs," humanoid robot tech coverage, lower-third overlays.</p>
         <p class="vo">"Elon Musk recently made a massive prediction…"</p>
-        <button class="add-asset-btn" data-id="shot-1" data-type="shot" data-source="Previsualisation" data-title="Panel 1 — Headline montage (0:00)" data-desc="Fast-cut news headlines: &quot;The Future of AI and Jobs,&quot; humanoid robot tech coverage, lower-third overlays.">➕ Add to Assets</button>
+        <div class="actions">
+          <button class="add-asset-btn" data-id="shot-1" data-type="shot" data-source="Previsualisation" data-title="Panel 1 — Headline montage (0:00)" data-desc="Fast-cut news headlines: &quot;The Future of AI and Jobs,&quot; humanoid robot tech coverage, lower-third overlays.">➕ Add to Assets</button>
+          <button class="prompt-btn" data-title="Panel 1 — Headline montage" data-prompt="Fast-paced collage of news broadcast headlines about AI and robotics; lower-third chyron graphic reading &quot;The Future of AI and Jobs&quot;; humanoid robot on a TV studio screen; cool blue newsroom lighting; 16:9 cinematic broadcast look, high contrast, slight motion blur.">🖼️ Prompt</button>
+        </div>
       </div>
     </div>
 
@@ -342,7 +439,10 @@
         <h3>Host, home studio</h3>
         <p>Warm, personal shot — creator direct to camera in a living-room studio. Establishes authentic personal stake.</p>
         <p class="vo">"I have skin in the game — I have two daughters…"</p>
-        <button class="add-asset-btn" data-id="shot-2" data-type="shot" data-source="Previsualisation" data-title="Panel 2 — Host, home studio (0:10)" data-desc="Warm, personal shot — creator direct to camera in a living-room studio. Establishes authentic personal stake.">➕ Add to Assets</button>
+        <div class="actions">
+          <button class="add-asset-btn" data-id="shot-2" data-type="shot" data-source="Previsualisation" data-title="Panel 2 — Host, home studio (0:10)" data-desc="Warm, personal shot — creator direct to camera in a living-room studio. Establishes authentic personal stake.">➕ Add to Assets</button>
+          <button class="prompt-btn" data-title="Panel 2 — Host, home studio" data-prompt="Warm, intimate talking-head shot of a person speaking directly to camera in a cozy living-room podcast studio; soft key light; bookshelf and plants softly out of focus in the background; shallow depth of field; 16:9; warm golden color grade.">🖼️ Prompt</button>
+        </div>
       </div>
     </div>
 
@@ -358,7 +458,10 @@
         <h3>Stone Age → Agriculture</h3>
         <p>Animated arrow transition: hand tool morphs into an early plow. Sets up historical technology-shift pattern.</p>
         <p class="vo">"Every single time humanity undergoes a leap, doom-sayers predict the end of work."</p>
-        <button class="add-asset-btn" data-id="shot-3" data-type="shot" data-source="Previsualisation" data-title="Panel 3 — Stone Age → Agriculture (0:30)" data-desc="Animated arrow transition: hand tool morphs into an early plow. Sets up historical technology-shift pattern.">➕ Add to Assets</button>
+        <div class="actions">
+          <button class="add-asset-btn" data-id="shot-3" data-type="shot" data-source="Previsualisation" data-title="Panel 3 — Stone Age → Agriculture (0:30)" data-desc="Animated arrow transition: hand tool morphs into an early plow. Sets up historical technology-shift pattern.">➕ Add to Assets</button>
+          <button class="prompt-btn" data-title="Panel 3 — Stone Age → Agriculture" data-prompt="Split-frame animated transition: a rough stone hand-axe resting on dark rock on the left, morphing into an early wooden plow tilling golden soil on the right; dusty warm sunlight; illustrative motion-graphic style; 16:9.">🖼️ Prompt</button>
+        </div>
       </div>
     </div>
 
@@ -374,7 +477,10 @@
         <h3>Mainframe → PC</h3>
         <p>Vintage beige computer dissolves into a modern desktop with code on screen. Calculator/computer-era proof point.</p>
         <p class="vo">"The cost of doing math dropped to zero…"</p>
-        <button class="add-asset-btn" data-id="shot-4" data-type="shot" data-source="Previsualisation" data-title="Panel 4 — Mainframe → PC (1:05)" data-desc="Vintage beige computer dissolves into a modern desktop with code on screen. Calculator/computer-era proof point.">➕ Add to Assets</button>
+        <div class="actions">
+          <button class="add-asset-btn" data-id="shot-4" data-type="shot" data-source="Previsualisation" data-title="Panel 4 — Mainframe → PC (1:05)" data-desc="Vintage beige computer dissolves into a modern desktop with code on screen. Calculator/computer-era proof point.">➕ Add to Assets</button>
+          <button class="prompt-btn" data-title="Panel 4 — Mainframe → PC" data-prompt="Side-by-side dissolve transition: a room-sized 1960s beige mainframe computer with blinking lights on the left, morphing into a sleek modern desktop monitor with glowing code on the right; cool blue-teal lighting; tech-documentary style; 16:9.">🖼️ Prompt</button>
+        </div>
       </div>
     </div>
 
@@ -390,7 +496,10 @@
         <h3>"Job Tree" branching diagram</h3>
         <p>Gold tree graphic expanding into new job-title branches: Prompt Engineer, Robot Fleet Manager, AI Safety Auditor.</p>
         <p class="vo">"Automation creates an infinite number of new permutations."</p>
-        <button class="add-asset-btn" data-id="shot-5" data-type="shot" data-source="Previsualisation" data-title="Panel 5 — &quot;Job Tree&quot; branching diagram (1:45)" data-desc="Gold tree graphic expanding into new job-title branches: Prompt Engineer, Robot Fleet Manager, AI Safety Auditor.">➕ Add to Assets</button>
+        <div class="actions">
+          <button class="add-asset-btn" data-id="shot-5" data-type="shot" data-source="Previsualisation" data-title="Panel 5 — &quot;Job Tree&quot; branching diagram (1:45)" data-desc="Gold tree graphic expanding into new job-title branches: Prompt Engineer, Robot Fleet Manager, AI Safety Auditor.">➕ Add to Assets</button>
+          <button class="prompt-btn" data-title="Panel 5 — &quot;Job Tree&quot; branching diagram" data-prompt="Motion graphic of a glowing golden tree growing from a single trunk into branching leaves, each leaf labeled with a new job title such as Prompt Engineer, Robot Fleet Manager, AI Safety Auditor; dark navy background; bright gold accent lines; flat vector illustration style; 16:9.">🖼️ Prompt</button>
+        </div>
       </div>
     </div>
 
@@ -406,7 +515,10 @@
         <h3>Daughter with holo-tablet</h3>
         <p>Girl in a yellow sweater interacts with a glowing, translucent tablet interface at home — bridges tech to family.</p>
         <p class="vo">"Which brings me back to my daughters."</p>
-        <button class="add-asset-btn" data-id="shot-6" data-type="shot" data-source="Previsualisation" data-title="Panel 6 — Daughter with holo-tablet (2:15)" data-desc="Girl in a yellow sweater interacts with a glowing, translucent tablet interface at home — bridges tech to family.">➕ Add to Assets</button>
+        <div class="actions">
+          <button class="add-asset-btn" data-id="shot-6" data-type="shot" data-source="Previsualisation" data-title="Panel 6 — Daughter with holo-tablet (2:15)" data-desc="Girl in a yellow sweater interacts with a glowing, translucent tablet interface at home — bridges tech to family.">➕ Add to Assets</button>
+          <button class="prompt-btn" data-title="Panel 6 — Daughter with holo-tablet" data-prompt="Close-up B-roll of a young girl in a yellow sweater at home, interacting with a glowing translucent holographic tablet interface; soft warm household lighting; shallow depth of field; cinematic family-documentary look; 16:9.">🖼️ Prompt</button>
+        </div>
       </div>
     </div>
 
@@ -422,7 +534,10 @@
         <h3>Host + daughter, holo-device</h3>
         <p>Father kneels beside daughter as she explores the holographic tablet together — human-tech partnership, not replacement.</p>
         <p class="vo">"My daughters are going to use math more than any generation before them."</p>
-        <button class="add-asset-btn" data-id="shot-7" data-type="shot" data-source="Previsualisation" data-title="Panel 7 — Host + daughter, holo-device (2:45)" data-desc="Father kneels beside daughter as she explores the holographic tablet together — human-tech partnership, not replacement.">➕ Add to Assets</button>
+        <div class="actions">
+          <button class="add-asset-btn" data-id="shot-7" data-type="shot" data-source="Previsualisation" data-title="Panel 7 — Host + daughter, holo-device (2:45)" data-desc="Father kneels beside daughter as she explores the holographic tablet together — human-tech partnership, not replacement.">➕ Add to Assets</button>
+          <button class="prompt-btn" data-title="Panel 7 — Host + daughter, holo-device" data-prompt="Two-shot of a father kneeling beside his young daughter, both looking at a glowing holographic tablet between them; warm golden-hour light through a window; tender human-tech partnership mood; cinematic; 16:9.">🖼️ Prompt</button>
+        </div>
       </div>
     </div>
 
@@ -438,7 +553,10 @@
         <h3>Collaboration split-frame</h3>
         <p>Left: colleagues high-fiving in an office. Right: mentor and teen reviewing notes together — human judgment amplified by tools.</p>
         <p class="vo">"Human judgment, empathy, and creative direction… human potential explodes."</p>
-        <button class="add-asset-btn" data-id="shot-8" data-type="shot" data-source="Previsualisation" data-title="Panel 8 — Collaboration split-frame (3:15)" data-desc="Left: colleagues high-fiving in an office. Right: mentor and teen reviewing notes together — human judgment amplified by tools.">➕ Add to Assets</button>
+        <div class="actions">
+          <button class="add-asset-btn" data-id="shot-8" data-type="shot" data-source="Previsualisation" data-title="Panel 8 — Collaboration split-frame (3:15)" data-desc="Left: colleagues high-fiving in an office. Right: mentor and teen reviewing notes together — human judgment amplified by tools.">➕ Add to Assets</button>
+          <button class="prompt-btn" data-title="Panel 8 — Collaboration split-frame" data-prompt="Split-screen composition: left side two colleagues high-fiving in a bright modern office, right side a mentor and teenager reviewing notes together at a table; warm optimistic lighting on both sides; documentary style; 16:9.">🖼️ Prompt</button>
+        </div>
       </div>
     </div>
 
@@ -454,12 +572,28 @@
         <h3>Host, direct address</h3>
         <p>Return to host on camera, grounded delivery, into subscribe/like CTA and end-screen cards.</p>
         <p class="vo">"The future is bright, jobs will evolve and expand…"</p>
-        <button class="add-asset-btn" data-id="shot-9" data-type="shot" data-source="Previsualisation" data-title="Panel 9 — Host, direct address (3:50)" data-desc="Return to host on camera, grounded delivery, into subscribe/like CTA and end-screen cards.">➕ Add to Assets</button>
+        <div class="actions">
+          <button class="add-asset-btn" data-id="shot-9" data-type="shot" data-source="Previsualisation" data-title="Panel 9 — Host, direct address (3:50)" data-desc="Return to host on camera, grounded delivery, into subscribe/like CTA and end-screen cards.">➕ Add to Assets</button>
+          <button class="prompt-btn" data-title="Panel 9 — Host, direct address" data-prompt="Grounded talking-head shot: host looking directly into camera delivering a confident closing statement; clean minimal studio background; soft even lighting; subscribe/like end-card icons subtly visible in the lower third; 16:9.">🖼️ Prompt</button>
+        </div>
       </div>
     </div>
 
   </div>
 </main>
+
+<div class="modal-overlay" id="prompt-modal" hidden>
+  <div class="modal-box">
+    <div class="modal-head">
+      <h4 id="prompt-modal-title">Image Prompt</h4>
+      <button class="modal-close" type="button" id="prompt-modal-close" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body" id="prompt-modal-body"></div>
+    <div class="modal-actions">
+      <button type="button" id="prompt-modal-copy">📋 Copy Prompt</button>
+    </div>
+  </div>
+</div>
 
 <footer>
   🎞️ Previsualization board for <a href="https://github.com/rifaterdemsahin/sep-1-future-of-jobs" target="_blank" rel="noopener">rifaterdemsahin/sep-1-future-of-jobs</a> — built for pre-production planning before shoot/edit. See everything you've saved in 🗂️ <a href="assets.html">Assets</a>.
@@ -471,6 +605,60 @@
 <script>
   Pipeline.render('previsualisation');
   PipelineLinks.init({ file: 'previsualisation.html', sourceFile: 'design.html', sourceLabel: 'Design' });
+
+  (function(){
+    var modal = document.getElementById('prompt-modal');
+    var titleEl = document.getElementById('prompt-modal-title');
+    var bodyEl = document.getElementById('prompt-modal-body');
+    var closeBtn = document.getElementById('prompt-modal-close');
+    var copyBtn = document.getElementById('prompt-modal-copy');
+    var currentPrompt = '';
+
+    function openModal(title, prompt){
+      titleEl.textContent = title;
+      bodyEl.textContent = prompt;
+      currentPrompt = prompt;
+      copyBtn.textContent = '📋 Copy Prompt';
+      modal.hidden = false;
+    }
+    function closeModal(){
+      modal.hidden = true;
+    }
+
+    document.querySelectorAll('.prompt-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        openModal(btn.dataset.title || 'Image Prompt', btn.dataset.prompt || '');
+      });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e){
+      if(e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && !modal.hidden) closeModal();
+    });
+
+    copyBtn.addEventListener('click', function(){
+      function done(ok){
+        copyBtn.textContent = ok ? '✅ Copied' : '⚠️ Copy failed';
+        setTimeout(function(){ copyBtn.textContent = '📋 Copy Prompt'; }, 1500);
+      }
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(currentPrompt).then(function(){ done(true); }, function(){ done(false); });
+      } else {
+        var tmp = document.createElement('textarea');
+        tmp.value = currentPrompt;
+        tmp.style.position = 'fixed';
+        tmp.style.opacity = '0';
+        document.body.appendChild(tmp);
+        tmp.select();
+        try{ document.execCommand('copy'); done(true); }
+        catch(err){ done(false); }
+        document.body.removeChild(tmp);
+      }
+    });
+  })();
 </script>
 </body>
 </html>
