@@ -1,22 +1,24 @@
 (function(){
-  var STORAGE_KEY = 'jobApocalypse_links_v1';
   var catalogCache = {};
+  var store = {};
+  var ready = window.sb.from('links').select('key, linked_ids')
+    .then(function(res){
+      if(res.error){ console.error('Links load failed', res.error); return; }
+      (res.data || []).forEach(function(row){ store[row.key] = row.linked_ids; });
+    });
 
-  function getStore(){
-    try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
-    catch(e){ return {}; }
-  }
-  function saveStore(store){
-    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(store)); }catch(e){}
-  }
   function getSelected(key){
-    var store = getStore();
     return store[key] || [];
   }
   function setSelected(key, ids){
-    var store = getStore();
     if(ids.length){ store[key] = ids; } else { delete store[key]; }
-    saveStore(store);
+    if(ids.length){
+      window.sb.from('links').upsert({ key: key, linked_ids: ids, updated_at: new Date().toISOString() })
+        .then(function(res){ if(res.error) console.error('Links save failed', res.error); });
+    } else {
+      window.sb.from('links').delete().eq('key', key)
+        .then(function(res){ if(res.error) console.error('Links delete failed', res.error); });
+    }
   }
 
   // Cross-stage catalogs are read live from the previous stage's own
@@ -159,7 +161,8 @@
   function init(opts){
     document.addEventListener('DOMContentLoaded', function(){
       injectStyles();
-      fetchCatalog(opts.sourceFile).then(function(catalog){
+      Promise.all([ready, fetchCatalog(opts.sourceFile)]).then(function(results){
+        var catalog = results[1];
         document.querySelectorAll('.add-asset-btn[data-id]').forEach(function(btn){
           buildLinker(btn, {
             file: opts.file,
@@ -175,6 +178,7 @@
   }
 
   window.PipelineLinks = {
+    ready: ready,
     init: init,
     getSelected: getSelected,
     setSelected: setSelected

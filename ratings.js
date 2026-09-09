@@ -1,24 +1,18 @@
 (function(){
-  var COOKIE_NAME = 'jobApocalypse_ratings_v1';
+  var cache = {};
+  var ready = window.sb.from('ratings').select('id, stars')
+    .then(function(res){
+      if(res.error){ console.error('Ratings load failed', res.error); return; }
+      (res.data || []).forEach(function(row){ cache[row.id] = row.stars; });
+    });
 
-  function getRatings(){
-    var m = document.cookie.match(new RegExp('(?:^|; )' + COOKIE_NAME + '=([^;]*)'));
-    if(!m) return {};
-    try{ return JSON.parse(decodeURIComponent(m[1])) || {}; }
-    catch(e){ return {}; }
-  }
-  function saveRatings(obj){
-    var val = encodeURIComponent(JSON.stringify(obj));
-    var expires = new Date(Date.now() + 365*24*60*60*1000).toUTCString();
-    document.cookie = COOKIE_NAME + '=' + val + '; expires=' + expires + '; path=/; SameSite=Lax';
-  }
   function getRating(id){
-    return getRatings()[id] || 0;
+    return cache[id] || 0;
   }
   function setRating(id, stars){
-    var r = getRatings();
-    r[id] = stars;
-    saveRatings(r);
+    cache[id] = stars;
+    window.sb.from('ratings').upsert({ id: id, stars: stars, updated_at: new Date().toISOString() })
+      .then(function(res){ if(res.error) console.error('Ratings save failed', res.error); });
   }
 
   function renderStars(el, current){
@@ -90,6 +84,7 @@
   }
 
   window.Ratings = {
+    ready: ready,
     getRating: getRating,
     setRating: setRating,
     createStarWidget: createStarWidget,

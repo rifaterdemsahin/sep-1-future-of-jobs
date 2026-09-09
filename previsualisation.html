@@ -314,6 +314,42 @@
   }
   .prompt-btn:hover{border-color:var(--accent);color:var(--accent);}
 
+  .download-btn{
+    align-self:flex-start;
+    font-size:11px;
+    padding:4px 10px;
+    border-radius:20px;
+    border:1px solid var(--panel-border);
+    background:transparent;
+    color:var(--text-dim);
+    cursor:pointer;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+    transition:border-color .15s ease,color .15s ease,background .15s ease;
+    white-space:nowrap;
+  }
+  .download-btn:hover{border-color:var(--accent-2);color:var(--text);background:rgba(90,176,255,.08);}
+
+  .download-all-wrap{
+    display:flex;
+    justify-content:center;
+    margin:14px 0 0;
+  }
+  .download-all-btn{
+    font-size:12px;
+    padding:6px 16px;
+    border-color:var(--panel-border);
+    background:var(--panel);
+    font-weight:500;
+  }
+  .download-all-btn:hover{
+    border-color:var(--accent);
+    color:var(--accent);
+    background:rgba(232,185,74,.08);
+  }
+
   .modal-overlay{
     position:fixed;
     inset:0;
@@ -391,6 +427,8 @@
   footer a{color:var(--accent-2);text-decoration:none;}
   footer a:hover{text-decoration:underline;}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="supabase-client.js"></script>
 <script src="theme.js"></script>
 <script src="notes.js"></script>
 </head>
@@ -431,7 +469,11 @@
     <span><span class="swatch warm"></span>🔥 Warm / cinematic — daughters, history, human potential</span>
   </div>
 
-  <div class="grid">
+  <div class="download-all-wrap">
+    <button type="button" id="download-all-btn" class="download-btn download-all-btn">⬇️ Download All 9 Storyboard Images</button>
+  </div>
+
+  <div class="grid" style="margin-top:24px;">
 
     <div class="card cold">
       <div class="frame">
@@ -448,6 +490,7 @@
         <div class="actions">
           <button class="add-asset-btn" data-id="shot-1" data-type="shot" data-source="Previsualisation" data-title="Panel 1 — Headline montage (0:00)" data-desc="Fast-cut news headlines: &quot;The Future of AI and Jobs,&quot; humanoid robot tech coverage, lower-third overlays.">➕ Add to Assets</button>
           <button class="prompt-btn" data-title="Panel 1 — Headline montage" data-prompt="Fast-paced collage of news broadcast headlines about AI and robotics; lower-third chyron graphic reading &quot;The Future of AI and Jobs&quot;; humanoid robot on a TV studio screen; cool blue newsroom lighting; 16:9 cinematic broadcast look, high contrast, slight motion blur.">🖼️ Prompt</button>
+          <a class="download-btn" href="images/panel_1.jpg" download="panel_1_headline_montage.jpg" title="Download Panel 1 image">⬇️ Download</a>
         </div>
       </div>
     </div>
@@ -467,6 +510,7 @@
         <div class="actions">
           <button class="add-asset-btn" data-id="shot-2" data-type="shot" data-source="Previsualisation" data-title="Panel 2 — Host, home studio (0:10)" data-desc="Warm, personal shot — creator direct to camera in a living-room studio. Establishes authentic personal stake.">➕ Add to Assets</button>
           <button class="prompt-btn" data-title="Panel 2 — Host, home studio" data-prompt="Warm, intimate talking-head shot of a person speaking directly to camera in a cozy living-room podcast studio; soft key light; bookshelf and plants softly out of focus in the background; shallow depth of field; 16:9; warm golden color grade.">🖼️ Prompt</button>
+          <a class="download-btn" href="images/panel_2.jpg" download="panel_2_host_home_studio.jpg" title="Download Panel 2 image">⬇️ Download</a>
         </div>
       </div>
     </div>
@@ -486,6 +530,7 @@
         <div class="actions">
           <button class="add-asset-btn" data-id="shot-3" data-type="shot" data-source="Previsualisation" data-title="Panel 3 — Stone Age → Agriculture (0:30)" data-desc="Animated arrow transition: hand tool morphs into an early plow. Sets up historical technology-shift pattern.">➕ Add to Assets</button>
           <button class="prompt-btn" data-title="Panel 3 — Stone Age → Agriculture" data-prompt="Split-frame animated transition: a rough stone hand-axe resting on dark rock on the left, morphing into an early wooden plow tilling golden soil on the right; dusty warm sunlight; illustrative motion-graphic style; 16:9.">🖼️ Prompt</button>
+          <a class="download-btn" href="images/panel_3.jpg" download="panel_3_stone_age_agriculture.jpg" title="Download Panel 3 image">⬇️ Download</a>
         </div>
       </div>
     </div>
@@ -505,6 +550,7 @@
         <div class="actions">
           <button class="add-asset-btn" data-id="shot-4" data-type="shot" data-source="Previsualisation" data-title="Panel 4 — Mainframe → PC (1:05)" data-desc="Vintage beige computer dissolves into a modern desktop with code on screen. Calculator/computer-era proof point.">➕ Add to Assets</button>
           <button class="prompt-btn" data-title="Panel 4 — Mainframe → PC" data-prompt="Side-by-side dissolve transition: a room-sized 1960s beige mainframe computer with blinking lights on the left, morphing into a sleek modern desktop monitor with glowing code on the right; cool blue-teal lighting; tech-documentary style; 16:9.">🖼️ Prompt</button>
+          <a class="download-btn" href="images/panel_4.jpg" download="panel_4_mainframe_pc.jpg" title="Download Panel 4 image">⬇️ Download</a>
         </div>
       </div>
     </div>
@@ -524,6 +570,7 @@
         <div class="actions">
           <button class="add-asset-btn" data-id="shot-5" data-type="shot" data-source="Previsualisation" data-title="Panel 5 — &quot;Job Tree&quot; branching diagram (1:45)" data-desc="Gold tree graphic expanding into new job-title branches: Prompt Engineer, Robot Fleet Manager, AI Safety Auditor.">➕ Add to Assets</button>
           <button class="prompt-btn" data-title="Panel 5 — &quot;Job Tree&quot; branching diagram" data-prompt="Motion graphic of a glowing golden tree growing from a single trunk into branching leaves, each leaf labeled with a new job title such as Prompt Engineer, Robot Fleet Manager, AI Safety Auditor; dark navy background; bright gold accent lines; flat vector illustration style; 16:9.">🖼️ Prompt</button>
+          <a class="download-btn" href="images/panel_5.jpg" download="panel_5_job_tree_branching_diagram.jpg" title="Download Panel 5 image">⬇️ Download</a>
         </div>
       </div>
     </div>
@@ -543,6 +590,7 @@
         <div class="actions">
           <button class="add-asset-btn" data-id="shot-6" data-type="shot" data-source="Previsualisation" data-title="Panel 6 — Daughter with holo-tablet (2:15)" data-desc="Girl in a yellow sweater interacts with a glowing, translucent tablet interface at home — bridges tech to family.">➕ Add to Assets</button>
           <button class="prompt-btn" data-title="Panel 6 — Daughter with holo-tablet" data-prompt="Close-up B-roll of a young girl in a yellow sweater at home, interacting with a glowing translucent holographic tablet interface; soft warm household lighting; shallow depth of field; cinematic family-documentary look; 16:9.">🖼️ Prompt</button>
+          <a class="download-btn" href="images/panel_6.jpg" download="panel_6_daughter_holo_tablet.jpg" title="Download Panel 6 image">⬇️ Download</a>
         </div>
       </div>
     </div>
@@ -562,6 +610,7 @@
         <div class="actions">
           <button class="add-asset-btn" data-id="shot-7" data-type="shot" data-source="Previsualisation" data-title="Panel 7 — Host + daughter, holo-device (2:45)" data-desc="Father kneels beside daughter as she explores the holographic tablet together — human-tech partnership, not replacement.">➕ Add to Assets</button>
           <button class="prompt-btn" data-title="Panel 7 — Host + daughter, holo-device" data-prompt="Two-shot of a father kneeling beside his young daughter, both looking at a glowing holographic tablet between them; warm golden-hour light through a window; tender human-tech partnership mood; cinematic; 16:9.">🖼️ Prompt</button>
+          <a class="download-btn" href="images/panel_7.jpg" download="panel_7_host_daughter_holo_device.jpg" title="Download Panel 7 image">⬇️ Download</a>
         </div>
       </div>
     </div>
@@ -581,25 +630,27 @@
         <div class="actions">
           <button class="add-asset-btn" data-id="shot-8" data-type="shot" data-source="Previsualisation" data-title="Panel 8 — Collaboration split-frame (3:15)" data-desc="Left: colleagues high-fiving in an office. Right: mentor and teen reviewing notes together — human judgment amplified by tools.">➕ Add to Assets</button>
           <button class="prompt-btn" data-title="Panel 8 — Collaboration split-frame" data-prompt="Split-screen composition: left side two colleagues high-fiving in a bright modern office, right side a mentor and teenager reviewing notes together at a table; warm optimistic lighting on both sides; documentary style; 16:9.">🖼️ Prompt</button>
+          <a class="download-btn" href="images/panel_8.jpg" download="panel_8_collaboration_split_frame.jpg" title="Download Panel 8 image">⬇️ Download</a>
         </div>
       </div>
     </div>
 
     <div class="card cold">
       <div class="frame">
-        <img src="images/panel_9.jpg" alt="Panel 9 — Host, direct address" class="frame-img">
+        <img src="images/panel_9.jpg" alt="Panel 9 — Host, direct address &amp; Skool CTA" class="frame-img">
         <div class="num">9</div>
         <div class="tc">3:50</div>
-        <div class="shot-tag">Talking Head · CTA</div>
+        <div class="shot-tag">Talking Head · Skool CTA</div>
       </div>
       <div class="body">
         <div class="section">Outro</div>
-        <h3>Host, direct address</h3>
-        <p>Return to host on camera, grounded delivery, into subscribe/like CTA and end-screen cards.</p>
-        <p class="vo">"The future is bright, jobs will evolve and expand…"</p>
+        <h3>Host, direct address &amp; Skool CTA</h3>
+        <p>Return to host on camera, grounded delivery, into Skool community certification roadmap overlay and subscribe/like end-screen cards.</p>
+        <p class="vo">"We've built a dedicated Skool community focused entirely on helping you get certified and land high-demand future roles…"</p>
         <div class="actions">
-          <button class="add-asset-btn" data-id="shot-9" data-type="shot" data-source="Previsualisation" data-title="Panel 9 — Host, direct address (3:50)" data-desc="Return to host on camera, grounded delivery, into subscribe/like CTA and end-screen cards.">➕ Add to Assets</button>
-          <button class="prompt-btn" data-title="Panel 9 — Host, direct address" data-prompt="Grounded talking-head shot: host looking directly into camera delivering a confident closing statement; clean minimal studio background; soft even lighting; subscribe/like end-card icons subtly visible in the lower third; 16:9.">🖼️ Prompt</button>
+          <button class="add-asset-btn" data-id="shot-9" data-type="shot" data-source="Previsualisation" data-title="Panel 9 — Host, direct address &amp; Skool CTA (3:50)" data-desc="Return to host on camera, grounded delivery, into Skool community certification roadmap overlay and subscribe/like end-screen cards.">➕ Add to Assets</button>
+          <button class="prompt-btn" data-title="Panel 9 — Host, direct address &amp; Skool CTA" data-prompt="Grounded talking-head shot: host looking directly into camera delivering a confident closing statement; clean minimal studio background; soft even lighting; subtle graphic overlay showing Skool community certification badges and modern tech roadmaps; 16:9.">🖼️ Prompt</button>
+          <a class="download-btn" href="images/panel_9.jpg" download="panel_9_host_direct_address_skool_cta.jpg" title="Download Panel 9 image">⬇️ Download</a>
         </div>
       </div>
     </div>
@@ -683,6 +734,41 @@
         document.body.removeChild(tmp);
       }
     });
+
+    var downloadAllBtn = document.getElementById('download-all-btn');
+    if (downloadAllBtn) {
+      downloadAllBtn.addEventListener('click', function() {
+        var panels = [
+          { url: 'images/panel_1.jpg', name: 'panel_1_headline_montage.jpg' },
+          { url: 'images/panel_2.jpg', name: 'panel_2_host_home_studio.jpg' },
+          { url: 'images/panel_3.jpg', name: 'panel_3_stone_age_agriculture.jpg' },
+          { url: 'images/panel_4.jpg', name: 'panel_4_mainframe_pc.jpg' },
+          { url: 'images/panel_5.jpg', name: 'panel_5_job_tree_branching_diagram.jpg' },
+          { url: 'images/panel_6.jpg', name: 'panel_6_daughter_holo_tablet.jpg' },
+          { url: 'images/panel_7.jpg', name: 'panel_7_host_daughter_holo_device.jpg' },
+          { url: 'images/panel_8.jpg', name: 'panel_8_collaboration_split_frame.jpg' },
+          { url: 'images/panel_9.jpg', name: 'panel_9_host_direct_address_skool_cta.jpg' }
+        ];
+        var origText = downloadAllBtn.textContent;
+        downloadAllBtn.textContent = '⏳ Downloading...';
+        panels.forEach(function(item, idx) {
+          setTimeout(function() {
+            var a = document.createElement('a');
+            a.href = item.url;
+            a.download = item.name;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            if (idx === panels.length - 1) {
+              setTimeout(function() {
+                downloadAllBtn.textContent = '✅ Downloaded All!';
+                setTimeout(function() { downloadAllBtn.textContent = origText; }, 2000);
+              }, 400);
+            }
+          }, idx * 250);
+        });
+      });
+    }
   })();
 </script>
 </body>

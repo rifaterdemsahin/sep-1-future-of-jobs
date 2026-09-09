@@ -1,33 +1,82 @@
 (function(){
-  var ASSET_KEY = 'jobApocalypse_assets_v1';
+  var cache = [];
+  var ready = window.sb.from('assets').select('*').order('added_at', { ascending: true })
+    .then(function(res){
+      if(res.error){ console.error('AssetDB load failed', res.error); return; }
+      cache = (res.data || []).map(fromRow);
+    });
+
+  function fromRow(row){
+    return {
+      id: row.id,
+      type: row.type,
+      title: row.title,
+      description: row.description,
+      source: row.source,
+      url: row.url,
+      comment: row.comment,
+      addedAt: row.added_at
+    };
+  }
+  function toRow(item){
+    return {
+      id: item.id,
+      type: item.type || 'item',
+      title: item.title || '',
+      description: item.description || '',
+      source: item.source || '',
+      url: item.url || '',
+      comment: item.comment || '',
+      added_at: item.addedAt || new Date().toISOString()
+    };
+  }
 
   function getAssets(){
-    try{ return JSON.parse(localStorage.getItem(ASSET_KEY)) || []; }
-    catch(e){ return []; }
-  }
-  function saveAssets(list){
-    try{ localStorage.setItem(ASSET_KEY, JSON.stringify(list)); }catch(e){}
+    return cache;
   }
   function hasAsset(id){
-    return getAssets().some(function(a){ return a.id === id; });
+    return cache.some(function(a){ return a.id === id; });
   }
   function addAsset(item){
-    var list = getAssets();
-    if(list.some(function(a){ return a.id === item.id; })) return false;
-    list.push(Object.assign({ comment: '', addedAt: new Date().toISOString() }, item));
-    saveAssets(list);
+    if(cache.some(function(a){ return a.id === item.id; })) return false;
+    var full = Object.assign({ comment: '', addedAt: new Date().toISOString() }, item);
+    cache.push(full);
+    window.sb.from('assets').insert(toRow(full)).then(function(res){
+      if(res.error) console.error('AssetDB insert failed', res.error);
+    });
     return true;
   }
   function removeAsset(id){
-    saveAssets(getAssets().filter(function(a){ return a.id !== id; }));
+    cache = cache.filter(function(a){ return a.id !== id; });
+    window.sb.from('assets').delete().eq('id', id).then(function(res){
+      if(res.error) console.error('AssetDB delete failed', res.error);
+    });
   }
   function updateComment(id, comment){
-    var list = getAssets();
-    var it = list.find(function(a){ return a.id === id; });
-    if(it){ it.comment = comment; saveAssets(list); }
+    var it = cache.find(function(a){ return a.id === id; });
+    if(!it) return;
+    it.comment = comment;
+    window.sb.from('assets').update({ comment: comment }).eq('id', id).then(function(res){
+      if(res.error) console.error('AssetDB comment update failed', res.error);
+    });
+  }
+  function updateAsset(id, patch){
+    var it = cache.find(function(a){ return a.id === id; });
+    if(!it) return;
+    Object.assign(it, patch);
+    var rowPatch = {};
+    Object.keys(patch).forEach(function(k){
+      rowPatch[k === 'addedAt' ? 'added_at' : k] = patch[k];
+    });
+    window.sb.from('assets').update(rowPatch).eq('id', id).then(function(res){
+      if(res.error) console.error('AssetDB update failed', res.error);
+    });
   }
   function clearAssets(){
-    saveAssets([]);
+    cache = [];
+    window.sb.from('assets').delete().neq('id', '').then(function(res){
+      if(res.error) console.error('AssetDB clear failed', res.error);
+    });
   }
 
   function injectStyles(){
@@ -135,10 +184,11 @@
   }
 
   window.AssetDB = {
+    ready: ready,
     getAssets: getAssets,
-    saveAssets: saveAssets,
     addAsset: addAsset,
     removeAsset: removeAsset,
+    updateAsset: updateAsset,
     updateComment: updateComment,
     clearAssets: clearAssets,
     hasAsset: hasAsset,
@@ -146,5 +196,7 @@
     openFeedbackPrompt: openFeedbackPrompt
   };
 
-  document.addEventListener('DOMContentLoaded', initAddButtons);
+  document.addEventListener('DOMContentLoaded', function(){
+    ready.then(initAddButtons);
+  });
 })();

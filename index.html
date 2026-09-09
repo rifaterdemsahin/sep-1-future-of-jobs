@@ -210,6 +210,7 @@
   table.cmp tr:last-child td{border-bottom:none;}
   table.cmp td.dim{color:var(--text-dim);}
   table.cmp td.star-cell{white-space:nowrap;}
+  table.cmp td.star-cell .item-note-wrap{white-space:normal;width:220px;max-width:220px;}
   .wrap-scroll{overflow-x:auto;}
 
   .shotlist{
@@ -254,6 +255,8 @@
   footer a{color:var(--accent-2);text-decoration:none;}
   footer a:hover{text-decoration:underline;}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="supabase-client.js"></script>
 <script src="theme.js"></script>
 <script src="notes.js"></script>
 </head>
@@ -375,6 +378,12 @@
         <span class="url">youtube.com/watch?v=3LjuyW5Lr-c</span>
         <button class="add-asset-btn" data-id="link-yt-3ljuyw" data-type="link" data-source="Research" data-title="The REAL Reason Everything Is About To Change" data-desc="YouTube · counterpoint" data-url="https://www.youtube.com/watch?v=3LjuyW5Lr-c&t=1229s">➕ Add to Assets</button>
       </div>
+      <div class="link-card">
+        <span class="tag">🎓 YouTube · Education</span>
+        <a class="title" href="https://www.youtube.com/shorts/urgbQCxcLG8" target="_blank" rel="noopener">Rethinking Education Stress &amp; AI-Driven Learning</a>
+        <span class="url">youtube.com/shorts/urgbQCxcLG8</span>
+        <button class="add-asset-btn" data-id="link-yt-urgbqc" data-type="link" data-source="Research" data-title="Rethinking Education Stress &amp; AI-Driven Learning" data-desc="YouTube · Education &amp; Family Participation" data-url="https://www.youtube.com/shorts/urgbQCxcLG8">➕ Add to Assets</button>
+      </div>
     </div>
     <p class="intro" style="margin-top:14px;">Note: two videos referenced in the chat notes — a "Refreshing AI Latest" skeptic clip and a "Tipping Spears Podcast" jobs-debate clip — couldn't be matched to a verifiable YouTube URL, so they're left out rather than guessed. Closest verified stand-ins for that angle are in the table below.</p>
   </section>
@@ -441,6 +450,13 @@
           <td class="dim">🌳 Infinite Permutation</td>
           <td class="dim">Strong, directly-on-thesis counterpoint: walks through the 1963 "computers will take all the jobs" Newsweek scare, the '80s desktop-computer panic, and the Adobe Photoshop/photographer example — argues job counts have never declined after a tech revolution, only shifted and grown (farming 60%→2% of labor). Good source for the historical-precedent beat and the "fixed pie" fallacy.</td>
           <td class="dim">Conversational/debate format between two founders, not neutral — pull specific data points (Newsweek 1963, farming labor %) rather than citing wholesale; auto-generated captions, verify quotes before using on screen.</td>
+          <td class="star-cell"></td>
+        </tr>
+        <tr data-id="cmp-education-urgbqc">
+          <td><a href="https://www.youtube.com/shorts/urgbQCxcLG8" target="_blank" rel="noopener">Rethinking Education &amp; Student Stress</a><br><span class="dim">YouTube Short</span></td>
+          <td class="dim">🌳 Infinite Permutation / Education</td>
+          <td class="dim">AI drops the cost of personalized education toward zero, unlocking universal family participation and relieving rote learning stress.</td>
+          <td class="dim">Short-form format — best paired with data on personalized AI tutoring and accessible STEM learning.</td>
           <td class="star-cell"></td>
         </tr>
       </table>
@@ -575,10 +591,10 @@
       </div>
       <div class="shot-row warm">
         <div class="row-head">
-          <div class="sec">🧮 Section 3 — Math &amp; human insight</div>
-          <button class="add-asset-btn" data-id="footage-sec3-math" data-type="footage" data-source="Research" data-title="Math & human collaboration b-roll" data-desc="Kids on tablets, coding, or building with Lego Mindstorms; teenager solving equations on a glass whiteboard; engineers collaborating around blueprints.">➕ Add to Assets</button>
+          <div class="sec">🧮 Section 3 — Education &amp; Math</div>
+          <button class="add-asset-btn" data-id="footage-sec3-math" data-type="footage" data-source="Research" data-title="Math, AI tutoring &amp; family participation b-roll" data-desc="Kids learning with personalized AI tutors, coding, or building with Lego Mindstorms; family learning together at home; teenager solving equations on a glass whiteboard; engineers collaborating around blueprints.">➕ Add to Assets</button>
         </div>
-        <div class="items">Kids on tablets, coding, or building with Lego Mindstorms; teenager solving equations on a glass whiteboard; engineers collaborating around blueprints.</div>
+        <div class="items">Kids with personalized AI tutors on tablets (ref: <b>yt/urgbQCxcLG8</b>); family learning together at home; teenager solving equations on a glass whiteboard; engineers collaborating around blueprints.</div>
       </div>
       <div class="shot-row">
         <div class="row-head">
@@ -611,6 +627,8 @@
 
   var byId = function(el){ return el.querySelector('[data-id]').getAttribute('data-id'); };
   var beforeIdEl = function(item, starEl){ item.insertBefore(starEl, item.querySelector('[data-id]')); };
+
+  Ratings.ready.then(function(){
 
   var sortables = {
     'source-link-grid': Ratings.makeSortable({
@@ -645,6 +663,33 @@
       if(target) target.reset();
     });
   });
+
+  ItemNotes.attach({
+    container: document.getElementById('source-link-grid'),
+    itemSelector: '.link-card',
+    getId: byId,
+    mount: function(item, wrap){ item.appendChild(wrap); }
+  });
+  ItemNotes.attach({
+    container: document.getElementById('pro-con-table'),
+    itemSelector: 'tr[data-id]',
+    getId: function(row){ return row.getAttribute('data-id'); },
+    mount: function(row, wrap){ row.querySelector('.star-cell').appendChild(wrap); }
+  });
+  ItemNotes.attach({
+    container: document.getElementById('perspective-table'),
+    itemSelector: 'tr[data-id]',
+    getId: function(row){ return row.getAttribute('data-id'); },
+    mount: function(row, wrap){ row.querySelector('.star-cell').appendChild(wrap); }
+  });
+  ItemNotes.attach({
+    container: document.getElementById('shotlist-container'),
+    itemSelector: '.shot-row',
+    getId: byId,
+    mount: function(row, wrap){ row.appendChild(wrap); }
+  });
+
+  }); // Ratings.ready
 </script>
 </body>
 </html>

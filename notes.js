@@ -1,36 +1,34 @@
 (function(){
-  var COOKIE_KEY = 'jobApocalypse_notes_v1';
-  var COOKIE_DAYS = 365;
-
-  function getCookie(name){
-    var match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
-    return match ? decodeURIComponent(match[1]) : '';
-  }
-  function setCookie(name, value, days){
-    var expires = new Date(Date.now() + days * 864e5).toUTCString();
-    document.cookie = name + '=' + encodeURIComponent(value) +
-      ';expires=' + expires + ';path=/;SameSite=Lax';
-  }
-
   function currentPage(){
     var path = window.location.pathname.split('/').pop();
     return path || 'index.html';
   }
 
-  function loadNotes(){
-    var raw = getCookie(COOKIE_KEY);
-    if(!raw) return [];
-    try{
-      var parsed = JSON.parse(raw);
-      if(!Array.isArray(parsed)) return [];
-      // Migrate older cookie format (plain strings, no page tag).
-      return parsed.map(function(n){
-        return typeof n === 'string' ? { text: n, page: currentPage() } : n;
+  var notesCache = [];
+  var notesReady = window.sb.from('notes').select('*').order('created_at', { ascending: true })
+    .then(function(res){
+      if(res.error){ console.error('Notes load failed', res.error); return; }
+      notesCache = (res.data || []).map(function(row){
+        return { id: row.id, text: row.text, page: row.page };
       });
-    }catch(e){ return []; }
+    });
+
+  function loadNotes(){
+    return notesCache;
   }
-  function saveNotes(notes){
-    setCookie(COOKIE_KEY, JSON.stringify(notes), COOKIE_DAYS);
+  // Persists one note. New notes (no id) are inserted and get their id
+  // back from Supabase; existing notes are left alone (list is append/remove only).
+  function insertNote(note){
+    return window.sb.from('notes').insert({ page: note.page, text: note.text }).select().then(function(res){
+      if(res.error){ console.error('Notes insert failed', res.error); return; }
+      if(res.data && res.data[0]) note.id = res.data[0].id;
+    });
+  }
+  function deleteNoteRow(id){
+    if(!id) return;
+    window.sb.from('notes').delete().eq('id', id).then(function(res){
+      if(res.error) console.error('Notes delete failed', res.error);
+    });
   }
 
   function copyText(text, status){
@@ -100,7 +98,27 @@
       '.notes-actions button:hover{border-color:var(--accent-2,#5ab0ff);}' +
       '.notes-actions .nb-add{border-color:var(--accent,#e8b94a);color:var(--accent,#e8b94a);}' +
       '.notes-actions .nb-clear:hover{border-color:#e05a5a;color:#e05a5a;}' +
-      '.notes-actions .nb-status{font-size:11.5px;color:var(--text-dim,#9aa1b0);margin-left:auto;}';
+      '.notes-actions .nb-status{font-size:11.5px;color:var(--text-dim,#9aa1b0);margin-left:auto;}' +
+      '.item-note-wrap{margin-top:6px;}' +
+      '.item-note-toggle{align-self:flex-start;font-size:11px;padding:4px 10px;border-radius:20px;' +
+        'border:1px solid var(--panel-border,#232838);background:transparent;' +
+        'color:var(--text-dim,#9aa1b0);cursor:pointer;white-space:nowrap;' +
+        'transition:border-color .15s ease,color .15s ease,background .15s ease;}' +
+      '.item-note-toggle:hover{border-color:var(--accent-2,#5ab0ff);color:var(--text,#eef0f4);}' +
+      '.item-note-toggle.has-note{border-color:var(--accent,#e8b94a);color:var(--accent,#e8b94a);' +
+        'background:rgba(232,185,74,.08);}' +
+      '.item-note-panel{margin-top:6px;display:flex;flex-direction:column;gap:6px;}' +
+      '.item-note-panel textarea{width:100%;min-height:52px;max-height:30vh;resize:vertical;' +
+        'background:var(--bg,#0b0d12);color:var(--text,#eef0f4);' +
+        'border:1px solid var(--panel-border,#232838);border-radius:8px;padding:8px 10px;' +
+        'font-size:12.5px;line-height:1.45;font-family:inherit;box-sizing:border-box;}' +
+      '.item-note-panel textarea:focus{outline:none;border-color:var(--accent-2,#5ab0ff);}' +
+      '.item-note-actions{display:flex;gap:6px;}' +
+      '.item-note-actions button{border:1px solid var(--panel-border,#232838);background:transparent;' +
+        'color:var(--text-dim,#9aa1b0);border-radius:7px;padding:4px 10px;font-size:11px;cursor:pointer;' +
+        'font-family:inherit;transition:border-color .15s ease,color .15s ease;}' +
+      '.item-note-actions button:hover{border-color:var(--accent-2,#5ab0ff);color:var(--text,#eef0f4);}' +
+      '.item-note-actions .in-delete:hover{border-color:#e05a5a;color:#e05a5a;}';
     document.head.appendChild(style);
   }
 
@@ -116,7 +134,7 @@
     header.className = 'notes-bar-header';
     header.innerHTML =
       '<span>📝</span>' +
-      '<span class="nb-title">Notes for Claude</span>' +
+      '<span class="nb-title">Notes for Video Production Agent</span>' +
       '<span class="nb-count"></span>' +
       '<span class="nb-caret">▲</span>';
     var countEl = header.querySelector('.nb-count');
@@ -205,8 +223,8 @@
         removeBtn.title = 'Remove this note';
         removeBtn.textContent = '✕';
         removeBtn.addEventListener('click', function(){
+          deleteNoteRow(note.id);
           notes.splice(idx, 1);
-          saveNotes(notes);
           renderList();
           refreshCount();
         });
@@ -222,8 +240,9 @@
     function addNote(){
       var text = textarea.value.trim();
       if(!text) return;
-      notes.push({ text: text, page: currentPage() });
-      saveNotes(notes);
+      var note = { text: text, page: currentPage() };
+      notes.push(note);
+      insertNote(note).then(renderList);
       textarea.value = '';
       renderList();
       if(!bar.classList.contains('open')) bar.classList.add('open');
@@ -257,8 +276,9 @@
 
     clearBtn.addEventListener('click', function(e){
       e.stopPropagation();
-      notes = [];
-      saveNotes(notes);
+      var toDelete = notes.slice();
+      notes.length = 0;
+      toDelete.forEach(function(n){ deleteNoteRow(n.id); });
       renderList();
       status.textContent = '🗑️ cleared';
       setTimeout(function(){ status.textContent = ''; }, 1500);
@@ -268,5 +288,107 @@
     document.body.appendChild(bar);
   }
 
-  document.addEventListener('DOMContentLoaded', buildUi);
+  document.addEventListener('DOMContentLoaded', function(){
+    notesReady.then(buildUi);
+  });
+
+  var itemNotesCache = {};
+  var itemNotesReady = window.sb.from('item_notes').select('id, text')
+    .then(function(res){
+      if(res.error){ console.error('Item notes load failed', res.error); return; }
+      (res.data || []).forEach(function(row){ itemNotesCache[row.id] = row.text; });
+    });
+
+  function saveItemNote(id, text){
+    itemNotesCache[id] = text;
+    window.sb.from('item_notes').upsert({ id: id, text: text, updated_at: new Date().toISOString() })
+      .then(function(res){ if(res.error) console.error('Item note save failed', res.error); });
+  }
+  function deleteItemNote(id){
+    delete itemNotesCache[id];
+    window.sb.from('item_notes').delete().eq('id', id)
+      .then(function(res){ if(res.error) console.error('Item note delete failed', res.error); });
+  }
+
+  function attachItemNotes(opts){
+    injectStyles();
+    var container = opts.container;
+    var itemSelector = opts.itemSelector;
+    var getId = opts.getId;
+    var mount = opts.mount;
+    if(!container) return;
+
+    var notesMap = itemNotesCache;
+    var entries = [];
+
+    Array.prototype.forEach.call(container.querySelectorAll(itemSelector), function(item){
+      var id = getId(item);
+      if(!id) return;
+
+      var wrap = document.createElement('div');
+      wrap.className = 'item-note-wrap';
+
+      var toggle = document.createElement('button');
+      toggle.type = 'button';
+      toggle.className = 'item-note-toggle';
+
+      var panel = document.createElement('div');
+      panel.className = 'item-note-panel';
+      panel.style.display = 'none';
+
+      var textarea = document.createElement('textarea');
+      textarea.placeholder = 'Note about this item…';
+      textarea.value = notesMap[id] || '';
+
+      var actions = document.createElement('div');
+      actions.className = 'item-note-actions';
+      var saveBtn = document.createElement('button');
+      saveBtn.type = 'button';
+      saveBtn.textContent = '💾 Save';
+      var deleteBtn = document.createElement('button');
+      deleteBtn.type = 'button';
+      deleteBtn.className = 'in-delete';
+      deleteBtn.textContent = '🗑️ Delete';
+      actions.appendChild(saveBtn);
+      actions.appendChild(deleteBtn);
+
+      panel.appendChild(textarea);
+      panel.appendChild(actions);
+
+      function refreshToggle(){
+        var has = !!(notesMap[id] && notesMap[id].trim());
+        toggle.textContent = has ? '📝 Note ✓' : '📝 Add note';
+        toggle.classList.toggle('has-note', has);
+      }
+      refreshToggle();
+
+      toggle.addEventListener('click', function(){
+        panel.style.display = (panel.style.display === 'none') ? 'flex' : 'none';
+        if(panel.style.display === 'flex') textarea.focus();
+      });
+      saveBtn.addEventListener('click', function(){
+        var text = textarea.value.trim();
+        if(text){ saveItemNote(id, text); } else { deleteItemNote(id); }
+        refreshToggle();
+      });
+      deleteBtn.addEventListener('click', function(){
+        deleteItemNote(id);
+        textarea.value = '';
+        refreshToggle();
+        panel.style.display = 'none';
+      });
+
+      wrap.appendChild(toggle);
+      wrap.appendChild(panel);
+      mount(item, wrap);
+
+      entries.push({ id: id, textarea: textarea, refreshToggle: refreshToggle });
+    });
+  }
+
+  function attachItemNotesWhenReady(opts){
+    itemNotesReady.then(function(){ attachItemNotes(opts); });
+  }
+
+  window.ItemNotes = { ready: itemNotesReady, attach: attachItemNotesWhenReady };
 })();

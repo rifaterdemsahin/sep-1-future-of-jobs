@@ -33,8 +33,8 @@ A supporting page sits alongside the pipeline rather than inside it:
 
 - 🗂️ [Assets](assets.html) (`assets.html` / `assets.js`) — B-roll and
   archival categories mapped to script sections, with YouTube search terms
-  to source each one. Pulled into from Research/Design/Previsualisation
-  wherever a shot needs footage.
+  to source each one. Pulled into from Research/Arguments/Script/Design/
+  Previsualisation wherever a shot needs footage.
 
 ### Rationale — why this shape
 
