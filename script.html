@@ -213,6 +213,46 @@
   .vo p:last-child{margin-bottom:0;}
   .vo strong{color:var(--accent);}
 
+  .elevenlabs-bar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+    background:var(--panel);
+    border:1px solid var(--accent);
+    border-radius:12px;
+    padding:14px 18px;
+    margin-bottom:24px;
+    box-shadow:0 4px 20px rgba(0,0,0,.15);
+  }
+  .elevenlabs-info{
+    font-size:13px;
+    color:var(--text-dim);
+  }
+  .elevenlabs-info strong{
+    color:var(--text);
+  }
+  .copy-elevenlabs-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--accent);
+    color:var(--bg);
+    border:none;
+    font-size:13px;
+    font-weight:700;
+    padding:9px 18px;
+    border-radius:20px;
+    cursor:pointer;
+    transition:transform .15s ease, opacity .15s ease, background .15s ease;
+    font-family:inherit;
+  }
+  .copy-elevenlabs-btn:hover{
+    opacity:.92;
+    transform:translateY(-1px);
+  }
+
   footer{
     max-width:840px;
     margin:0 auto;
@@ -254,6 +294,15 @@
 <div class="pipeline-wrap" id="pipeline-stepper"></div>
 
 <main>
+  <div class="elevenlabs-bar">
+    <div class="elevenlabs-info">
+      <strong>🎙️ ElevenLabs Voiceover Ready:</strong> Clean, natural-reading script without visual notes or timestamps.
+    </div>
+    <button type="button" class="copy-elevenlabs-btn" id="copy-elevenlabs-btn">
+      📋 Copy Clean Script for ElevenLabs
+    </button>
+  </div>
+
   <div class="toc">
     <h2>Beats</h2>
     <ol>
@@ -373,6 +422,48 @@
 <script>
   Pipeline.render('script');
   PipelineLinks.init({ file: 'script.html', sourceFile: 'index.html', sourceLabel: 'Research' });
+
+  (function(){
+    var copyBtn = document.getElementById('copy-elevenlabs-btn');
+    if(!copyBtn) return;
+
+    function getCleanVoScript(){
+      var paras = [];
+      document.querySelectorAll('.vo p').forEach(function(p){
+        var txt = p.textContent.trim();
+        // Remove trailing emojis or symbols if needed while keeping natural speech
+        txt = txt.replace(/[\u{1F300}-\u{1F9FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/gu, '').trim();
+        if(txt) paras.push(txt);
+      });
+      return paras.join('\n\n');
+    }
+
+    copyBtn.addEventListener('click', function(){
+      var cleanScript = getCleanVoScript();
+      function done(ok){
+        copyBtn.textContent = ok ? '✅ Copied for ElevenLabs!' : '⚠️ Copy failed';
+        copyBtn.style.background = ok ? 'var(--warm)' : 'transparent';
+        setTimeout(function(){
+          copyBtn.textContent = '📋 Copy Clean Script for ElevenLabs';
+          copyBtn.style.background = 'var(--accent)';
+        }, 2200);
+      }
+
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(cleanScript).then(function(){ done(true); }, function(){ done(false); });
+      } else {
+        var tmp = document.createElement('textarea');
+        tmp.value = cleanScript;
+        tmp.style.position = 'fixed';
+        tmp.style.opacity = '0';
+        document.body.appendChild(tmp);
+        tmp.select();
+        try{ document.execCommand('copy'); done(true); }
+        catch(err){ done(false); }
+        document.body.removeChild(tmp);
+      }
+    });
+  })();
 </script>
 </body>
 </html>

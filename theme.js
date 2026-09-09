@@ -8,9 +8,9 @@
       cold: '#5ab0ff', warm: '#e8b94a'
     }},
     { id: 'light', emoji: '☀️', label: 'Light', vars: {
-      bg: '#f7f7f5', panel: '#ffffff', panelBorder: '#e2e2e0',
-      accent: '#c98a1d', accent2: '#1f6fb2', text: '#14161c', textDim: '#5b6270',
-      cold: '#1f6fb2', warm: '#c98a1d'
+      bg: '#f7f7f5', panel: '#ffffff', panelBorder: '#d0d4dc',
+      accent: '#a86208', accent2: '#0b60b6', text: '#111318', textDim: '#4e5564',
+      cold: '#0b60b6', warm: '#a86208'
     }},
     { id: 'midnight', emoji: '🌌', label: 'Midnight', vars: {
       bg: '#05060a', panel: '#0d1220', panelBorder: '#1b2540',
@@ -18,23 +18,23 @@
       cold: '#6fb1ff', warm: '#f2c14e'
     }},
     { id: 'sepia', emoji: '🍂', label: 'Sepia', vars: {
-      bg: '#f4ecdd', panel: '#fdf6e9', panelBorder: '#e3d3ad',
-      accent: '#b0631d', accent2: '#5c7a52', text: '#3a2f22', textDim: '#7a6a52',
-      cold: '#5c7a52', warm: '#b0631d'
+      bg: '#f4ecdd', panel: '#fdf6e9', panelBorder: '#d8c7a2',
+      accent: '#944805', accent2: '#23653b', text: '#241a0e', textDim: '#584936',
+      cold: '#23653b', warm: '#944805'
     }},
     { id: 'ocean', emoji: '🌊', label: 'Ocean', vars: {
       bg: '#061a1c', panel: '#0d2b2e', panelBorder: '#164447',
-      accent: '#ffb454', accent2: '#37e5c4', text: '#e6fbf8', textDim: '#7fb8b5',
+      accent: '#ffb454', accent2: '#37e5c4', text: '#e6fbf8', textDim: '#8dc2bf',
       cold: '#37e5c4', warm: '#ffb454'
     }},
     { id: 'grape', emoji: '🍇', label: 'Grape', vars: {
       bg: '#120c1e', panel: '#1d1430', panelBorder: '#33254f',
-      accent: '#f6c453', accent2: '#b98cff', text: '#f1e9ff', textDim: '#a495c4',
+      accent: '#f6c453', accent2: '#b98cff', text: '#f1e9ff', textDim: '#b4a5d4',
       cold: '#b98cff', warm: '#f6c453'
     }},
     { id: 'contrast', emoji: '⬛', label: 'High Contrast', vars: {
-      bg: '#000000', panel: '#000000', panelBorder: '#ffffff',
-      accent: '#ffee00', accent2: '#00e5ff', text: '#ffffff', textDim: '#cccccc',
+      bg: '#000000', panel: '#050505', panelBorder: '#ffffff',
+      accent: '#ffee00', accent2: '#00e5ff', text: '#ffffff', textDim: '#e6e6e6',
       cold: '#00e5ff', warm: '#ffee00'
     }}
   ];
@@ -55,15 +55,38 @@
     document.head.appendChild(style);
   }
 
+  function getCookie(name){
+    try{
+      var match = document.cookie.match(new RegExp('(^|;\\s*)' + name + '=([^;]*)'));
+      return match ? decodeURIComponent(match[2]) : null;
+    }catch(e){ return null; }
+  }
+
+  function setCookie(name, val, days){
+    try{
+      var exp = days ? '; max-age=' + (days * 24 * 60 * 60) : '';
+      document.cookie = name + '=' + encodeURIComponent(val) + '; path=/; SameSite=Lax' + exp;
+    }catch(e){}
+  }
+
   function getSaved(){
-    try{ return localStorage.getItem(STORAGE_KEY) || 'dark'; }
-    catch(e){ return 'dark'; }
+    try{
+      var cookieVal = getCookie(STORAGE_KEY);
+      if(cookieVal) return cookieVal;
+      return localStorage.getItem(STORAGE_KEY) || 'dark';
+    }catch(e){ return 'dark'; }
   }
+
   function save(id){
-    try{ localStorage.setItem(STORAGE_KEY, id); }catch(e){}
+    try{
+      localStorage.setItem(STORAGE_KEY, id);
+      setCookie(STORAGE_KEY, id, 365);
+    }catch(e){}
   }
+
   function apply(id){
     document.documentElement.setAttribute('data-theme', id);
+    window.dispatchEvent(new CustomEvent('themechange', { detail: { theme: id } }));
   }
 
   // Runs synchronously as the page's <head> parses, before first paint,

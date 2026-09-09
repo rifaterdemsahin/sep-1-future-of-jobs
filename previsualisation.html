@@ -156,7 +156,8 @@
     background:var(--panel);
     border:1px solid var(--panel-border);
     border-radius:12px;
-    overflow:hidden;
+    overflow:visible;
+    position:relative;
     display:flex;
     flex-direction:column;
     transition:transform .15s ease, border-color .15s ease;
@@ -164,6 +165,7 @@
   .card:hover{
     transform:translateY(-2px);
     border-color:#3a4258;
+    z-index:100;
   }
   .card.cold{border-top:3px solid var(--cold);}
   .card.warm{border-top:3px solid var(--warm);}
@@ -178,7 +180,26 @@
       radial-gradient(circle at 30% 20%, rgba(90,176,255,.10), transparent 60%),
       linear-gradient(135deg,#171b26,#0e1017);
     border-bottom:1px solid var(--panel-border);
-    overflow:hidden;
+    border-radius:11px 11px 0 0;
+    overflow:visible;
+  }
+  .frame-img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    border-radius:11px 11px 0 0;
+    cursor:zoom-in;
+    transition:transform .25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow .25s ease;
+    transform-origin:center center;
+  }
+  .frame:hover .frame-img:hover{
+    transform:scale(4);
+    z-index:9999;
+    position:relative;
+    border-radius:8px;
+    box-shadow:0 24px 60px rgba(0,0,0,.95), 0 0 0 2px var(--accent-2);
+    cursor:zoom-out;
   }
   .frame .num{
     position:absolute;
@@ -186,27 +207,28 @@
     left:10px;
     width:26px;height:26px;
     border-radius:50%;
-    background:rgba(0,0,0,.55);
-    border:1px solid rgba(255,255,255,.15);
+    background:rgba(0,0,0,.7);
+    backdrop-filter:blur(4px);
+    border:1px solid rgba(255,255,255,.2);
     display:flex;align-items:center;justify-content:center;
     font-size:13px;font-weight:700;
     color:var(--text);
+    z-index:2;
+    pointer-events:none;
   }
   .frame .tc{
     position:absolute;
     top:10px;right:10px;
     font-size:11px;
     font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
-    background:rgba(0,0,0,.55);
-    border:1px solid rgba(255,255,255,.15);
+    background:rgba(0,0,0,.7);
+    backdrop-filter:blur(4px);
+    border:1px solid rgba(255,255,255,.2);
     padding:3px 8px;
     border-radius:20px;
-    color:var(--text-dim);
-  }
-  .frame .icon{
-    font-size:44px;
-    opacity:.85;
-    filter:drop-shadow(0 2px 8px rgba(0,0,0,.4));
+    color:var(--text);
+    z-index:2;
+    pointer-events:none;
   }
   .frame .shot-tag{
     position:absolute;
@@ -214,10 +236,13 @@
     font-size:10.5px;
     letter-spacing:.06em;
     text-transform:uppercase;
-    color:var(--text-dim);
-    background:rgba(0,0,0,.5);
+    color:#ffffff;
+    background:rgba(0,0,0,.7);
+    backdrop-filter:blur(4px);
     padding:3px 8px;
     border-radius:20px;
+    z-index:2;
+    pointer-events:none;
   }
 
   .body{
@@ -410,9 +435,9 @@
 
     <div class="card cold">
       <div class="frame">
+        <img src="images/panel_1.jpg" alt="Panel 1 — Headline montage" class="frame-img">
         <div class="num">1</div>
         <div class="tc">0:00</div>
-        <div class="icon">📰🤖</div>
         <div class="shot-tag">Montage · Screen Overlay</div>
       </div>
       <div class="body">
@@ -429,9 +454,9 @@
 
     <div class="card warm">
       <div class="frame">
+        <img src="images/panel_2.jpg" alt="Panel 2 — Host, home studio" class="frame-img">
         <div class="num">2</div>
         <div class="tc">0:10</div>
-        <div class="icon">🎙️</div>
         <div class="shot-tag">Talking Head</div>
       </div>
       <div class="body">
@@ -448,9 +473,9 @@
 
     <div class="card cold">
       <div class="frame">
+        <img src="images/panel_3.jpg" alt="Panel 3 — Stone Age → Agriculture" class="frame-img">
         <div class="num">3</div>
         <div class="tc">0:30</div>
-        <div class="icon">🪨➡️🌾</div>
         <div class="shot-tag">Graphic · Transition</div>
       </div>
       <div class="body">
@@ -467,9 +492,9 @@
 
     <div class="card cold">
       <div class="frame">
+        <img src="images/panel_4.jpg" alt="Panel 4 — Mainframe → PC" class="frame-img">
         <div class="num">4</div>
         <div class="tc">1:05</div>
-        <div class="icon">🖥️➡️💻</div>
         <div class="shot-tag">Graphic · Transition</div>
       </div>
       <div class="body">
@@ -486,9 +511,9 @@
 
     <div class="card warm">
       <div class="frame">
+        <img src="images/panel_5.jpg" alt="Panel 5 — Job Tree branching diagram" class="frame-img">
         <div class="num">5</div>
         <div class="tc">1:45</div>
-        <div class="icon">🌳</div>
         <div class="shot-tag">Motion Graphic</div>
       </div>
       <div class="body">
@@ -505,9 +530,9 @@
 
     <div class="card warm">
       <div class="frame">
+        <img src="images/panel_6.jpg" alt="Panel 6 — Daughter with holo-tablet" class="frame-img">
         <div class="num">6</div>
         <div class="tc">2:15</div>
-        <div class="icon">🧒📱</div>
         <div class="shot-tag">B-Roll · Close-up</div>
       </div>
       <div class="body">
@@ -524,9 +549,9 @@
 
     <div class="card warm">
       <div class="frame">
+        <img src="images/panel_7.jpg" alt="Panel 7 — Host + daughter, holo-device" class="frame-img">
         <div class="num">7</div>
         <div class="tc">2:45</div>
-        <div class="icon">👨‍👧✨</div>
         <div class="shot-tag">B-Roll · Two-shot</div>
       </div>
       <div class="body">
@@ -543,9 +568,9 @@
 
     <div class="card warm">
       <div class="frame">
+        <img src="images/panel_8.jpg" alt="Panel 8 — Collaboration split-frame" class="frame-img">
         <div class="num">8</div>
         <div class="tc">3:15</div>
-        <div class="icon">🤝📝</div>
         <div class="shot-tag">Split Screen · B-Roll</div>
       </div>
       <div class="body">
@@ -562,9 +587,9 @@
 
     <div class="card cold">
       <div class="frame">
+        <img src="images/panel_9.jpg" alt="Panel 9 — Host, direct address" class="frame-img">
         <div class="num">9</div>
         <div class="tc">3:50</div>
-        <div class="icon">🎙️✅</div>
         <div class="shot-tag">Talking Head · CTA</div>
       </div>
       <div class="body">
