@@ -3,6 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+  // Canonical host is now Cloudflare Workers; GitHub Pages just forwards visitors there.
+  if(location.hostname.endsWith('github.io')){
+    location.replace('https://sep-1-future-of-jobs.polished-boat-17b2.workers.dev' + location.pathname + location.search + location.hash);
+  }
+</script>
 <title>🔍 Research — Why Elon Musk is Wrong About the Job Apocalypse</title>
 <style>
   :root{

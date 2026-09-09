@@ -5,15 +5,25 @@ Apocalypse."** Static HTML, no build step, no framework — open a file in a
 browser and it works.
 
 - **Repo:** https://github.com/rifaterdemsahin/sep-1-future-of-jobs
-- **Live site (GitHub Pages):**
-  - 🔍 [Research](https://rifaterdemsahin.github.io/sep-1-future-of-jobs/index.html)
-  - 🧩 [Arguments](https://rifaterdemsahin.github.io/sep-1-future-of-jobs/arguments.html)
-  - 📝 [Script](https://rifaterdemsahin.github.io/sep-1-future-of-jobs/script.html)
-  - 🎨 [Design](https://rifaterdemsahin.github.io/sep-1-future-of-jobs/design.html)
-  - 🎞️ [Previsualisation](https://rifaterdemsahin.github.io/sep-1-future-of-jobs/previsualisation.html)
-  - 🗂️ [Assets](https://rifaterdemsahin.github.io/sep-1-future-of-jobs/assets.html)
+- **Live site (Cloudflare Workers — canonical):**
+  - 🔍 [Research](https://sep-1-future-of-jobs.polished-boat-17b2.workers.dev/index.html)
+  - 🧩 [Arguments](https://sep-1-future-of-jobs.polished-boat-17b2.workers.dev/arguments.html)
+  - 📝 [Script](https://sep-1-future-of-jobs.polished-boat-17b2.workers.dev/script.html)
+  - 🎨 [Design](https://sep-1-future-of-jobs.polished-boat-17b2.workers.dev/design.html)
+  - 🎞️ [Previsualisation](https://sep-1-future-of-jobs.polished-boat-17b2.workers.dev/previsualisation.html)
+  - 🗂️ [Assets](https://sep-1-future-of-jobs.polished-boat-17b2.workers.dev/assets.html)
+  - Deployed via `wrangler deploy` (see `wrangler.toml`); redeploy after
+    any change with `npx wrangler deploy`.
+- **GitHub Pages:** still builds from this repo, but every page now
+  redirects (`location.replace`) to the Cloudflare Workers URL above —
+  GitHub Pages is a forwarding address, not a second copy of the site.
+- **Data:** assets, notes, ratings and cross-stage links are stored in
+  Supabase (see `supabase/README.md`), not per-browser storage — the two
+  hosts above serve the exact same live data.
 - **Run locally:** open any `.html` file directly, or run a local static
-  server (`python3 -m http.server`) and browse to `index.html`.
+  server (`python3 -m http.server`) and browse to `index.html`. Note the
+  GitHub Pages redirect only triggers on a `github.io` hostname, so local
+  runs are unaffected.
 
 ## The pipeline
 
