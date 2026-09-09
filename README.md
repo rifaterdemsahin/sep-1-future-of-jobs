@@ -6,45 +6,66 @@ browser and it works.
 
 - **Repo:** https://github.com/rifaterdemsahin/sep-1-future-of-jobs
 - **Live site (Cloudflare Workers — canonical):**
-  - 🔍 [Research](https://sep-1-future-of-jobs.polished-boat-17b2.workers.dev/index.html)
-  - 🧩 [Arguments](https://sep-1-future-of-jobs.polished-boat-17b2.workers.dev/arguments.html)
-  - 📝 [Script](https://sep-1-future-of-jobs.polished-boat-17b2.workers.dev/script.html)
-  - 🎨 [Design](https://sep-1-future-of-jobs.polished-boat-17b2.workers.dev/design.html)
-  - 🎞️ [Previsualisation](https://sep-1-future-of-jobs.polished-boat-17b2.workers.dev/previsualisation.html)
-  - 🗂️ [Assets](https://sep-1-future-of-jobs.polished-boat-17b2.workers.dev/assets.html)
+  - 🔍 [Research](https://sep-1-future-of-jobs.polished-boat-17b2.workers.dev/html/index.html)
+  - 🧩 [Arguments](https://sep-1-future-of-jobs.polished-boat-17b2.workers.dev/html/arguments.html)
+  - 📝 [Script](https://sep-1-future-of-jobs.polished-boat-17b2.workers.dev/html/script.html)
+  - 🎨 [Design](https://sep-1-future-of-jobs.polished-boat-17b2.workers.dev/html/design.html)
+  - 🎞️ [Previsualisation](https://sep-1-future-of-jobs.polished-boat-17b2.workers.dev/html/previsualisation.html)
+  - 🗂️ [Assets](https://sep-1-future-of-jobs.polished-boat-17b2.workers.dev/html/assets.html)
+  - The bare domain (`/`) redirects to `/html/index.html`.
   - Deployed via `wrangler deploy` (see `wrangler.toml`); redeploy after
     any change with `npx wrangler deploy`.
-- **GitHub Pages:** still builds from this repo, but every page now
-  redirects (`location.replace`) to the Cloudflare Workers URL above —
+- **GitHub Pages:** still builds from this repo, but every page redirects
+  (`location.replace`) to the matching Cloudflare Workers URL above —
   GitHub Pages is a forwarding address, not a second copy of the site.
-- **Data:** assets, notes, ratings and cross-stage links are stored in
-  Supabase (see `supabase/README.md`), not per-browser storage — the two
-  hosts above serve the exact same live data.
-- **Run locally:** open any `.html` file directly, or run a local static
-  server (`python3 -m http.server`) and browse to `index.html`. Note the
-  GitHub Pages redirect only triggers on a `github.io` hostname, so local
-  runs are unaffected.
+- **Data:** every page's actual content — source links, arguments, script
+  beats, design specs, shot panels — plus assets, notes, ratings, and
+  cross-stage links, is stored in Supabase (see `supabase/README.md`), not
+  hardcoded in the HTML or in per-browser storage. `assets.html` is the
+  only page whose data still lives solely in the `assets` table by design
+  (it's a save-list, not authored content).
+- **Run locally:** run a local static server (`python3 -m http.server`)
+  from the repo root and browse to `/html/index.html` — the pages use
+  relative `../js/`, `../css/`, `../images/` paths, so `file://` won't
+  resolve them; a server is required. The GitHub Pages redirect only
+  triggers on a `github.io` hostname, so local runs are unaffected.
+
+## Folder structure
+
+```
+html/    the 6 pages (index, arguments, script, design, previsualisation, assets)
+js/      shared JS modules loaded by every page
+css/     shared.css — theme variables, base body reset, top nav
+images/  storyboard panel images (previsualisation)
+supabase/  schema + seed scripts
+index.html   root redirect stub → html/index.html
+```
 
 ## The pipeline
 
 Pre-production is modelled as five linked stages, each feeding the next.
-`pipeline.js` renders the stepper you see at the top of every stage page,
-so the site itself documents the flow:
+`js/pipeline.js` renders the stepper you see at the top of every stage
+page, so the site itself documents the flow:
 
 | # | Stage | Page | What it holds |
 |---|-------|------|----------------|
-| 1 | 🔍 [Research](index.html) | `index.html` | Source links, counter-arguments, pro/con video comparisons, footage leads |
-| 2 | 🧩 [Arguments](arguments.html) | `arguments.html` | Premise, arguments, and conclusion — the video's actual case, distilled from Research |
-| 3 | 📝 [Script](script.html) | `script.html` | Voiceover beats broken into timed sections |
-| 4 | 🎨 [Design](design.html) | `design.html` | Palette, typography, pacing and motion specs, structured as a 3-act story |
-| 5 | 🎞️ [Previsualisation](previsualisation.html) | `previsualisation.html` | Shot-by-shot board, ready for the edit |
+| 1 | 🔍 [Research](html/index.html) | `html/index.html` | Source links, counter-arguments, pro/con video comparisons, footage leads |
+| 2 | 🧩 [Arguments](html/arguments.html) | `html/arguments.html` | Premise, arguments, and conclusion — the video's actual case, distilled from Research |
+| 3 | 📝 [Script](html/script.html) | `html/script.html` | Voiceover beats broken into timed sections |
+| 4 | 🎨 [Design](html/design.html) | `html/design.html` | Palette, typography, pacing and motion specs, structured as a 3-act story |
+| 5 | 🎞️ [Previsualisation](html/previsualisation.html) | `html/previsualisation.html` | Shot-by-shot board, ready for the edit — plus a "How this gets explained in plain English" note on every panel |
+
+The top nav (`js/nav.js`) lists the pages in a slightly different order —
+Arguments before Research — and colors each link along one light-to-dark
+hue so the six stages read as a sequence at a glance.
 
 A supporting page sits alongside the pipeline rather than inside it:
 
-- 🗂️ [Assets](assets.html) (`assets.html` / `assets.js`) — B-roll and
-  archival categories mapped to script sections, with YouTube search terms
-  to source each one. Pulled into from Research/Arguments/Script/Design/
-  Previsualisation wherever a shot needs footage.
+- 🗂️ [Assets](html/assets.html) (`html/assets.html` / `js/assets.js`) — B-roll
+  and archival categories mapped to script sections, with YouTube search
+  terms to source each one. Pulled into from Research/Arguments/Script/
+  Design/Previsualisation wherever a shot needs footage. Can be sorted by
+  save date or by each item's expected time code in the final video.
 
 ### Rationale — why this shape
 
@@ -69,17 +90,44 @@ real dependency, not just a navigation convenience:
 
 Keeping every stage as a plain page (rather than one long doc) lets each
 one carry its own review/rating tooling — e.g. the star-rating + re-sort
-on Research's source links and video comparison table (`ratings.js`) —
+on Research's source links and video comparison table (`js/ratings.js`) —
 without cluttering the others.
+
+## How content loads
+
+Every page has a "🗄️ Database" button in the bottom notes bar that opens a
+modal explaining exactly this for that page. In short:
+
+1. `js/supabase-client.js` creates one shared `window.sb` client per page.
+2. `js/content-db.js` fetches all rows from `content_blocks` (Supabase
+   Postgres) and exposes a `.ready` promise plus `getBlocks(page, section)`.
+3. Each page's own inline script waits on `ContentDB.ready` (and
+   `AssetDB.ready` where relevant) before building any HTML — the cards,
+   argument blocks, script beats, design specs, and shot panels you see
+   are all rendered client-side from the rows that come back, using the
+   same item ids the old static markup used, so existing ratings/notes/
+   saved-assets keyed by those ids kept working across the migration.
+4. `supabase/seed-content.js` is the source of truth for that content —
+   edit it and re-run `node supabase/seed-content.js` to update the DB
+   (upserts by id, safe to re-run).
+
+Cross-stage "🔗 Linked to…" pickers (`js/links.js`) read the same
+`content_blocks` rows for the previous stage instead of scraping that
+page's HTML, so they keep working now that content is DB-rendered.
 
 ## Other files
 
 | File | Purpose |
 |------|---------|
-| `pipeline.js` | Renders the Research → Arguments → Script → Design → Previsualisation stepper on each stage page |
-| `links.js` | Cross-stage linking — dropdown multi-selects that jump between related items on different pipeline stages |
-| `theme.js` | 7-mode theme switcher (Dark, Light, Midnight, Sepia, Ocean, Grape, High Contrast) |
-| `ratings.js` | Star-rating + re-sort for tables/cards, persisted in a cookie per browser |
+| `js/pipeline.js` | Renders the Research → Arguments → Script → Design → Previsualisation stepper on each stage page |
+| `js/nav.js` | Renders the top navigation bar (single source of truth, was previously duplicated per page) |
+| `js/content-db.js` | Fetches `content_blocks` and exposes it to each page's render code |
+| `js/links.js` | Cross-stage linking — dropdown multi-selects that jump between related items on different pipeline stages |
+| `js/theme.js` | 7-mode theme switcher (Dark, Light, Midnight, Sepia, Ocean, Grape, High Contrast) |
+| `js/ratings.js` | Star-rating + re-sort for tables/cards |
+| `js/notes.js` | The bottom "Notes for Video Production Agent" bar, per-item note boxes, and the "🗄️ Database" explainer modal |
+| `js/audio-clips.js` | Manifest of Kokoro voice-over clips already saved to Azure Blob Storage, so Arguments' voice-over bar can skip a re-generation call when a clip already exists |
+| `css/shared.css` | Theme variables, base body reset, top nav — the CSS that used to be duplicated in every page's `<style>` block |
 | `transcripts/` | Raw transcripts backing the Research page's source links |
 
 ## Workflow

@@ -1,17 +1,22 @@
 # Project workflow
 
-This is a static HTML site (`index.html`, `script.html`, `design.html`,
-`previsualisation.html`, `assets.html` + `assets.js`) for pre-production
-notes on the "Job Apocalypse · Debunked" video. No build step.
+This is a static HTML site (`html/index.html`, `html/arguments.html`,
+`html/script.html`, `html/design.html`, `html/previsualisation.html`,
+`html/assets.html`, JS in `js/`, shared CSS in `css/shared.css`) for
+pre-production notes on the "Job Apocalypse · Debunked" video. No build
+step. Root `index.html` is just a redirect stub into `html/index.html`.
+Per-page content (source links, arguments, script beats, design specs,
+shot panels) is stored in Supabase's `content_blocks` table and rendered
+client-side — see `supabase/seed-content.js` to edit it, not the HTML.
 
 ## After making changes
 
 Always finish a change with this sequence:
 
 1. Run a local static server for the project directory and open the main
-   page (`index.html`) in Google Chrome to visually confirm the change
-   (per global preference, use `open -a "Google Chrome" <url>`, not the
-   default browser).
+   page (`html/index.html`) in Google Chrome to visually confirm the
+   change (per global preference, use `open -a "Google Chrome" <url>`,
+   not the default browser).
 2. Commit and push to `main` (only when the user has asked for the change
    to be committed).
 3. Open the GitHub commit page for the commit just pushed (i.e.
