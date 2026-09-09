@@ -1,15 +1,8 @@
 (function(){
-  // The pre-production pipeline: each stage feeds the next.
-  // Research -> Arguments -> Script -> Design -> Previsualisation
+  // The pre-production pipeline: each stage feeds the next. Display order
+  // starts with Arguments (matches the top nav), the underlying
+  // dependency each "feeds" line describes is unchanged.
   var STAGES = [
-    {
-      id: 'research',
-      emoji: '🔍',
-      label: 'Research',
-      file: 'index.html',
-      tagline: 'Source links, counter-arguments, footage leads',
-      feeds: 'Feeds Arguments: raw sources and counter-evidence get distilled into a premise, arguments, and conclusion.'
-    },
     {
       id: 'arguments',
       emoji: '🧩',
@@ -17,6 +10,14 @@
       file: 'arguments.html',
       tagline: 'Premise, arguments, conclusion',
       feeds: 'Feeds the script: each argument becomes a voiceover beat and shot direction.'
+    },
+    {
+      id: 'research',
+      emoji: '🔍',
+      label: 'Research',
+      file: 'index.html',
+      tagline: 'Source links, counter-arguments, footage leads',
+      feeds: 'Feeds Arguments: raw sources and counter-evidence get distilled into a premise, arguments, and conclusion.'
     },
     {
       id: 'script',
@@ -50,6 +51,17 @@
     style.id = 'pipeline-styles';
     style.textContent =
       '.pipeline-wrap{max-width:1000px;margin:0 auto;padding:0 24px 32px;}'+
+      '.pipeline-toggle{display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none;'+
+        'background:var(--panel,#13161f);border:1px solid var(--panel-border,#232838);'+
+        'border-radius:10px;padding:10px 14px;}'+
+      '.pipeline-toggle:hover{border-color:var(--accent-2,#5ab0ff);}'+
+      '.pipeline-toggle .pt-emoji{font-size:16px;}'+
+      '.pipeline-toggle .pt-label{font-size:12.5px;font-weight:600;color:var(--text,#eef0f4);flex:1;}'+
+      '.pipeline-toggle .pt-label b{color:var(--accent-2,#5ab0ff);}'+
+      '.pipeline-toggle .pt-caret{font-size:11px;color:var(--text-dim,#9aa1b0);transition:transform .15s ease;}'+
+      '.pipeline-wrap.open .pt-caret{transform:rotate(180deg);}'+
+      '.pipeline-body{display:none;margin-top:10px;}'+
+      '.pipeline-wrap.open .pipeline-body{display:block;}'+
       '.pipeline-track{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;'+
         'background:var(--panel,#13161f);border:1px solid var(--panel-border,#232838);'+
         'border-radius:12px;padding:14px 10px;}'+
@@ -110,7 +122,19 @@
         (next ? '<a href="' + next.file + '">Next: ' + next.label + ' →</a>' : '<span></span>') +
       '</div>';
 
-    mount.innerHTML = track + feeds + nextprev;
+    var toggle =
+      '<div class="pipeline-toggle">' +
+        '<span class="pt-emoji">' + (current ? current.emoji : '🧭') + '</span>' +
+        '<span class="pt-label">Stage ' + (idx + 1) + ' of ' + STAGES.length + ': <b>' + (current ? current.label : '') + '</b> — ' + (current ? current.tagline : '') + '</span>' +
+        '<span class="pt-caret">▾</span>' +
+      '</div>';
+
+    mount.className = 'pipeline-wrap';
+    mount.innerHTML = toggle + '<div class="pipeline-body">' + track + feeds + nextprev + '</div>';
+
+    mount.querySelector('.pipeline-toggle').addEventListener('click', function(){
+      mount.classList.toggle('open');
+    });
   }
 
   window.Pipeline = {
