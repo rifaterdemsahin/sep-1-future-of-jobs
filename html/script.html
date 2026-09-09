@@ -10,82 +10,8 @@
   }
 </script>
 <title>📝 Script — Why Elon Musk is Wrong About the Job Apocalypse</title>
+<link rel="stylesheet" href="../css/shared.css">
 <style>
-  :root{
-    --bg:#0b0d12;
-    --panel:#13161f;
-    --panel-border:#232838;
-    --accent:#e8b94a;
-    --accent-2:#5ab0ff;
-    --text:#eef0f4;
-    --text-dim:#9aa1b0;
-    --cold:#5ab0ff;
-    --warm:#e8b94a;
-  }
-  *{box-sizing:border-box;}
-  body{
-    margin:0;
-    background:var(--bg);
-    color:var(--text);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    line-height:1.6;
-  }
-  .topnav{
-    position:sticky;
-    top:0;
-    z-index:20;
-    background:rgba(11,13,18,.85);
-    backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--panel-border);
-  }
-  .topnav-inner{
-    max-width:1200px;
-    margin:0 auto;
-    padding:14px 24px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:16px;
-    flex-wrap:wrap;
-  }
-  .topnav .brand{
-    font-size:13px;
-    font-weight:700;
-    color:var(--text);
-    text-decoration:none;
-    letter-spacing:.02em;
-  }
-  .topnav .brand span{color:var(--accent);}
-  .topnav .links{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-  }
-  .topnav .links a{
-    font-size:13px;
-    color:var(--text-dim);
-    text-decoration:none;
-    padding:6px 14px;
-    border-radius:20px;
-    border:1px solid transparent;
-    transition:border-color .15s ease, color .15s ease;
-  }
-  .topnav .links a:hover{
-    color:var(--text);
-    border-color:var(--panel-border);
-  }
-  .topnav .links a.active{
-    color:var(--text);
-    border-color:var(--accent-2);
-  }
-  .topnav .links a.live{
-    color:var(--accent);
-    border-color:var(--accent);
-  }
-  .topnav .links a.live:hover{
-    color:var(--bg);
-    background:var(--accent);
-  }
   header{
     padding:48px 24px 24px;
     max-width:840px;
@@ -528,26 +454,15 @@
   footer a:hover{text-decoration:underline;}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-<script src="supabase-client.js"></script>
-<script src="theme.js"></script>
-<script src="notes.js"></script>
+<script src="../js/supabase-client.js"></script>
+<script src="../js/nav.js"></script>
+<script src="../js/theme.js"></script>
+<script src="../js/notes.js"></script>
 </head>
 <body>
 
-<nav class="topnav">
-  <div class="topnav-inner">
-    <a class="brand" href="index.html">🎬 Job Apocalypse <span>· Debunked</span></a>
-    <div class="links">
-      <a href="index.html">🔍 Research</a>
-      <a href="arguments.html">🧩 Arguments</a>
-      <a href="script.html" class="active">📝 Script</a>
-      <a href="design.html">🎨 Design</a>
-      <a href="previsualisation.html">🎞️ Previsualisation</a>
-      <a href="assets.html">🗂️ Assets</a>
-      <a class="live" href="https://rifaterdemsahin.github.io/sep-1-future-of-jobs/script.html" target="_blank" rel="noopener">🌐 Live</a>
-    </div>
-  </div>
-</nav>
+<div id="nav-mount"></div>
+<script>Nav.render('script');</script>
 
 <header>
   <div class="eyebrow">📝 Full Script · v1</div>
@@ -756,9 +671,9 @@
   📝 Script for <a href="https://github.com/rifaterdemsahin/sep-1-future-of-jobs" target="_blank" rel="noopener">rifaterdemsahin/sep-1-future-of-jobs</a> — see the <a href="design.html">design</a>. See everything you've saved in 🗂️ <a href="assets.html">Assets</a>.
 </footer>
 
-<script src="pipeline.js"></script>
-<script src="assets.js"></script>
-<script src="links.js"></script>
+<script src="../js/pipeline.js"></script>
+<script src="../js/assets.js"></script>
+<script src="../js/links.js"></script>
 <script>
   Pipeline.render('script');
   PipelineLinks.init({ file: 'script.html', sourceFile: 'index.html', sourceLabel: 'Research' });
