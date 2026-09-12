@@ -36,10 +36,17 @@
     font-size:15px;
   }
 
-  .status-summary{
-    max-width:1100px;
+  .controls{
+    max-width:1300px;
     margin:0 auto 28px;
     padding:0 24px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .status-summary{
     display:flex;
     gap:10px;
     flex-wrap:wrap;
@@ -54,11 +61,50 @@
     display:flex;
     align-items:center;
     gap:6px;
+    cursor:pointer;
+    background:none;
+    font-family:inherit;
+    opacity:.4;
+    transition:opacity .12s ease;
   }
+  .status-pill:hover{ opacity:.7; }
+  .status-pill.active{ opacity:1; }
   .status-pill b{ font-variant-numeric:tabular-nums; }
   .status-pill.done{ color:#7be08a; border-color:#2b5a35; background:rgba(123,224,138,.08); }
   .status-pill.progress{ color:var(--accent); border-color:#5a4a20; background:rgba(232,185,74,.08); }
   .status-pill.todo{ color:var(--text-dim); border-color:var(--panel-border); background:rgba(255,255,255,.03); }
+  .status-pill.reset{
+    color:var(--text-dim);
+    border-style:dashed;
+    opacity:.7;
+  }
+  .status-pill.reset:hover{ opacity:1; color:var(--text); }
+
+  .collapse-controls{
+    display:flex;
+    gap:8px;
+  }
+  .collapse-controls button{
+    font-size:12px;
+    font-weight:600;
+    padding:6px 14px;
+    border-radius:999px;
+    border:1px solid var(--panel-border);
+    background:var(--panel);
+    color:var(--text);
+    cursor:pointer;
+    font-family:inherit;
+  }
+  .collapse-controls button:hover{ border-color:var(--text-dim); }
+
+  .card.filtered-out{ display:none; }
+  .column-empty{
+    color:var(--text-dim);
+    font-size:12px;
+    text-align:center;
+    padding:14px 6px;
+    font-style:italic;
+  }
 
   main{
     max-width:100%;
@@ -81,6 +127,10 @@
     display:flex;
     flex-direction:column;
     max-height:calc(100vh - 260px);
+    transition:flex-basis .18s ease;
+  }
+  .column.collapsed{
+    flex:0 0 54px;
   }
   .column-head{
     padding:14px 16px 10px;
@@ -89,7 +139,29 @@
     top:0;
     background:var(--panel);
     border-radius:14px 14px 0 0;
+    cursor:pointer;
+    user-select:none;
+    display:flex;
+    align-items:flex-start;
+    gap:8px;
   }
+  .column-head:hover{ background:#171b26; }
+  .column-head .head-text{ flex:1 1 auto; min-width:0; }
+  .column-head .collapse-toggle{
+    flex:0 0 auto;
+    width:22px;
+    height:22px;
+    border-radius:6px;
+    border:1px solid var(--panel-border);
+    background:transparent;
+    color:var(--text-dim);
+    font-size:11px;
+    line-height:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .column-head .collapse-toggle:hover{ color:var(--text); border-color:var(--text-dim); }
   .column-head .stage-emoji{ font-size:20px; }
   .column-head h2{
     font-size:14px;
@@ -117,6 +189,28 @@
     flex-direction:column;
     gap:8px;
   }
+
+  /* Collapsed state: column shrinks to a vertical strip, body hidden,
+     header text rotates to read top-to-bottom. */
+  .column.collapsed{ overflow:hidden; }
+  .column.collapsed .column-body{ display:none; }
+  .column.collapsed .column-head{
+    flex-direction:column;
+    align-items:center;
+    height:100%;
+    border-radius:14px;
+    border-bottom:none;
+  }
+  .column.collapsed .column-head .head-text{
+    writing-mode:vertical-rl;
+    transform:rotate(180deg);
+    display:flex;
+    align-items:center;
+    gap:8px;
+    white-space:nowrap;
+  }
+  .column.collapsed .column-head h2{ margin:0; }
+  .column.collapsed .column-head .collapse-toggle{ transform:rotate(180deg); }
 
   .card{
     background:var(--bg);
@@ -150,7 +244,12 @@
     white-space:nowrap;
     text-transform:uppercase;
     letter-spacing:.04em;
+    border:1px solid transparent;
+    background:none;
+    font-family:inherit;
+    cursor:pointer;
   }
+  .card .badge:hover{ border-color:currentColor; }
   .card.done .badge{ background:rgba(123,224,138,.12); color:#7be08a; }
   .card.progress .badge{ background:rgba(232,185,74,.12); color:var(--accent); }
   .card.todo .badge{ background:rgba(255,255,255,.05); color:var(--text-dim); }
@@ -160,6 +259,19 @@
     margin-top:5px;
     line-height:1.45;
   }
+  .card .card-id{
+    display:inline-block;
+    margin-top:6px;
+    font-family:ui-monospace,Menlo,Consolas,monospace;
+    font-size:10.5px;
+    color:var(--text-dim);
+    background:rgba(255,255,255,.04);
+    border:1px solid var(--panel-border);
+    border-radius:5px;
+    padding:1px 6px;
+    letter-spacing:.01em;
+    user-select:all;
+  }
 
   footer{
     text-align:center;
@@ -168,12 +280,35 @@
     padding:20px 24px 60px;
   }
   footer a{ color:var(--accent-2); }
+
+  .wip-badge{
+    font-size:10.5px;
+    font-weight:700;
+    padding:2px 8px;
+    border-radius:999px;
+    margin-left:6px;
+    border:1px solid var(--panel-border);
+    color:var(--text-dim);
+    white-space:nowrap;
+  }
+  .wip-badge.over{
+    color:#ff9a8a;
+    border-color:#5a2a24;
+    background:rgba(226,104,95,.12);
+  }
+
+  /* Per-task notes reuse js/notes.js's .item-note-* styles (injected at
+     runtime); .item-note-wrap just needs room inside a card. */
+  .card .item-note-wrap{ margin-top:8px; }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="../js/supabase-client.js"></script>
+<script src="../js/nav.js"></script>
+<script src="../js/notes.js"></script>
 </head>
 <body>
 
 <div id="nav-mount"></div>
-<script src="../js/nav.js"></script>
 <script>Nav.render('todo');</script>
 
 <header>
@@ -182,7 +317,13 @@
   <p class="sub">Every stage of the "Job Apocalypse · Debunked" pipeline — from Research through Publish — with every task and its status, so it's obvious what's done, what's in progress, and what's still ahead.</p>
 </header>
 
-<div class="status-summary" id="status-summary"></div>
+<div class="controls">
+  <div class="status-summary" id="status-summary"></div>
+  <div class="collapse-controls">
+    <button type="button" id="collapse-all-btn">▾ Collapse all</button>
+    <button type="button" id="expand-all-btn">▸ Expand all</button>
+  </div>
+</div>
 
 <main>
   <div class="board" id="board"></div>
@@ -212,20 +353,23 @@ var PRODUCTION_PLAN = [
     ]
   },
   {
-    id: 'arguments', emoji: '🧩', name: 'Arguments', status: 'progress',
+    id: 'arguments', emoji: '🧩', name: 'Arguments', status: 'progress', wipLimit: 1,
     tasks: [
       { title: 'Core message', status: 'done' },
       { title: 'Premise', status: 'done', note: 'Reworded to "Key Premise Locked" in the pending diff.' },
       { title: 'Audience transformation (before/after)', status: 'done', note: 'New section added in the uncommitted diff — not yet pushed.' },
-      { title: '8 argument cards', status: 'done' },
+      { title: '11 argument cards', status: 'done', note: 'Added Argument 11: IT self-learning & university expansion.' },
       { title: 'Argument 7 reframed: I-shaped → T-shaped → X-shaped skills', status: 'done', note: 'Sharpened to name the three skill shapes explicitly and center creative multi-skilling as the AI-era differentiator. Reseeded to Supabase.' },
+      { title: 'Argument 9 added: Wages rise with capability permutations', status: 'done', note: 'Added Argument 9 proving superlinear compensation returns as execution friction collapses.' },
+      { title: 'Argument 10 added: Regulation accelerates AI like traffic rules', status: 'done', note: 'Added Argument 10 illustrating how clear guardrails and safety standards accelerate institutional scale and public trust.' },
+      { title: 'Argument 11 added: IT self-learning & university expansion', status: 'done', note: 'Added Argument 11 showing how self-directed IT learning unlocks AI leverage and expands the global role of universities.' },
       { title: 'Conclusion', status: 'done' },
       { title: 'Sanity-check cards', status: 'done' },
       { title: 'Commit + push wording refresh', status: 'progress', note: 'html/arguments.html and seed-content.js currently modified but uncommitted.' }
     ]
   },
   {
-    id: 'script', emoji: '📝', name: 'Script', status: 'progress',
+    id: 'script', emoji: '📝', name: 'Script', status: 'progress', wipLimit: 1,
     tasks: [
       { title: 'Hook (0:00–0:30)', status: 'done', note: 'VO tightened in the pending diff ("sharp 30s open").' },
       { title: 'Section 1 — Productivity Fallacy & Historical Proof (0:30–1:45)', status: 'done' },
@@ -257,7 +401,7 @@ var PRODUCTION_PLAN = [
     ]
   },
   {
-    id: 'assets', emoji: '🗂️', name: 'Assets', status: 'progress',
+    id: 'assets', emoji: '🗂️', name: 'Assets', status: 'progress', wipLimit: 1,
     tasks: [
       { title: 'B-roll categories mapped to script sections', status: 'done' },
       { title: 'YouTube search terms per category', status: 'done' },
@@ -318,11 +462,57 @@ var PRODUCTION_PLAN = [
 
 (function(){
   var STATUS_LABEL = { done: 'Done', progress: 'In Progress', todo: 'To Do' };
+  var ALL_STATUSES = ['done', 'progress', 'todo'];
+  var STATUS_CYCLE = { todo: 'progress', progress: 'done', done: 'todo' };
+  var collapsedStages = {};
+  try{
+    collapsedStages = JSON.parse(sessionStorage.getItem('todoCollapsedStages') || '{}');
+  }catch(e){ collapsedStages = {}; }
+
+  // Per-task status overrides — click a card's status badge to cycle
+  // To Do -> In Progress -> Done -> To Do. Saved in localStorage (this
+  // browser only) so edits survive a reload without needing a new
+  // Supabase column just for this.
+  var statusOverrides = {};
+  try{
+    statusOverrides = JSON.parse(localStorage.getItem('todoStatusOverrides') || '{}');
+  }catch(e){ statusOverrides = {}; }
+
+  function saveStatusOverrides(){
+    try{ localStorage.setItem('todoStatusOverrides', JSON.stringify(statusOverrides)); }catch(e){}
+  }
+
+  function effectiveStatus(taskId, fallbackStatus){
+    return statusOverrides[taskId] || fallbackStatus;
+  }
+
+  // Status filter: all three active by default (nothing hidden). Clicking
+  // a pill toggles that status; if that leaves zero active, treat it as
+  // "all active" again rather than showing a blank board.
+  var activeFilters = {};
+  try{
+    activeFilters = JSON.parse(sessionStorage.getItem('todoActiveFilters') || 'null') ||
+      { done: true, progress: true, todo: true };
+  }catch(e){ activeFilters = { done: true, progress: true, todo: true }; }
+
+  function saveCollapsed(){
+    try{ sessionStorage.setItem('todoCollapsedStages', JSON.stringify(collapsedStages)); }catch(e){}
+  }
+
+  function saveFilters(){
+    try{ sessionStorage.setItem('todoActiveFilters', JSON.stringify(activeFilters)); }catch(e){}
+  }
+
+  function isFilterActive(){
+    return ALL_STATUSES.some(function(s){ return !activeFilters[s]; });
+  }
 
   function countAll(){
     var totals = { done: 0, progress: 0, todo: 0 };
     PRODUCTION_PLAN.forEach(function(stage){
-      stage.tasks.forEach(function(t){ totals[t.status]++; });
+      stage.tasks.forEach(function(t, i){
+        totals[effectiveStatus('todo-' + stage.id + '-' + i, t.status)]++;
+      });
     });
     return totals;
   }
@@ -330,37 +520,127 @@ var PRODUCTION_PLAN = [
   function renderSummary(){
     var totals = countAll();
     var mount = document.getElementById('status-summary');
-    mount.innerHTML = ['done', 'progress', 'todo'].map(function(s){
-      return '<div class="status-pill ' + s + '">' + (s === 'done' ? '✅' : s === 'progress' ? '🟡' : '⬜') +
-        ' ' + STATUS_LABEL[s] + ' <b>' + totals[s] + '</b></div>';
+    var pills = ALL_STATUSES.map(function(s){
+      return '<button type="button" class="status-pill ' + s + (activeFilters[s] ? ' active' : '') + '" data-filter="' + s + '">' +
+        (s === 'done' ? '✅' : s === 'progress' ? '🟡' : '⬜') +
+        ' ' + STATUS_LABEL[s] + ' <b>' + totals[s] + '</b></button>';
     }).join('');
+    var reset = isFilterActive()
+      ? '<button type="button" class="status-pill reset active" data-filter="reset">✕ Show all</button>'
+      : '';
+    mount.innerHTML = pills + reset;
+
+    mount.querySelectorAll('.status-pill[data-filter]').forEach(function(pill){
+      pill.addEventListener('click', function(){
+        var key = pill.getAttribute('data-filter');
+        if(key === 'reset'){
+          activeFilters = { done: true, progress: true, todo: true };
+        }else{
+          activeFilters[key] = !activeFilters[key];
+          if(!isFilterActive()){
+            // nothing left active — treat as "show everything" again
+            activeFilters = { done: true, progress: true, todo: true };
+          }
+        }
+        saveFilters();
+        renderSummary();
+        renderBoard();
+      });
+    });
   }
 
   function renderBoard(){
     var board = document.getElementById('board');
     board.innerHTML = PRODUCTION_PLAN.map(function(stage){
-      var doneCount = stage.tasks.filter(function(t){ return t.status === 'done'; }).length;
-      var cards = stage.tasks.map(function(t){
-        return '<div class="card ' + t.status + '">' +
+      var doneCount = 0;
+      var progressCount = 0;
+      var visibleCount = 0;
+      var cards = stage.tasks.map(function(t, i){
+        var taskId = 'todo-' + stage.id + '-' + i;
+        var status = effectiveStatus(taskId, t.status);
+        if(status === 'done') doneCount++;
+        if(status === 'progress') progressCount++;
+        var hidden = !activeFilters[status];
+        if(!hidden) visibleCount++;
+        return '<div class="card ' + status + (hidden ? ' filtered-out' : '') + '" data-task-id="' + taskId + '">' +
           '<div class="card-top">' +
             '<div class="card-title">' + t.title + '</div>' +
-            '<div class="badge">' + STATUS_LABEL[t.status] + '</div>' +
+            '<button type="button" class="badge" data-cycle="' + taskId + '" title="Click to change status">' + STATUS_LABEL[status] + '</button>' +
           '</div>' +
+          '<code class="card-id" title="item_notes row id in Supabase">🆔 ' + taskId + '</code>' +
           (t.note ? '<div class="card-note">' + t.note + '</div>' : '') +
         '</div>';
-      }).join('');
+      }).join('') + (visibleCount === 0 ? '<div class="column-empty">No tasks match the current filter</div>' : '');
 
-      return '<div class="column">' +
-        '<div class="column-head">' +
-          '<span class="stage-emoji">' + stage.emoji + '</span>' +
-          '<h2>' + stage.name + '</h2>' +
-          '<span class="stage-status ' + stage.status + '">' + STATUS_LABEL[stage.status] + '</span>' +
-          '<span class="stage-count">' + doneCount + '/' + stage.tasks.length + ' done</span>' +
+      var collapsed = collapsedStages[stage.id];
+      var wipBadge = (stage.wipLimit != null)
+        ? '<span class="wip-badge' + (progressCount > stage.wipLimit ? ' over' : '') + '">🚧 WIP ' + progressCount + '/' + stage.wipLimit + '</span>'
+        : '';
+      return '<div class="column' + (collapsed ? ' collapsed' : '') + '" data-stage="' + stage.id + '">' +
+        '<div class="column-head" data-toggle="' + stage.id + '">' +
+          '<div class="head-text">' +
+            '<span class="stage-emoji">' + stage.emoji + '</span>' +
+            '<h2>' + stage.name + '</h2>' +
+            '<span class="stage-status ' + stage.status + '">' + STATUS_LABEL[stage.status] + '</span>' +
+            '<span class="stage-count">' + doneCount + '/' + stage.tasks.length + ' done</span>' +
+            wipBadge +
+          '</div>' +
+          '<button class="collapse-toggle" type="button" aria-label="Collapse column" title="Collapse/expand">' + (collapsed ? '▸' : '▾') + '</button>' +
         '</div>' +
         '<div class="column-body">' + cards + '</div>' +
       '</div>';
     }).join('');
+
+    board.querySelectorAll('.column-head[data-toggle]').forEach(function(head){
+      head.addEventListener('click', function(){
+        var id = head.getAttribute('data-toggle');
+        collapsedStages[id] = !collapsedStages[id];
+        saveCollapsed();
+        renderBoard();
+      });
+    });
+
+    board.querySelectorAll('.badge[data-cycle]').forEach(function(badge){
+      badge.addEventListener('click', function(e){
+        e.stopPropagation();
+        var taskId = badge.getAttribute('data-cycle');
+        var parts = taskId.split('-');
+        var idx = parseInt(parts[parts.length - 1], 10);
+        var stageId = parts.slice(1, -1).join('-');
+        var stage = PRODUCTION_PLAN.filter(function(s){ return s.id === stageId; })[0];
+        var task = stage && stage.tasks[idx];
+        if(!task) return;
+        var current = effectiveStatus(taskId, task.status);
+        statusOverrides[taskId] = STATUS_CYCLE[current];
+        saveStatusOverrides();
+        renderSummary();
+        renderBoard();
+      });
+    });
+
+    // Per-task notes, persisted to Supabase's item_notes table (id = the
+    // card's data-task-id) via the same ItemNotes module every other page
+    // uses for per-item notes — click "📝 Add note" on a card to save one.
+    if(window.ItemNotes){
+      window.ItemNotes.attach({
+        container: board,
+        itemSelector: '.card',
+        getId: function(el){ return el.getAttribute('data-task-id'); },
+        mount: function(item, wrap){ item.appendChild(wrap); }
+      });
+    }
   }
+
+  document.getElementById('collapse-all-btn').addEventListener('click', function(){
+    PRODUCTION_PLAN.forEach(function(stage){ collapsedStages[stage.id] = true; });
+    saveCollapsed();
+    renderBoard();
+  });
+  document.getElementById('expand-all-btn').addEventListener('click', function(){
+    PRODUCTION_PLAN.forEach(function(stage){ collapsedStages[stage.id] = false; });
+    saveCollapsed();
+    renderBoard();
+  });
 
   renderSummary();
   renderBoard();

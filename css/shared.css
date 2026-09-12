@@ -59,3 +59,49 @@ body{
 .topnav .links a.active{color:var(--nav-color, var(--text));}
 .topnav .links a.live{color:var(--accent);border-color:var(--accent);}
 .topnav .links a.live:hover{color:var(--bg);background:var(--accent);}
+
+/* Site-wide search, mounted in the top nav next to the page links. */
+.topnav .search-wrap{position:relative;}
+.topnav .search-toggle{
+  display:flex;align-items:center;gap:6px;
+  font-size:13px;color:var(--text-dim);
+  background:transparent;border:1px solid transparent;border-radius:20px;
+  padding:6px 14px;cursor:pointer;font-family:inherit;
+  transition:border-color .15s ease, color .15s ease;
+}
+.topnav .search-toggle:hover{color:var(--text);border-color:var(--panel-border);}
+.topnav .search-toggle[hidden]{display:none;}
+.topnav .search-box{
+  display:flex;align-items:center;gap:6px;
+  border:1px solid var(--panel-border);border-radius:20px;
+  padding:5px 12px;background:var(--panel);
+}
+.topnav .search-box[hidden]{display:none;}
+.topnav .search-box input{
+  border:none;background:transparent;color:var(--text);
+  font-size:13px;font-family:inherit;outline:none;width:170px;max-width:40vw;
+}
+.topnav .search-box input::placeholder{color:var(--text-dim);}
+.topnav .search-close{
+  border:none;background:transparent;color:var(--text-dim);cursor:pointer;
+  font-size:13px;padding:0 2px;line-height:1;
+}
+.topnav .search-close:hover{color:var(--text);}
+.topnav .search-results{
+  position:absolute;top:calc(100% + 8px);right:0;
+  width:340px;max-width:80vw;max-height:60vh;overflow-y:auto;
+  background:var(--panel);border:1px solid var(--panel-border);border-radius:12px;
+  box-shadow:0 12px 28px rgba(0,0,0,.4);padding:6px;z-index:30;
+}
+.topnav .search-results[hidden]{display:none;}
+.topnav .search-result{
+  display:block;padding:8px 10px;border-radius:8px;text-decoration:none;
+  color:var(--text);border-left:3px solid transparent;
+}
+.topnav .search-result:hover{background:rgba(255,255,255,.05);border-left-color:var(--accent-2);}
+.topnav .search-result .sr-page{
+  display:block;font-size:10.5px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.05em;color:var(--accent-2);margin-bottom:2px;
+}
+.topnav .search-result .sr-title{font-size:13px;line-height:1.4;}
+.topnav .search-empty{padding:10px;font-size:12.5px;color:var(--text-dim);}
