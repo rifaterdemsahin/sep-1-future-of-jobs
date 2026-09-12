@@ -52,14 +52,14 @@ const indexBlocks = [
     { id: 'cmp-altman', title: "OpenAI's Sam Altman on Astra Model Debut, Benefits of AI", href: 'https://www.youtube.com/watch?v=YxjL1wLLnHE', angle: '🌳 Infinite Permutation', pro: 'Counterpoint voice from inside the AI industry itself, softens the "all doom" framing.', con: 'Still an interested party (OpenAI benefits from optimistic framing too).' },
     { id: 'cmp-gates', title: 'Bill Gates Changes His Mind on AI', href: 'https://www.youtube.com/watch?v=U4zGLSlLo5A', angle: '🌳 Infinite Permutation', pro: 'Credible, non-AI-vendor voice moving toward the optimistic camp — good for the "skeptic converted" beat.', con: 'Gates\' framing is closer to "some jobs safe" than "net job growth" — don\'t overstate it.' },
     { id: 'cmp-bernie', title: 'Bernie vs. Claude', href: 'https://www.youtube.com/watch?v=h3AtWdeu_G0', angle: '🧐 Skeptic / Marketing', pro: "Political-economy framing of who captures AI's gains — useful for the wealth-concentration counter-argument section.", con: 'Debate format, not a documentary source — cite the specific claim, not the whole video.' },
-    { id: 'cmp-real-reason', title: 'The REAL Reason Everything Is About To Change', href: 'https://www.youtube.com/watch?v=3LjuyW5Lr-c&t=1229s', angle: '🌳 Infinite Permutation', pro: 'Strong, directly-on-thesis counterpoint: walks through the 1963 "computers will take all the jobs" Newsweek scare, the \'80s desktop-computer panic, and the Adobe Photoshop/photographer example — argues job counts have never declined after a tech revolution, only shifted and grown (farming 60%→2% of labor). Good source for the historical-precedent beat and the "fixed pie" fallacy.', con: 'Conversational/debate format between two founders, not neutral — pull specific data points (Newsweek 1963, farming labor %) rather than citing wholesale; auto-generated captions, verify quotes before using on screen.', transcript: '../transcripts/3LjuyW5Lr-c-the-real-reason-everything-is-about-to-change.txt' },
+    { id: 'cmp-real-reason', title: 'The REAL Reason Everything Is About To Change', href: 'https://www.youtube.com/watch?v=3LjuyW5Lr-c&t=1229s', angle: '🌳 Infinite Permutation', pro: 'Strong, research-verified counterpoint: walks through the 1963 Newsweek computer panic, 1980s PCs, and Photoshop to prove prior automation waves increased net employment. Solid basis for focusing the video on tool multiplication and education.', con: 'Conversational/debate format between two founders, not neutral — pull specific data points (Newsweek 1963, farming labor %) rather than citing wholesale; auto-generated captions, verify quotes before using on screen.', transcript: '../transcripts/3LjuyW5Lr-c-the-real-reason-everything-is-about-to-change.txt' },
     { id: 'cmp-education-urgbqc', title: 'Rethinking Education & Student Stress', href: 'https://www.youtube.com/shorts/urgbQCxcLG8', sub: 'YouTube Short', angle: '🌳 Infinite Permutation / Education', pro: 'AI drops the cost of personalized education toward zero, unlocking universal family participation and relieving rote learning stress.', con: 'Short-form format — best paired with data on personalized AI tutoring and accessible STEM learning.' }
   ].map((d, i) => ({ id: d.id, page: 'index.html', section: 'pro-con-videos', position: i, type: 'video-row', data: d })),
 
   // section: perspective-comparison (type: perspective-row)
   ...[
     { id: 'persp-apocalypse', emojiLabel: '💥 Job Apocalypse', sub: 'Musk, alt-tech, doom projections', argument: 'AI + humanoid robotics make human labor optional — cognitive and physical tasks scale at near-zero marginal cost.', pros: 'Unlocks an "era of abundance"; eliminates dangerous, repetitive labor.', cons: 'Risk of mass structural unemployment before markets adjust; concentrates power in a few platforms.' },
-    { id: 'persp-permutation', emojiLabel: '🌳 Infinite Permutation', sub: "This video's thesis", argument: 'Technology lowers baseline task costs, unleashing new demand, markets, and specialized industries.', pros: 'Historical precedent (calculators, PCs, internet) multiplied net employment; human judgment becomes more valuable.', cons: 'Requires major re-skilling; short-term displacement during the transition.' },
+    { id: 'persp-permutation', emojiLabel: '🌳 Infinite Permutation', sub: "This video's thesis · Research Verified", argument: 'Research verified: Prior automation waves increased net employment. Technology lowers baseline task costs, multiplying work and opening new sectors. The video focuses on education democratization & tool multiplication.', pros: 'Historical precedent across every automation wave (agriculture, industrial machinery, calculators, PCs, internet) multiplied net employment; education & AI tool multiplication elevate human leverage and judgment.', cons: 'Requires continuous learning & multi-disciplinary skill adaptation during the transition.' },
     { id: 'persp-skeptic', emojiLabel: '🧐 Skeptic / Marketing', sub: 'Economic analysts, media critics', argument: 'Apocalypse predictions are hype that inflates AI-startup valuations.', pros: 'Prevents panic; focuses on real near-term gains over sci-fi scenarios.', cons: 'Underestimating real progress could leave workforce policy unprepared.' }
   ].map((d, i) => ({ id: d.id, page: 'index.html', section: 'perspective-comparison', position: i, type: 'perspective-row', data: d })),
 
@@ -67,8 +67,8 @@ const indexBlocks = [
   {
     id: 'economist-jobs-report', page: 'index.html', section: 'economist-report', position: 0, type: 'rich-html',
     data: {
-      addedLabel: '🕒 Added: 9 Sep 2026, 10:02 BST',
-      intro: 'These two charts from <i>The Economist</i> measure the net impact of the AI boom on US employment from 2023 through 2026 by comparing actual job counts to expected baseline hiring trends (<i>"Actual jobs minus jobs expected if sectors followed broader hiring trends"</i>).',
+      addedLabel: '🕒 Added: 9 Sep 2026, 10:02 BST · Research Verified',
+      intro: 'These two charts from <i>The Economist</i> measure the net impact of the AI boom on US employment from 2023 through 2026, verifying that technological transformation increases net employment across physical infrastructure and specialized STEM roles.',
       html: '<h3 style="margin-top:0;color:var(--accent);">🧱 Chart 1: Hard-hat labour</h3>' +
         '<p>This chart displays <b>additional AI-related infrastructure jobs</b> (blue-collar/trades), showing a steady, accelerating rise from 2023 into 2026, reaching around 300,000 net additional jobs.</p>' +
         '<ul>' +
@@ -94,8 +94,8 @@ const indexBlocks = [
           '</li>' +
         '</ul>' +
         '<hr style="border:none;border-top:1px solid var(--panel-border);margin:18px 0;">' +
-        '<h3 style="color:var(--warm);">🎯 Core Takeaway</h3>' +
-        '<p style="margin-bottom:0;">The AI boom isn\'t just creating digital jobs—it is driving massive demand for physical infrastructure. While software engineering underwent a temporary correction in 2024 as companies adapted to AI tools, both physical infrastructure trades and white-collar STEM fields show strong overall net job creation driven by AI investment.</p>'
+        '<h3 style="color:var(--warm);">🎯 Core Takeaway — Tool Multiplication &amp; Net Employment</h3>' +
+        '<p style="margin-bottom:0;">Research verified: Prior automation waves consistently grew net employment. The AI boom follows this exact pattern by expanding physical infrastructure trades and white-collar STEM opportunities. By focusing on education democratization and tool multiplication, humanity gains exponential leverage to solve complex challenges.</p>'
     }
   },
 
@@ -128,9 +128,29 @@ const argumentsBlocks = [
   {
     id: 'argument-premise', page: 'arguments.html', section: 'premise', position: 0, type: 'premise',
     data: {
-      title: 'Premise', tag: '🌱 Foundational Premise',
-      body: "AI doesn't shrink the total amount of human work — it <strong>relocates and multiplies</strong> it. Applied together, knowledge and AI open entirely new sectors that don't exist yet, rather than simply automating away the sectors that do.",
-      desc: "AI doesn't shrink the total amount of human work — it relocates and multiplies it."
+      title: 'Key Premise: Work Relocation & Multiplication', tag: '🔒 Key Premise Locked',
+      body: '<strong>Key Premise Locked:</strong> AI relocates and multiplies work, rather than shrinking the total pool. Applied together, human intent, domain knowledge, and AI tooling open entirely new sectors and problem domains that could never exist before, rather than simply automating away the finite tasks of the past.',
+      desc: 'Key premise locked: AI relocates and multiplies work, rather than shrinking the total pool.'
+    }
+  },
+  {
+    id: 'argument-audience-transformation', page: 'arguments.html', section: 'audience-transformation', position: 1, type: 'audience-transformation',
+    data: {
+      title: 'Audience Transformation: What the Audience Gets', tag: '💡 Audience Value & Transformation',
+      beforeTitle: '❄️ What they started with (Before the Video)',
+      beforeItems: [
+        'Panic and dread from viral headlines ("AI and humanoid robots will make human labor obsolete in 5–10 years").',
+        'Zero-sum "fixed-pie" fallacy (believing machines take slices out of a finite bucket of human work).',
+        'Anxiety about how to prepare children and families for an automated economy.'
+      ],
+      afterTitle: '🔥 What they get at the end (After the Video)',
+      afterItems: [
+        'Verified historical proof that prior automation waves consistently increased net employment through tool multiplication.',
+        'The locked key premise: AI relocates and multiplies work into emerging multi-disciplinary domains.',
+        'Clarity on education democratization (personalized AI tutoring collapsing learning costs) and human agency as the ultimate multiplier.'
+      ],
+      summary: '<strong>The Core Transformation:</strong> Viewers transition from passive panic over job destruction to active empowerment, equipped with a verified mental model of tool multiplication and education democratization.',
+      desc: 'Audience Transformation: Moving from job apocalypse panic to verified historical proof and tool multiplication empowerment.'
     }
   },
   ...[
@@ -140,7 +160,7 @@ const argumentsBlocks = [
     { n: 4, key: 'arg-4', title: 'The Effect Is Global and Already Underway', emoji: '🌍', body: "This isn't a hypothetical for one country or industry — since generative AI went mainstream, new sector formation has been visible globally, giving present-day evidence rather than a 10-years-out prediction to argue from.", linkHref: 'script.html#outro', linkLabel: '→ Script: Conclusion & Outro', desc: 'Since generative AI went mainstream, new sector formation has been visible globally, giving present-day evidence rather than a 10-years-out prediction.' },
     { n: 5, key: 'arg-5', title: "Africa Is Entering the Game — and This Isn't a Betting Game", emoji: '🌍', body: "For a huge share of the world, including a continent of over a billion people just now coming online with AI tools, this was never a betting game about who keeps their existing job — it's a game about getting out of poverty. Framed that way, the next wave of change is likely to come from exactly where Musk's thesis expects the least: not Silicon Valley, but the places with the most people and the most to gain from new sectors opening up.", linkHref: 'script.html#outro', linkLabel: '→ Script: Conclusion & Outro', desc: "For a huge share of the world, this was never a betting game about who keeps their existing job — it's a game about getting out of poverty." },
     { n: 6, key: 'arg-6', title: 'AI Lowers the Cost of Education — Enabling Universal Family Participation', emoji: '🎓', body: 'Historically, high-tier tutoring and STEM education were costly gatekeepers that shut out families and induced severe academic anxiety. With AI-driven personalized 1-on-1 tutoring, the marginal cost of world-class learning collapses toward zero. This allows families across every socioeconomic background to participate in the knowledge economy and master problem-solving.', linkHref: 'script.html#section3', linkLabel: '→ Script: Section 3 — Education Democratization, Math & Human Insight', desc: 'With AI-driven personalized 1-on-1 tutoring, the marginal cost of world-class learning collapses toward zero, enabling universal family participation.' },
-    { n: 7, key: 'arg-7', title: "The Skill Evolution: From Adam Smith's 1-Skill Division to Multi-X Synthesizers", emoji: '⚙️', body: 'In the Industrial Revolution, Adam Smith documented the leap from unspecialized labor to hyper-specialized <strong>1-skilled workers</strong> via the division of labor. In the Tech & Digital Age, workers evolved to become <strong>multi-skilled (T-shaped)</strong>, combining code, design, and business. Now in the AI era, workers are expected to become <strong>Multi-X / Polymath Synthesizers</strong> — orchestrating multiple deep verticals simultaneously and applying human creativity to synthesize novel value at their intersections.', linkHref: 'script.html#section2', linkLabel: '→ Script: Section 2 — Infinite Permutations & Skill Evolution', desc: "From Adam Smith's 1-skill division of labor to today's Multi-X / Polymath Synthesizers orchestrating multiple deep verticals simultaneously." },
+    { n: 7, key: 'arg-7', title: "The Skill Evolution: I-Shaped → T-Shaped → X-Shaped", emoji: '⚙️', body: 'In the Industrial Revolution, Adam Smith documented the leap from unspecialized labor to hyper-specialized <strong>I-shaped workers</strong> (one deep skill, via the division of labor) — that\'s a straight vertical line, no breadth. In the Tech & Digital Age, workers evolved to become <strong>T-shaped</strong>: one deep skill plus a broad horizontal bar of adjacent competence (code, design, business). Neither shape is enough now. The AI era rewards <strong>X-shaped workers</strong> — multiple deep verticals crossing at once, with the intersections themselves the source of value. It\'s not breadth for its own sake; it\'s the <em>creative recombination</em> at the crossing point — where two or more mastered domains collide — that AI can\'t originate on its own.', body2: "Being multi-skilled stops being a resume line and becomes the job itself: the AI-era premium isn't on knowing more things, it's on being the one who can creatively fuse them into something neither domain would produce alone.", linkHref: 'script.html#section2', linkLabel: '→ Script: Section 2 — Infinite Permutations & Skill Evolution', desc: 'From I-shaped (one deep skill) to T-shaped (one deep skill + broad competence) to X-shaped — multiple deep verticals crossing, where creative multi-skilling itself becomes the differentiator.' },
     { n: 8, key: 'arg-8', title: 'The Asimovian Horizon: Short-Term J-Curve Contraction Before Exponential Expansion', emoji: '🌌', body: 'When viewed from inches away during the immediate cycle, technological dislocation creates short-term friction: legacy jobs and functions contract because we cannot yet perceive the emergent industries of tomorrow. Like Isaac Asimov\'s positronic / epochal shifts, the realm of the <em>unknown</em> is vastly larger than the <em>known</em>. What feels like a contraction is the dip of a classic economic <strong>J-curve</strong> — a temporary phase transition before unconstrained new frontiers expand the global market exponentially.', body2: 'To be honest about the dip itself: right now there <em>is</em> a real shrink in some categories of work, and real downward pressure on wages and contract rates in the roles AI reaches first. No one can say precisely how long that dip lasts. This is exactly the position the people running the horse-drawn carriages were in when the automobile arrived — the trade they knew was disappearing under them before it was clear what to retrain into. That transition was painful for them too, and pretending this one won\'t be painful for people living through it now would undercut the argument rather than strengthen it. The claim here isn\'t that the dip doesn\'t hurt — it\'s that the dip is not the destination.', linkHref: 'script.html#section1', linkLabel: '→ Script: Section 1 — Productivity Fallacy & Macro Cycles', desc: 'What feels like a contraction is the dip of a classic economic J-curve — a temporary phase transition before new frontiers expand the global market exponentially.' }
   ].map((d) => ({ id: 'argument-' + d.n, page: 'arguments.html', section: 'arguments', position: d.n - 1, type: 'argument-card', data: { cardId: 'card-' + d.key, num: 'Argument ' + d.n, title: d.emoji + ' ' + d.title, body: d.body, body2: d.body2 || '', linkHref: d.linkHref, linkLabel: d.linkLabel, desc: d.desc, fullTitle: 'Argument ' + d.n + ' — ' + d.title } })),
   {
@@ -166,20 +186,20 @@ const argumentsBlocks = [
 // ---------------------------------------------------------------------
 const scriptBlocks = [
   {
-    sectionId: 'hook', title: '🪝 Hook', tc: '0:00 – 0:30', warm: false,
-    visualDesc: 'Fast-cut montage of headlines featuring Elon Musk predicting AI and humanoid robots replacing human labor, transitioning to a warm, personal shot of the creator in a home studio or living room.',
+    sectionId: 'hook', title: '🪝 Hook (Sharp 30s Open)', tc: '0:00 – 0:30', warm: false,
+    visualDesc: 'Sharp 30-second hook: Fast-cut montage of headlines featuring Elon Musk predicting AI and humanoid robots replacing human labor, transitioning crisply at 0:25 to a personal, grounded shot of the creator in a home studio establishing skin in the game with his two daughters.',
     vo: [
       'Elon Musk recently made a massive prediction: over the next five years, as AI and humanoid robotics scale, total global productivity will soar, but human labor as we know it will become largely optional — or flat-out obsolete.',
       "He sees a world run by machines. But I'm here to argue the exact opposite: <strong>humans are going to have more jobs, not fewer.</strong>",
-      "And look, this isn't just fluffy, wishful thinking. I have skin in the game — I have two daughters growing up in this exact world. When I look at where technology is heading, I don't see a job apocalypse. I see an explosion of brand-new possibilities.",
+      "And look, this isn't just wishful thinking. I have skin in the game — I have two daughters growing up in this exact world. When I look at where technology is heading, I don't see a job apocalypse. I see an explosion of brand-new possibilities.",
       'Here is why the future is bright, and why my kids — and yours — are going to thrive.'
     ],
-    addTitle: 'Hook (0:00–0:30)',
-    addDesc: 'Fast-cut montage of headlines featuring Elon Musk predicting AI and humanoid robots replacing human labor, transitioning to a warm, personal shot of the creator in a home studio or living room.'
+    addTitle: 'Hook (Sharp 30s Open, 0:00–0:30)',
+    addDesc: 'Sharp 30s opening hook: Fast-cut Musk headline montage transitioning into personal home studio.'
   },
   {
     sectionId: 'section1', title: '🪨 Section 1 — The Productivity Fallacy &amp; Historical Proof', tc: '0:30 – 1:45', warm: false,
-    visualDesc: 'B-roll / on-screen animations showing historical shifts: Stone Age tools, early agricultural farming, mechanical calculators, and 1980s personal computers.',
+    visualDesc: 'Smooth transition from personal hook at 0:30 into historical proof: B-roll and animations of Stone Age tools, early agriculture, calculators, and personal computers demonstrating how automation consistently multiplied net employment by 1:45.',
     vo: [
       "Let's give credit where it's due: Elon is right about productivity rising. When you combine human capability with robotics and artificial intelligence, total economic output goes through the roof. Where he gets it wrong is what happens to us afterward.",
       'Every single time humanity undergoes a massive technological leap, doom-sayers predict the end of work.',
@@ -188,20 +208,20 @@ const scriptBlocks = [
       'When calculators were invented, people thought mathematicians and accountants would disappear. Instead, financial modeling blew up. The cost of doing math dropped to zero, which allowed us to build hyper-complex global financial systems, modern architecture, and space programs.',
       "<strong>Tools don't destroy human intent; they multiply the permutations of what humans can create.</strong>"
     ],
-    addTitle: 'Section 1 — Productivity Fallacy & Historical Proof (0:30–1:45)',
-    addDesc: 'B-roll / on-screen animations showing historical shifts: Stone Age tools, early agricultural farming, mechanical calculators, and 1980s personal computers.'
+    addTitle: 'Section 1 — Historical Proof & Smooth Transition (0:30–1:45)',
+    addDesc: 'Smooth transition from hook into historical proof of net job growth across prior automation waves.'
   },
   {
     sectionId: 'section2', title: '🌳 Section 2 — The Infinite Permutation Principle', tc: '1:45 – 2:45', warm: true,
-    visualDesc: 'Graphics displaying a tree diagram expanding infinitely into new, specialized job roles (e.g., Prompt Engineer, Robot Fleet Manager, Bio-data Analyst, Custom Experience Designer).',
+    visualDesc: 'Graphics displaying a tree diagram expanding infinitely into emerging multi-disciplinary job roles (e.g., Multi-X Synthesizer, Prompt & Systems Architect, Robot Fleet Manager, Bio-data Modeler, Synthetic Media Director).',
     vo: [
       "Here's the mechanism people miss: technology lowers the cost of basic tasks, which creates brand-new industries that couldn't exist before.",
       'Before the internet, nobody\'s job title was "App Developer," "Cloud Architect," or "YouTube Creator."',
-      'When robotics handle repetitive physical labor and AI handles raw baseline calculations, humans are freed up to move into vastly more complex, creative, and highly specialized roles.',
+      'When robotics handle repetitive physical labor and AI handles raw baseline calculations, humans are freed up to move into vastly more complex, creative, and highly specialized multi-disciplinary roles.',
       "Instead of a fixed pie of jobs that gets taken away, automation creates an infinite number of new permutations. We won't just be doing the old jobs faster; we'll be solving entirely new categories of problems."
     ],
     addTitle: 'Section 2 — The Infinite Permutation Principle (1:45–2:45)',
-    addDesc: 'Graphics displaying a tree diagram expanding infinitely into new, specialized job roles (e.g., Prompt Engineer, Robot Fleet Manager, Bio-data Analyst, Custom Experience Designer).'
+    addDesc: 'Graphics displaying a tree diagram expanding infinitely into emerging multi-disciplinary job roles.'
   },
   {
     sectionId: 'section3', title: '🧮 Section 3 — Education Democratization, Math &amp; Human Insight', tc: '2:45 – 3:45', warm: true,
@@ -240,15 +260,31 @@ const scriptBlocks = [
 // ---------------------------------------------------------------------
 const designBlocks = [
   ...[
-    { key: 'act1', cls: 'act1', eyebrow: 'Act 1 · Setup', title: '❄️ The Apocalypse Claim', tc: '0:00 – 1:45', items: ['🪝 Hook — Musk/Optimus headline montage → personal cut to camera', '🪨 Section 1 — The Productivity Fallacy &amp; historical proof'], linkHref: 'script.html#hook', linkLabel: '→ Script: Hook' },
-    { key: 'act2', cls: 'act2', eyebrow: 'Act 2 · Confrontation', title: '🌳 The Counter-Argument', tc: '1:45 – 3:45', items: ['🌳 Section 2 — The Infinite Permutation Principle', '🧮 Section 3 — Math &amp; human insight matter more, not less'], linkHref: 'script.html#section2', linkLabel: '→ Script: Section 2' },
-    { key: 'act3', cls: 'act3', eyebrow: 'Act 3 · Resolution', title: '🔥 The Human Takeaway', tc: '3:45 – 4:30', items: ['🎬 Conclusion &amp; Outro — host direct to camera, optimistic close', 'CTA cards, warm/cinematic tone throughout'], linkHref: 'script.html#outro', linkLabel: '→ Script: Outro' }
+    { key: 'act1', cls: 'act1', eyebrow: 'Act 1 · Setup (Cold Slate Blue)', title: '❄️ The Apocalypse Claim', tc: '0:00 – 1:45', items: ['🪝 Hook — Sharp 30s Musk/Optimus headline montage → personal cut to camera', '🪨 Section 1 — Smooth transition to historical proof of net job growth (0:30–1:45)'], linkHref: 'script.html#hook', linkLabel: '→ Script: Hook' },
+    { key: 'act2', cls: 'act2', eyebrow: 'Act 2 · Confrontation (Transition to Warm Gold)', title: '🌳 The Counter-Argument & Multi-Disciplinary Jobs', tc: '1:45 – 3:45', items: ['🌳 Section 2 — The Infinite Permutation Principle & Multi-X Synthesizers', '🧮 Section 3 — Education democratization & human insight multiplication'], linkHref: 'script.html#section2', linkLabel: '→ Script: Section 2' },
+    { key: 'act3', cls: 'act3', eyebrow: 'Act 3 · Resolution (Warm Gold)', title: '🔥 The Human Takeaway & Agency', tc: '3:45 – 4:30', items: ['🎬 Conclusion &amp; Outro — host direct to camera, optimistic close', 'CTA cards, warm gold tone throughout'], linkHref: 'script.html#outro', linkLabel: '→ Script: Outro' }
   ].map((d, i) => ({ id: 'design-act-' + d.key, page: 'design.html', section: 'three-act-structure', position: i, type: 'act-card', data: d })),
   {
     id: 'design-editing-rule', page: 'design.html', section: 'editing-rule', position: 0, type: 'editing-rule-pair',
     data: {
-      cold: { title: '❄️ Cold &amp; Fast — Musk / Apocalypse beats', items: ['Desaturated blues, high contrast, harder cuts', 'News headline overlays, screen-recording textures', 'Faster cut rate (roughly 1–2s per shot)', 'Used for: hook headlines, Musk/Optimus clips, "job apocalypse" claims'] },
-      warm: { title: '🔥 Warm &amp; Cinematic — Family / Human potential beats', items: ['Golden-hour tones, soft contrast, steady pacing', 'Handheld-but-composed home footage, natural light', 'Slower cut rate (3–5s+ per shot), lets moments breathe', 'Used for: daughters, history/human-achievement, outro CTA'] }
+      cold: {
+        title: '❄️ Cold Slate Blue &amp; Fast — Panic / Apocalypse Thesis',
+        items: [
+          'Cold slate blue palette (#5ab0ff / #2a3b5c), desaturated tones, high contrast',
+          'News headline overlays, doom chyrons, screen-recording textures',
+          'Faster cut rate (roughly 1–2s per shot) evoking the panic and apocalypse thesis',
+          'Used for: hook headlines, Musk/Optimus clips, "job apocalypse" doom claims'
+        ]
+      },
+      warm: {
+        title: '🔥 Warm Gold &amp; Cinematic — Human Agency &amp; Multiplication',
+        items: [
+          'Warm gold palette (#e8b94a / #d49520), rich amber undertones, soft cinematic contrast',
+          'Handheld-but-composed home footage, natural light, human agency',
+          'Slower cut rate (3–5s+ per shot), letting human insight, education, and family moments breathe',
+          'Used for: daughters, education democratization, history/human-achievement, outro CTA'
+        ]
+      }
     }
   },
   {
@@ -259,10 +295,10 @@ const designBlocks = [
     }
   },
   ...[
-    { key: 'stoneage', graphic: '🪨 Stone Age → Agriculture arrow', style: 'Flat icon morph, cold-to-warm gradient wipe', section: 'Section 1', addTitle: 'Stone Age → Agriculture arrow', addDesc: 'Flat icon morph, cold-to-warm gradient wipe. Section 1.' },
-    { key: 'mainframe', graphic: '🖥️ Mainframe → PC dissolve', style: 'Cross-dissolve, CRT scanline texture on outgoing frame', section: 'Section 1', addTitle: 'Mainframe → PC dissolve', addDesc: 'Cross-dissolve, CRT scanline texture on outgoing frame. Section 1.' },
-    { key: 'jobtree', graphic: '🌳 "Job Tree" branching diagram', style: 'Gold line-art, grows outward on VO beat, serif job-title labels', section: 'Section 2', addTitle: '"Job Tree" branching diagram', addDesc: 'Gold line-art, grows outward on VO beat, serif job-title labels. Section 2.' },
-    { key: 'cta', graphic: '🎓 Skool Community &amp; End-screen CTA', style: 'Skool community logo, certification badges pop-in, brand gold accent', section: 'Outro', addTitle: 'Skool Community & End-screen CTA', addDesc: 'Skool community logo, certification badges pop-in, brand gold accent. Outro.' }
+    { key: 'stoneage', graphic: '🪨 Stone Age → Agriculture arrow', style: 'Flat icon morph, cold slate blue to warm gold gradient wipe', section: 'Section 1', addTitle: 'Stone Age → Agriculture arrow', addDesc: 'Flat icon morph, cold slate blue to warm gold gradient wipe. Section 1.' },
+    { key: 'mainframe', graphic: '🖥️ Mainframe → PC dissolve', style: 'Cross-dissolve, CRT scanlines in cold slate blue transitioning to warm gold desktop', section: 'Section 1', addTitle: 'Mainframe → PC dissolve', addDesc: 'Cross-dissolve, CRT scanline texture on outgoing frame. Section 1.' },
+    { key: 'jobtree', graphic: '🌳 "Job Tree" Multi-Disciplinary Expansion', style: 'Gold line-art tree, grows outward on VO beat, serif & modern labels emphasizing emerging multi-disciplinary job titles (Multi-X Synthesizers, AI-Ops Orchestrators)', section: 'Section 2', addTitle: '"Job Tree" Multi-Disciplinary Expansion', addDesc: 'Gold line-art tree growing outward to emphasize emerging multi-disciplinary job titles. Section 2.' },
+    { key: 'cta', graphic: '🎓 Skool Community &amp; End-screen CTA', style: 'Skool community logo, certification badges pop-in, warm gold brand accent', section: 'Outro', addTitle: 'Skool Community & End-screen CTA', addDesc: 'Skool community logo, certification badges pop-in, warm gold brand accent. Outro.' }
   ].map((d, i) => ({ id: 'spec-' + d.key, page: 'design.html', section: 'motion-specs', position: i, type: 'spec-row', data: d })),
   {
     id: 'design-pacing', page: 'design.html', section: 'pacing', position: 0, type: 'pacing-bar',
@@ -282,11 +318,11 @@ const previsualisationBlocks = [
     }
   },
   ...[
-    { n: 1, mood: 'cold', tc: '0:00', tag: 'Montage · Screen Overlay', section: 'Hook', title: 'Headline montage', desc: 'Fast-cut news headlines: "The Future of AI and Jobs," humanoid robot tech coverage, lower-third overlays.', vo: '"Elon Musk recently made a massive prediction…"', prompt: 'Fast-paced collage of news broadcast headlines about AI and robotics; lower-third chyron graphic reading "The Future of AI and Jobs"; humanoid robot on a TV studio screen; cool blue newsroom lighting; 16:9 cinematic broadcast look, high contrast, slight motion blur.', layman: "Shows the scary headlines everyone's already half-seen about robots taking jobs — we open where the audience's worry already is, instead of pretending it doesn't exist." },
-    { n: 2, mood: 'warm', tc: '0:10', tag: 'Talking Head', section: 'Hook', title: 'Host, home studio', desc: 'Warm, personal shot — creator direct to camera in a living-room studio. Establishes authentic personal stake.', vo: '"I have skin in the game — I have two daughters…"', prompt: 'Warm, intimate talking-head shot of a person speaking directly to camera in a cozy living-room podcast studio; soft key light; bookshelf and plants softly out of focus in the background; shallow depth of field; 16:9; warm golden color grade.', layman: "The host talks like a real parent, not a lecturer — so people trust this is a personal take, not a corporate pitch about AI." },
-    { n: 3, mood: 'cold', tc: '0:30', tag: 'Graphic · Transition', section: 'Section 1', title: 'Stone Age → Agriculture', desc: 'Animated arrow transition: hand tool morphs into an early plow. Sets up historical technology-shift pattern.', vo: '"Every single time humanity undergoes a leap, doom-sayers predict the end of work."', prompt: 'Split-frame animated transition: a rough stone hand-axe resting on dark rock on the left, morphing into an early wooden plow tilling golden soil on the right; dusty warm sunlight; illustrative motion-graphic style; 16:9.', layman: "A caveman's rock tool turns into a farmer's plow — a simple picture for \"new tools have always changed jobs before, and it turned out fine.\"" },
-    { n: 4, mood: 'cold', tc: '1:05', tag: 'Graphic · Transition', section: 'Section 1', title: 'Mainframe → PC', desc: 'Vintage beige computer dissolves into a modern desktop with code on screen. Calculator/computer-era proof point.', vo: '"The cost of doing math dropped to zero…"', prompt: 'Side-by-side dissolve transition: a room-sized 1960s beige mainframe computer with blinking lights on the left, morphing into a sleek modern desktop monitor with glowing code on the right; cool blue-teal lighting; tech-documentary style; 16:9.', layman: 'A giant old computer turns into a modern laptop — shows that even huge tech leaps like calculators didn\'t erase jobs, they just changed what people did.' },
-    { n: 5, mood: 'warm', tc: '1:45', tag: 'Motion Graphic', section: 'Section 2', title: '"Job Tree" branching diagram', desc: 'Gold tree graphic expanding into new job-title branches: Prompt Engineer, Robot Fleet Manager, AI Safety Auditor.', vo: '"Automation creates an infinite number of new permutations."', prompt: 'Motion graphic of a glowing golden tree growing from a single trunk into branching leaves, each leaf labeled with a new job title such as Prompt Engineer, Robot Fleet Manager, AI Safety Auditor; dark navy background; bright gold accent lines; flat vector illustration style; 16:9.', layman: 'A tree growing new branches, each one a job that didn\'t exist before — a picture for "technology grows more jobs than it removes," with zero economics jargon.' },
+    { n: 1, mood: 'cold', tc: '0:00', tag: 'Montage · Screen Overlay', section: 'Hook', title: 'Headline montage (Sharp 30s Hook)', desc: 'Fast-cut news headlines: "The Future of AI and Jobs," humanoid robot tech coverage, lower-third overlays.', vo: '"Elon Musk recently made a massive prediction…"', prompt: 'Fast-paced collage of news broadcast headlines about AI and robotics; lower-third chyron graphic reading "The Future of AI and Jobs"; humanoid robot on a TV studio screen; cool blue newsroom lighting; 16:9 cinematic broadcast look, high contrast, slight motion blur.', layman: "Shows the scary headlines everyone's already half-seen about robots taking jobs — we open where the audience's worry already is, instead of pretending it doesn't exist." },
+    { n: 2, mood: 'warm', tc: '0:10', tag: 'Talking Head', section: 'Hook', title: 'Host, home studio', desc: 'Warm, personal shot — creator direct to camera in a living-room studio. Establishes authentic personal stake with daughters by 0:30.', vo: '"I have skin in the game — I have two daughters…"', prompt: 'Warm, intimate talking-head shot of a person speaking directly to camera in a cozy living-room podcast studio; soft key light; bookshelf and plants softly out of focus in the background; shallow depth of field; 16:9; warm golden color grade.', layman: "The host talks like a real parent, not a lecturer — so people trust this is a personal take, not a corporate pitch about AI." },
+    { n: 3, mood: 'cold', tc: '0:30', tag: 'Graphic · Transition', section: 'Section 1', title: 'Stone Age → Agriculture', desc: 'Smooth transition from personal hook: animated arrow where hand tool morphs into early plow, proving prior automation waves multiplied work by 1:45.', vo: '"Every single time humanity undergoes a leap, doom-sayers predict the end of work."', prompt: 'Split-frame animated transition: a rough stone hand-axe resting on dark rock on the left, morphing into an early wooden plow tilling golden soil on the right; dusty warm sunlight; illustrative motion-graphic style; 16:9.', layman: "A caveman's rock tool turns into a farmer's plow — a simple picture for \"new tools have always changed jobs before, and it turned out fine.\"" },
+    { n: 4, mood: 'cold', tc: '1:05', tag: 'Graphic · Transition', section: 'Section 1', title: 'Mainframe → PC', desc: 'Vintage beige computer dissolves into modern desktop. Calculators and PCs proof point: tool multiplication creates more net employment.', vo: '"The cost of doing math dropped to zero…"', prompt: 'Side-by-side dissolve transition: a room-sized 1960s beige mainframe computer with blinking lights on the left, morphing into a sleek modern desktop monitor with glowing code on the right; cool blue-teal lighting; tech-documentary style; 16:9.', layman: 'A giant old computer turns into a modern laptop — shows that even huge tech leaps like calculators didn\'t erase jobs, they just changed what people did.' },
+    { n: 5, mood: 'warm', tc: '1:45', tag: 'Motion Graphic', section: 'Section 2', title: '"Job Tree" Multi-Disciplinary Expansion', desc: 'Glowing gold tree graphic expanding into emerging multi-disciplinary job titles: Multi-X Synthesizer, AI-Ops Architect, Prompt & Systems Orchestrator, Bio-Data Modeler, Synthetic Media Director, Human-AI Workflow Specialist.', vo: '"Automation creates an infinite number of new permutations — unlocking emerging multi-disciplinary roles that blend technical mastery with human creativity."', prompt: 'Motion graphic of a glowing golden tree branching outward from a single trunk into multifaceted nodes, each node clearly labeled with emerging multi-disciplinary job titles: "Multi-X Synthesizer", "AI-Ops Architect", "Prompt & Systems Orchestrator", "Bio-Data Modeler", "Synthetic Media Director"; dark slate blue background; glowing gold accent lines; high-resolution vector motion design; 16:9.', layman: 'A glowing tree sprouting new multi-disciplinary branches — shows how technology creates hybrid jobs that combine skills (like art + coding + robotics) instead of just deleting jobs.' },
     { n: 6, mood: 'warm', tc: '2:15', tag: 'B-Roll · Close-up', section: 'Section 2 → 3', title: 'Daughter with holo-tablet', desc: 'Girl in a yellow sweater interacts with a glowing, translucent tablet interface at home — bridges tech to family.', vo: '"Which brings me back to my daughters."', prompt: 'Close-up B-roll of a young girl in a yellow sweater at home, interacting with a glowing translucent holographic tablet interface; soft warm household lighting; shallow depth of field; cinematic family-documentary look; 16:9.', layman: 'A kid using a futuristic tablet at home — makes "AI can help kids learn" feel real and close instead of an abstract debate.' },
     { n: 7, mood: 'warm', tc: '2:45', tag: 'B-Roll · Two-shot', section: 'Section 3', title: 'Host + daughter, holo-device', desc: 'Father kneels beside daughter as she explores the holographic tablet together — human-tech partnership, not replacement.', vo: '"My daughters are going to use math more than any generation before them."', prompt: 'Two-shot of a father kneeling beside his young daughter, both looking at a glowing holographic tablet between them; warm golden-hour light through a window; tender human-tech partnership mood; cinematic; 16:9.', layman: 'Dad and daughter looking at the same screen together — shorthand for "people and AI working side by side," not people being replaced.' },
     { n: 8, mood: 'warm', tc: '3:15', tag: 'Split Screen · B-Roll', section: 'Section 3', title: 'Collaboration split-frame', desc: 'Left: colleagues high-fiving in an office. Right: mentor and teen reviewing notes together — human judgment amplified by tools.', vo: '"Human judgment, empathy, and creative direction… human potential explodes."', prompt: 'Split-screen composition: left side two colleagues high-fiving in a bright modern office, right side a mentor and teenager reviewing notes together at a table; warm optimistic lighting on both sides; documentary style; 16:9.', layman: 'Two everyday scenes side by side — coworkers celebrating, a mentor helping a teen — to say "people helping people" is still what wins, tools or not.' },

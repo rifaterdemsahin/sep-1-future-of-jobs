@@ -87,6 +87,61 @@
   .premise-card p{margin:0;font-size:16px;}
   .premise-card strong{color:var(--accent);}
 
+  /* Audience Transformation Card */
+  .audience-transformation-card{
+    background:linear-gradient(145deg, rgba(90,176,255,.07), rgba(232,185,74,.07));
+    border:1px solid var(--panel-border);
+    border-radius:12px;
+    padding:22px 24px;
+  }
+  .transform-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    margin:14px 0 16px;
+  }
+  @media (max-width:700px){.transform-grid{grid-template-columns:1fr;}}
+  .transform-col{
+    border-radius:10px;
+    padding:16px 18px;
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+  }
+  .transform-col.cold{
+    border-top:3px solid var(--cold);
+    background:linear-gradient(160deg, rgba(90,176,255,.06), var(--panel));
+  }
+  .transform-col.warm{
+    border-top:3px solid var(--warm);
+    background:linear-gradient(160deg, rgba(232,185,74,.06), var(--panel));
+  }
+  .transform-col h4{
+    margin:0 0 10px;
+    font-size:14px;
+    font-weight:700;
+  }
+  .transform-col.cold h4{color:var(--accent-2);}
+  .transform-col.warm h4{color:var(--accent);}
+  .transform-col ul{
+    margin:0;
+    padding-left:18px;
+    font-size:13.5px;
+    color:var(--text-dim);
+  }
+  .transform-col li{margin-bottom:6px;}
+  .transform-col li:last-child{margin-bottom:0;}
+  .transform-summary{
+    margin:0;
+    padding:12px 14px;
+    background:rgba(232,185,74,.08);
+    border:1px solid rgba(232,185,74,.25);
+    border-radius:8px;
+    font-size:13.5px;
+    color:var(--text);
+    line-height:1.5;
+  }
+  .transform-summary strong{color:var(--accent);}
+
   .arg-list{display:flex;flex-direction:column;gap:14px;}
   .arg-card{
     background:var(--panel);
@@ -640,8 +695,9 @@
   </section>
 
   <section class="block">
-    <h2>🌱 Premise</h2>
+    <h2>🌱 Premise &amp; Audience Takeaway</h2>
     <div id="premise-mount"></div>
+    <div id="audience-transformation-mount" style="margin-top:16px;"></div>
   </section>
 
   <section class="block">
@@ -724,6 +780,34 @@
             '</div>' +
           '</div>' +
           '<p>' + dp.body + '</p>' +
+        '</div>';
+    }
+
+    var at = ContentDB.getBlocks('arguments.html', 'audience-transformation')[0];
+    if(at){
+      var da = at.data;
+      document.getElementById('audience-transformation-mount').innerHTML =
+        '<div class="audience-transformation-card" id="card-audience-transformation">' +
+          '<div class="card-top">' +
+            '<span style="font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--accent);text-transform:uppercase;">' + da.tag + '</span>' +
+            '<div class="card-btn-group">' +
+              '<button class="listen-btn" onclick="togglePlayCard(\'card-audience-transformation\', \'Audience Transformation\', this)">🔊 Listen</button>' +
+              '<button class="copy-btn" onclick="copyCardText(\'card-audience-transformation\', \'Audience Transformation\', this)">📋 Copy</button>' +
+              '<button class="add-asset-btn" data-id="' + at.id + '" data-type="argument" data-source="Arguments" data-title="' + esc(da.title) + '" data-desc="' + esc(da.desc) + '" data-url="arguments.html#card-audience-transformation">➕ Add to Assets</button>' +
+            '</div>' +
+          '</div>' +
+          '<h3 style="margin:0 0 14px;font-size:16px;color:var(--text);">' + da.title + '</h3>' +
+          '<div class="transform-grid">' +
+            '<div class="transform-col cold">' +
+              '<h4>' + da.beforeTitle + '</h4>' +
+              '<ul>' + da.beforeItems.map(function(li){ return '<li>' + li + '</li>'; }).join('') + '</ul>' +
+            '</div>' +
+            '<div class="transform-col warm">' +
+              '<h4>' + da.afterTitle + '</h4>' +
+              '<ul>' + da.afterItems.map(function(li){ return '<li>' + li + '</li>'; }).join('') + '</ul>' +
+            '</div>' +
+          '</div>' +
+          '<p class="transform-summary">' + da.summary + '</p>' +
         '</div>';
     }
 
@@ -925,6 +1009,24 @@
     }
     md.push('');
 
+    // Audience Transformation
+    var at = document.querySelector('.audience-transformation-card');
+    if(at){
+      md.push('## 💡 Audience Transformation');
+      var atClone = at.cloneNode(true);
+      atClone.querySelectorAll('.copy-btn, .listen-btn').forEach(function(el){ el.remove(); });
+      var h3 = atClone.querySelector('h3') ? atClone.querySelector('h3').textContent.trim() : '';
+      if(h3) md.push(h3);
+      atClone.querySelectorAll('.transform-col').forEach(function(col){
+        var h4 = col.querySelector('h4') ? col.querySelector('h4').textContent.trim() : '';
+        if(h4) md.push('\n**' + h4 + '**');
+        col.querySelectorAll('li').forEach(function(li){ md.push('- ' + li.textContent.trim()); });
+      });
+      var summary = atClone.querySelector('.transform-summary') ? atClone.querySelector('.transform-summary').textContent.trim() : '';
+      if(summary) md.push('\n' + summary);
+      md.push('');
+    }
+
     // Arguments
     md.push('## 🧩 Supporting Arguments');
     document.querySelectorAll('.arg-card').forEach(function(ac, idx){
@@ -964,7 +1066,8 @@
   function copyThesis(btn){
     var text = '🎯 CORE MESSAGE & PREMISE\n\n' +
       '✨ Vision & Purpose:\nWhile rapid AI advancement elevates skill expectations across every discipline, it simultaneously unlocks AI-empowered self-learning. With this unprecedented multiplier, humanity is not heading toward a job apocalypse — we are gaining the collective power to solve grand challenges, construct civilizational megastructures, and eradicate global poverty.\n🚀 The future is not a shortage of work — the future is profoundly bright.\n\n' +
-      '🌱 Core Premise:\nAI doesn\'t shrink the total amount of human work — it relocates and multiplies it. Applied together, knowledge and AI open entirely new sectors that don\'t exist yet, rather than simply automating away the sectors that do.';
+      '🔒 Key Premise Locked:\nAI relocates and multiplies work, rather than shrinking the total pool. Applied together, human intent, domain knowledge, and AI tooling open entirely new sectors and problem domains that could never exist before, rather than simply automating away the finite tasks of the past.\n\n' +
+      '💡 Audience Takeaway (Before vs. After):\n- Before: Panic & fixed-pie dread of robots taking all human jobs.\n- After: Verified proof that automation waves expand net employment, focus on education democratization & tool multiplication as Multi-X Synthesizers.';
     copyText(text, btn, 'Core Thesis copied!');
   }
 

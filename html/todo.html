@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+  if(location.hostname.endsWith('github.io')){
+    location.replace('https://sep-1-future-of-jobs.polished-boat-17b2.workers.dev' + location.pathname + location.search + location.hash);
+  }
+</script>
+<title>✅ Production Plan — Why Elon Musk is Wrong About the Job Apocalypse</title>
+<link rel="stylesheet" href="../css/shared.css">
+<style>
+  header{
+    padding:48px 24px 24px;
+    max-width:1100px;
+    margin:0 auto;
+    text-align:center;
+  }
+  header .eyebrow{
+    color:var(--accent);
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-size:12px;
+    font-weight:600;
+  }
+  header h1{
+    font-size:clamp(24px,4vw,38px);
+    margin:10px 0 12px;
+    font-weight:700;
+  }
+  header p.sub{
+    color:var(--text-dim);
+    max-width:680px;
+    margin:0 auto;
+    font-size:15px;
+  }
+
+  .status-summary{
+    max-width:1100px;
+    margin:0 auto 28px;
+    padding:0 24px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .status-pill{
+    font-size:12px;
+    font-weight:700;
+    padding:6px 14px;
+    border-radius:999px;
+    border:1px solid var(--panel-border);
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .status-pill b{ font-variant-numeric:tabular-nums; }
+  .status-pill.done{ color:#7be08a; border-color:#2b5a35; background:rgba(123,224,138,.08); }
+  .status-pill.progress{ color:var(--accent); border-color:#5a4a20; background:rgba(232,185,74,.08); }
+  .status-pill.todo{ color:var(--text-dim); border-color:var(--panel-border); background:rgba(255,255,255,.03); }
+
+  main{
+    max-width:100%;
+    padding:0 24px 90px;
+  }
+
+  .board{
+    display:flex;
+    gap:16px;
+    overflow-x:auto;
+    padding:4px 4px 20px;
+    max-width:1500px;
+    margin:0 auto;
+  }
+  .column{
+    flex:0 0 300px;
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    border-radius:14px;
+    display:flex;
+    flex-direction:column;
+    max-height:calc(100vh - 260px);
+  }
+  .column-head{
+    padding:14px 16px 10px;
+    border-bottom:1px solid var(--panel-border);
+    position:sticky;
+    top:0;
+    background:var(--panel);
+    border-radius:14px 14px 0 0;
+  }
+  .column-head .stage-emoji{ font-size:20px; }
+  .column-head h2{
+    font-size:14px;
+    margin:6px 0 4px;
+    font-weight:700;
+  }
+  .column-head .stage-status{
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    font-weight:700;
+  }
+  .column-head .stage-status.done{ color:#7be08a; }
+  .column-head .stage-status.progress{ color:var(--accent); }
+  .column-head .stage-status.todo{ color:var(--text-dim); }
+  .column-head .stage-count{
+    color:var(--text-dim);
+    font-size:11px;
+    margin-left:6px;
+  }
+  .column-body{
+    padding:12px;
+    overflow-y:auto;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+
+  .card{
+    background:var(--bg);
+    border:1px solid var(--panel-border);
+    border-left-width:4px;
+    border-radius:10px;
+    padding:10px 12px;
+    font-size:13px;
+  }
+  .card.done{ border-left-color:#7be08a; }
+  .card.progress{ border-left-color:var(--accent); }
+  .card.todo{ border-left-color:var(--panel-border); }
+  .card .card-top{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:8px;
+  }
+  .card .card-title{
+    font-weight:600;
+    line-height:1.35;
+  }
+  .card.done .card-title{ color:var(--text); }
+  .card.todo .card-title{ color:var(--text-dim); }
+  .card .badge{
+    flex:0 0 auto;
+    font-size:10px;
+    font-weight:700;
+    padding:2px 7px;
+    border-radius:999px;
+    white-space:nowrap;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+  }
+  .card.done .badge{ background:rgba(123,224,138,.12); color:#7be08a; }
+  .card.progress .badge{ background:rgba(232,185,74,.12); color:var(--accent); }
+  .card.todo .badge{ background:rgba(255,255,255,.05); color:var(--text-dim); }
+  .card .card-note{
+    color:var(--text-dim);
+    font-size:12px;
+    margin-top:5px;
+    line-height:1.45;
+  }
+
+  footer{
+    text-align:center;
+    color:var(--text-dim);
+    font-size:12.5px;
+    padding:20px 24px 60px;
+  }
+  footer a{ color:var(--accent-2); }
+</style>
+</head>
+<body>
+
+<div id="nav-mount"></div>
+<script src="../js/nav.js"></script>
+<script>Nav.render('todo');</script>
+
+<header>
+  <div class="eyebrow">✅ Production Plan · Kanban</div>
+  <h1>Production Plan</h1>
+  <p class="sub">Every stage of the "Job Apocalypse · Debunked" pipeline — from Research through Publish — with every task and its status, so it's obvious what's done, what's in progress, and what's still ahead.</p>
+</header>
+
+<div class="status-summary" id="status-summary"></div>
+
+<main>
+  <div class="board" id="board"></div>
+</main>
+
+<footer>
+  ✅ Production plan for <a href="https://github.com/rifaterdemsahin/sep-1-future-of-jobs" target="_blank" rel="noopener">rifaterdemsahin/sep-1-future-of-jobs</a> — data lives in this page's own <code>PRODUCTION_PLAN</code> script, not Supabase (it's a planning snapshot, not authored content). See <a href="index.html">Research</a> through <a href="previsualisation.html">Previsualisation</a> for the actual stage content.
+</footer>
+
+<script>
+// ---------------------------------------------------------------------
+// Production planning data structure.
+// Each stage = one Kanban column. Each stage has an overall `status`
+// (done / progress / todo) and a list of `tasks`, each with its own
+// status so partially-finished stages show exactly what's left.
+// ---------------------------------------------------------------------
+var PRODUCTION_PLAN = [
+  {
+    id: 'research', emoji: '🔍', name: 'Research', status: 'done',
+    tasks: [
+      { title: 'Collect source links (pro/con)', status: 'done' },
+      { title: 'Pro/con video comparison table', status: 'done' },
+      { title: 'Perspective comparison (Apocalypse vs. Permutation vs. Skeptic)', status: 'done' },
+      { title: 'Economist AI jobs-impact charts (hard-hat labour & STEM)', status: 'done' },
+      { title: 'Transcript pulled for key counter-source ("The REAL Reason…")', status: 'done' },
+      { title: 'Mark research-verified findings on premise-supporting sources', status: 'done', note: 'Latest pass tags cmp-real-reason and the Economist report as "Research Verified".' }
+    ]
+  },
+  {
+    id: 'arguments', emoji: '🧩', name: 'Arguments', status: 'progress',
+    tasks: [
+      { title: 'Core message', status: 'done' },
+      { title: 'Premise', status: 'done', note: 'Reworded to "Key Premise Locked" in the pending diff.' },
+      { title: 'Audience transformation (before/after)', status: 'done', note: 'New section added in the uncommitted diff — not yet pushed.' },
+      { title: '8 argument cards', status: 'done' },
+      { title: 'Argument 7 reframed: I-shaped → T-shaped → X-shaped skills', status: 'done', note: 'Sharpened to name the three skill shapes explicitly and center creative multi-skilling as the AI-era differentiator. Reseeded to Supabase.' },
+      { title: 'Conclusion', status: 'done' },
+      { title: 'Sanity-check cards', status: 'done' },
+      { title: 'Commit + push wording refresh', status: 'progress', note: 'html/arguments.html and seed-content.js currently modified but uncommitted.' }
+    ]
+  },
+  {
+    id: 'script', emoji: '📝', name: 'Script', status: 'progress',
+    tasks: [
+      { title: 'Hook (0:00–0:30)', status: 'done', note: 'VO tightened in the pending diff ("sharp 30s open").' },
+      { title: 'Section 1 — Productivity Fallacy & Historical Proof (0:30–1:45)', status: 'done' },
+      { title: 'Section 2 — Infinite Permutation Principle (1:45–2:45)', status: 'done' },
+      { title: 'Section 3 — Education Democratization, Math & Human Insight (2:45–3:45)', status: 'done' },
+      { title: 'Conclusion & Outro (3:45–4:30)', status: 'done' },
+      { title: 'Commit + push beat-timing refresh', status: 'progress', note: 'html/script.html and seed-content.js currently modified but uncommitted.' }
+    ]
+  },
+  {
+    id: 'design', emoji: '🎨', name: 'Design', status: 'done',
+    tasks: [
+      { title: 'Three-act structure', status: 'done' },
+      { title: 'Core editing rule (cold → warm contrast)', status: 'done' },
+      { title: 'Palette & theme tokens', status: 'done' },
+      { title: 'Typography samples', status: 'done' },
+      { title: 'Motion specs table', status: 'done' },
+      { title: 'Pacing bar across the timeline', status: 'done' }
+    ]
+  },
+  {
+    id: 'previsualisation', emoji: '🎞️', name: 'Previsualisation', status: 'done',
+    tasks: [
+      { title: 'Shot board: 9 panels boarded (Hook → Outro)', status: 'done' },
+      { title: 'Panel images generated for all 9 shots', status: 'done' },
+      { title: 'Image-gen prompts written per panel', status: 'done' },
+      { title: '"Plain English" explainer per panel', status: 'done' },
+      { title: 'VO line paired to each panel', status: 'done' }
+    ]
+  },
+  {
+    id: 'assets', emoji: '🗂️', name: 'Assets', status: 'progress',
+    tasks: [
+      { title: 'B-roll categories mapped to script sections', status: 'done' },
+      { title: 'YouTube search terms per category', status: 'done' },
+      { title: 'Save-to-assets + Azure Blob image upload', status: 'done' },
+      { title: 'Source/license actual footage for each saved item', status: 'todo' },
+      { title: 'Sort & finalize by expected time-code', status: 'progress' }
+    ]
+  },
+  {
+    id: 'voice', emoji: '🎙️', name: 'Voice Recording', status: 'todo',
+    tasks: [
+      { title: 'Record/generate VO for Hook beat', status: 'todo' },
+      { title: 'Record/generate VO for Section 1–3 beats', status: 'todo' },
+      { title: 'Record/generate VO for Outro + Skool CTA', status: 'todo' },
+      { title: 'Cache generated audio (ElevenLabs)', status: 'todo', note: 'Site already has audio-caching plumbing from commit 277b93b — needs real takes.' },
+      { title: 'Time VO against each shot\'s timecode', status: 'todo' }
+    ]
+  },
+  {
+    id: 'footage', emoji: '🎥', name: 'Footage & Graphics Sourcing', status: 'todo',
+    tasks: [
+      { title: 'Generate/commission motion graphics from previz prompts', status: 'todo' },
+      { title: 'Shoot or source talking-head footage (host + daughter shots)', status: 'todo' },
+      { title: 'Pull licensed news-headline montage clips', status: 'todo' },
+      { title: 'Verify usage rights on every sourced clip', status: 'todo' }
+    ]
+  },
+  {
+    id: 'edit', emoji: '✂️', name: 'Edit', status: 'todo',
+    tasks: [
+      { title: 'Assemble rough cut from the 9-panel shot board', status: 'todo' },
+      { title: 'Sync VO to visuals per beat', status: 'todo' },
+      { title: 'Color grade: cold slate-blue → warm gold arc', status: 'todo' },
+      { title: 'Sound design & music bed', status: 'todo' },
+      { title: 'Captions/subtitles', status: 'todo' }
+    ]
+  },
+  {
+    id: 'review', emoji: '✅', name: 'Review & QA', status: 'todo',
+    tasks: [
+      { title: 'Fact-check every on-screen claim against Research sources', status: 'todo' },
+      { title: 'Walk the 3 sanity-check items against the final cut', status: 'todo' },
+      { title: 'Full watch-through pass for pacing vs. the pacing bar', status: 'todo' },
+      { title: 'Accessibility pass (captions, contrast)', status: 'todo' }
+    ]
+  },
+  {
+    id: 'publish', emoji: '🚀', name: 'Publish', status: 'todo',
+    tasks: [
+      { title: 'Final render/export', status: 'todo' },
+      { title: 'Title, description, thumbnail', status: 'todo' },
+      { title: 'Upload to YouTube', status: 'todo' },
+      { title: 'Skool community CTA cross-link', status: 'todo' },
+      { title: 'Redeploy site (wrangler deploy) with any last content edits', status: 'todo' }
+    ]
+  }
+];
+
+(function(){
+  var STATUS_LABEL = { done: 'Done', progress: 'In Progress', todo: 'To Do' };
+
+  function countAll(){
+    var totals = { done: 0, progress: 0, todo: 0 };
+    PRODUCTION_PLAN.forEach(function(stage){
+      stage.tasks.forEach(function(t){ totals[t.status]++; });
+    });
+    return totals;
+  }
+
+  function renderSummary(){
+    var totals = countAll();
+    var mount = document.getElementById('status-summary');
+    mount.innerHTML = ['done', 'progress', 'todo'].map(function(s){
+      return '<div class="status-pill ' + s + '">' + (s === 'done' ? '✅' : s === 'progress' ? '🟡' : '⬜') +
+        ' ' + STATUS_LABEL[s] + ' <b>' + totals[s] + '</b></div>';
+    }).join('');
+  }
+
+  function renderBoard(){
+    var board = document.getElementById('board');
+    board.innerHTML = PRODUCTION_PLAN.map(function(stage){
+      var doneCount = stage.tasks.filter(function(t){ return t.status === 'done'; }).length;
+      var cards = stage.tasks.map(function(t){
+        return '<div class="card ' + t.status + '">' +
+          '<div class="card-top">' +
+            '<div class="card-title">' + t.title + '</div>' +
+            '<div class="badge">' + STATUS_LABEL[t.status] + '</div>' +
+          '</div>' +
+          (t.note ? '<div class="card-note">' + t.note + '</div>' : '') +
+        '</div>';
+      }).join('');
+
+      return '<div class="column">' +
+        '<div class="column-head">' +
+          '<span class="stage-emoji">' + stage.emoji + '</span>' +
+          '<h2>' + stage.name + '</h2>' +
+          '<span class="stage-status ' + stage.status + '">' + STATUS_LABEL[stage.status] + '</span>' +
+          '<span class="stage-count">' + doneCount + '/' + stage.tasks.length + ' done</span>' +
+        '</div>' +
+        '<div class="column-body">' + cards + '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  renderSummary();
+  renderBoard();
+
+  window.PRODUCTION_PLAN = PRODUCTION_PLAN;
+})();
+</script>
+
+</body>
+</html>
