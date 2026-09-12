@@ -272,6 +272,129 @@
     letter-spacing:.01em;
     user-select:all;
   }
+  .card .card-remove{
+    display:block;
+    margin-top:8px;
+    font-size:11px;
+    padding:3px 9px;
+    border-radius:20px;
+    border:1px solid var(--panel-border);
+    background:transparent;
+    color:var(--text-dim);
+    cursor:pointer;
+    font-family:inherit;
+  }
+  .card .card-remove:hover{ border-color:var(--danger); color:var(--danger); }
+
+  .add-task-row{
+    padding-top:2px;
+    display:flex;
+    gap:6px;
+  }
+  .add-task-input{
+    flex:1 1 auto;
+    min-width:0;
+    box-sizing:border-box;
+    background:transparent;
+    border:1px dashed var(--panel-border);
+    border-radius:10px;
+    padding:9px 12px;
+    font-size:13px;
+    color:var(--text);
+    font-family:inherit;
+  }
+  .add-task-input::placeholder{ color:var(--text-dim); }
+  .add-task-input:focus{ outline:none; border-color:var(--accent-2); border-style:solid; }
+  .add-task-btn{
+    flex:0 0 auto;
+    border:1px solid var(--accent);
+    background:transparent;
+    color:var(--accent);
+    border-radius:10px;
+    padding:0 14px;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    font-family:inherit;
+  }
+  .add-task-btn:hover{ background:var(--accent); color:var(--bg); }
+
+  /* Global "new task" button, pinned top-right of the viewport so it's
+     reachable no matter how far you've scrolled the board. */
+  .new-task-fab{
+    position:fixed;
+    top:78px;
+    right:24px;
+    z-index:25;
+    border:1px solid var(--accent);
+    background:var(--bg);
+    color:var(--accent);
+    border-radius:999px;
+    padding:9px 18px;
+    font-size:13px;
+    font-weight:700;
+    cursor:pointer;
+    font-family:inherit;
+    box-shadow:0 6px 18px rgba(0,0,0,.35);
+  }
+  .new-task-fab:hover{ background:var(--accent); color:var(--bg); }
+  .new-task-popover{
+    position:fixed;
+    top:122px;
+    right:24px;
+    z-index:25;
+    width:280px;
+    max-width:calc(100vw - 48px);
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    border-radius:12px;
+    padding:14px;
+    box-shadow:0 12px 28px rgba(0,0,0,.4);
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .new-task-popover[hidden]{ display:none; }
+  .new-task-popover label{
+    font-size:11px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    color:var(--text-dim);
+  }
+  .new-task-popover select,
+  .new-task-popover input{
+    width:100%;
+    box-sizing:border-box;
+    background:var(--bg);
+    border:1px solid var(--panel-border);
+    border-radius:8px;
+    padding:8px 10px;
+    font-size:13px;
+    color:var(--text);
+    font-family:inherit;
+  }
+  .new-task-popover select:focus,
+  .new-task-popover input:focus{ outline:none; border-color:var(--accent-2); }
+  .new-task-popover-actions{
+    display:flex;
+    gap:8px;
+    margin-top:2px;
+  }
+  .new-task-popover-actions button{
+    flex:1 1 auto;
+    border:1px solid var(--panel-border);
+    background:transparent;
+    color:var(--text);
+    border-radius:8px;
+    padding:7px 10px;
+    font-size:12.5px;
+    cursor:pointer;
+    font-family:inherit;
+  }
+  .new-task-popover-actions .nt-submit{ border-color:var(--accent); color:var(--accent); }
+  .new-task-popover-actions .nt-submit:hover{ background:var(--accent); color:var(--bg); }
+  .new-task-popover-actions .nt-cancel:hover{ border-color:var(--text-dim); }
 
   footer{
     text-align:center;
@@ -316,6 +439,18 @@
   <h1>Production Plan</h1>
   <p class="sub">Every stage of the "Job Apocalypse · Debunked" pipeline — from Research through Publish — with every task and its status, so it's obvious what's done, what's in progress, and what's still ahead.</p>
 </header>
+
+<button type="button" class="new-task-fab" id="new-task-fab">➕ New Task</button>
+<div class="new-task-popover" id="new-task-popover" hidden>
+  <label for="new-task-stage">Stage</label>
+  <select id="new-task-stage"></select>
+  <label for="new-task-title">Task title</label>
+  <input type="text" id="new-task-title" placeholder="What needs doing…">
+  <div class="new-task-popover-actions">
+    <button type="button" class="nt-submit" id="new-task-submit">➕ Add</button>
+    <button type="button" class="nt-cancel" id="new-task-cancel">Cancel</button>
+  </div>
+</div>
 
 <div class="controls">
   <div class="status-summary" id="status-summary"></div>
@@ -488,6 +623,48 @@ var PRODUCTION_PLAN = [
     return statusOverrides[taskId] || fallbackStatus;
   }
 
+  // User-added tasks (the "+ Add task" button) — kept separate from the
+  // hand-authored PRODUCTION_PLAN so that array stays the curated plan.
+  // Stored in localStorage (this browser only), keyed by stage id.
+  var customTasks = {};
+  try{
+    customTasks = JSON.parse(localStorage.getItem('todoCustomTasks') || '{}');
+  }catch(e){ customTasks = {}; }
+
+  function saveCustomTasks(){
+    try{ localStorage.setItem('todoCustomTasks', JSON.stringify(customTasks)); }catch(e){}
+  }
+
+  function addCustomTask(stageId, title){
+    title = title.trim();
+    if(!title) return;
+    if(!customTasks[stageId]) customTasks[stageId] = [];
+    var id = 'todo-' + stageId + '-custom-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
+    customTasks[stageId].push({ id: id, title: title, status: 'todo' });
+    saveCustomTasks();
+  }
+
+  function removeCustomTask(stageId, taskId){
+    if(!customTasks[stageId]) return;
+    customTasks[stageId] = customTasks[stageId].filter(function(t){ return t.id !== taskId; });
+    saveCustomTasks();
+    delete statusOverrides[taskId];
+    saveStatusOverrides();
+  }
+
+  // Merges the curated PRODUCTION_PLAN tasks with any user-added ones for
+  // a stage into one uniform list, so status-cycling, filtering and notes
+  // all work identically for both.
+  function getStageTasks(stage){
+    var builtIn = stage.tasks.map(function(t, i){
+      return { taskId: 'todo-' + stage.id + '-' + i, title: t.title, baseStatus: t.status, note: t.note, custom: false };
+    });
+    var custom = (customTasks[stage.id] || []).map(function(t){
+      return { taskId: t.id, title: t.title, baseStatus: t.status, note: null, custom: true };
+    });
+    return builtIn.concat(custom);
+  }
+
   // Status filter: all three active by default (nothing hidden). Clicking
   // a pill toggles that status; if that leaves zero active, treat it as
   // "all active" again rather than showing a blank board.
@@ -512,8 +689,8 @@ var PRODUCTION_PLAN = [
   function countAll(){
     var totals = { done: 0, progress: 0, todo: 0 };
     PRODUCTION_PLAN.forEach(function(stage){
-      stage.tasks.forEach(function(t, i){
-        totals[effectiveStatus('todo-' + stage.id + '-' + i, t.status)]++;
+      getStageTasks(stage).forEach(function(t){
+        totals[effectiveStatus(t.taskId, t.baseStatus)]++;
       });
     });
     return totals;
@@ -554,25 +731,30 @@ var PRODUCTION_PLAN = [
   function renderBoard(){
     var board = document.getElementById('board');
     board.innerHTML = PRODUCTION_PLAN.map(function(stage){
+      var stageTasks = getStageTasks(stage);
       var doneCount = 0;
       var progressCount = 0;
       var visibleCount = 0;
-      var cards = stage.tasks.map(function(t, i){
-        var taskId = 'todo-' + stage.id + '-' + i;
-        var status = effectiveStatus(taskId, t.status);
+      var cards = stageTasks.map(function(t){
+        var status = effectiveStatus(t.taskId, t.baseStatus);
         if(status === 'done') doneCount++;
         if(status === 'progress') progressCount++;
         var hidden = !activeFilters[status];
         if(!hidden) visibleCount++;
-        return '<div class="card ' + status + (hidden ? ' filtered-out' : '') + '" data-task-id="' + taskId + '">' +
+        return '<div class="card ' + status + (hidden ? ' filtered-out' : '') + '" data-task-id="' + t.taskId + '">' +
           '<div class="card-top">' +
             '<div class="card-title">' + t.title + '</div>' +
-            '<button type="button" class="badge" data-cycle="' + taskId + '" title="Click to change status">' + STATUS_LABEL[status] + '</button>' +
+            '<button type="button" class="badge" data-cycle="' + t.taskId + '" title="Click to change status">' + STATUS_LABEL[status] + '</button>' +
           '</div>' +
-          '<code class="card-id" title="item_notes row id in Supabase">🆔 ' + taskId + '</code>' +
+          '<code class="card-id" title="item_notes row id in Supabase">🆔 ' + t.taskId + '</code>' +
           (t.note ? '<div class="card-note">' + t.note + '</div>' : '') +
+          (t.custom ? '<button type="button" class="card-remove" data-remove="' + t.taskId + '" title="Remove this task">🗑️ Remove</button>' : '') +
         '</div>';
-      }).join('') + (visibleCount === 0 ? '<div class="column-empty">No tasks match the current filter</div>' : '');
+      }).join('') + (visibleCount === 0 ? '<div class="column-empty">No tasks match the current filter</div>' : '') +
+        '<div class="add-task-row">' +
+          '<input type="text" class="add-task-input" data-add-stage="' + stage.id + '" placeholder="New task…">' +
+          '<button type="button" class="add-task-btn" data-add-btn="' + stage.id + '">➕ Add task</button>' +
+        '</div>';
 
       var collapsed = collapsedStages[stage.id];
       var wipBadge = (stage.wipLimit != null)
@@ -584,7 +766,7 @@ var PRODUCTION_PLAN = [
             '<span class="stage-emoji">' + stage.emoji + '</span>' +
             '<h2>' + stage.name + '</h2>' +
             '<span class="stage-status ' + stage.status + '">' + STATUS_LABEL[stage.status] + '</span>' +
-            '<span class="stage-count">' + doneCount + '/' + stage.tasks.length + ' done</span>' +
+            '<span class="stage-count">' + doneCount + '/' + stageTasks.length + ' done</span>' +
             wipBadge +
           '</div>' +
           '<button class="collapse-toggle" type="button" aria-label="Collapse column" title="Collapse/expand">' + (collapsed ? '▸' : '▾') + '</button>' +
@@ -606,17 +788,47 @@ var PRODUCTION_PLAN = [
       badge.addEventListener('click', function(e){
         e.stopPropagation();
         var taskId = badge.getAttribute('data-cycle');
-        var parts = taskId.split('-');
-        var idx = parseInt(parts[parts.length - 1], 10);
-        var stageId = parts.slice(1, -1).join('-');
+        var stageId = badge.closest('.column').getAttribute('data-stage');
         var stage = PRODUCTION_PLAN.filter(function(s){ return s.id === stageId; })[0];
-        var task = stage && stage.tasks[idx];
+        var task = stage && getStageTasks(stage).filter(function(t){ return t.taskId === taskId; })[0];
         if(!task) return;
-        var current = effectiveStatus(taskId, task.status);
+        var current = effectiveStatus(taskId, task.baseStatus);
         statusOverrides[taskId] = STATUS_CYCLE[current];
         saveStatusOverrides();
         renderSummary();
         renderBoard();
+      });
+    });
+
+    board.querySelectorAll('.card-remove[data-remove]').forEach(function(btn){
+      btn.addEventListener('click', function(e){
+        e.stopPropagation();
+        var taskId = btn.getAttribute('data-remove');
+        var stageId = btn.closest('.column').getAttribute('data-stage');
+        removeCustomTask(stageId, taskId);
+        renderSummary();
+        renderBoard();
+      });
+    });
+
+    function submitNewTask(stageId, input){
+      addCustomTask(stageId, input.value);
+      renderSummary();
+      renderBoard();
+    }
+
+    board.querySelectorAll('.add-task-input[data-add-stage]').forEach(function(input){
+      input.addEventListener('keydown', function(e){
+        if(e.key !== 'Enter') return;
+        submitNewTask(input.getAttribute('data-add-stage'), input);
+      });
+    });
+
+    board.querySelectorAll('.add-task-btn[data-add-btn]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var stageId = btn.getAttribute('data-add-btn');
+        var input = btn.previousElementSibling;
+        submitNewTask(stageId, input);
       });
     });
 
@@ -643,6 +855,52 @@ var PRODUCTION_PLAN = [
     saveCollapsed();
     renderBoard();
   });
+
+  // Global "➕ New Task" button (top-right, fixed) — same addCustomTask
+  // path as each column's own inline add-task row, just with an explicit
+  // stage picker instead of implicitly targeting one column.
+  (function(){
+    var fab = document.getElementById('new-task-fab');
+    var popover = document.getElementById('new-task-popover');
+    var stageSelect = document.getElementById('new-task-stage');
+    var titleInput = document.getElementById('new-task-title');
+    var submitBtn = document.getElementById('new-task-submit');
+    var cancelBtn = document.getElementById('new-task-cancel');
+
+    stageSelect.innerHTML = PRODUCTION_PLAN.map(function(stage){
+      return '<option value="' + stage.id + '">' + stage.emoji + ' ' + stage.name + '</option>';
+    }).join('');
+
+    function openPopover(){
+      popover.hidden = false;
+      titleInput.focus();
+    }
+    function closePopover(){
+      popover.hidden = true;
+      titleInput.value = '';
+    }
+    function submit(){
+      if(!titleInput.value.trim()) return;
+      addCustomTask(stageSelect.value, titleInput.value);
+      closePopover();
+      renderSummary();
+      renderBoard();
+    }
+
+    fab.addEventListener('click', function(e){
+      e.stopPropagation();
+      if(popover.hidden) openPopover(); else closePopover();
+    });
+    cancelBtn.addEventListener('click', closePopover);
+    submitBtn.addEventListener('click', submit);
+    titleInput.addEventListener('keydown', function(e){
+      if(e.key === 'Enter') submit();
+      if(e.key === 'Escape') closePopover();
+    });
+    document.addEventListener('click', function(e){
+      if(!popover.hidden && !popover.contains(e.target) && e.target !== fab) closePopover();
+    });
+  })();
 
   renderSummary();
   renderBoard();
