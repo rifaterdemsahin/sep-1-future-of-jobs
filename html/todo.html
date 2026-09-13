@@ -1231,6 +1231,14 @@ var PRODUCTION_PLAN = [
     document.addEventListener('click', function(e){
       if(!popover.hidden && !popover.contains(e.target) && e.target !== fab) closePopover();
     });
+
+    // Deep link from the nav's ✨ Create → ➕ Create Task item
+    // (todo.html?newTask=1) — open the popover immediately, then drop the
+    // query param so a refresh doesn't reopen it.
+    if(/[?&]newTask=1(&|$)/.test(location.search)){
+      openPopover();
+      history.replaceState(null, '', location.pathname + location.hash);
+    }
   })();
 
   renderSummary();

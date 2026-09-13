@@ -389,7 +389,7 @@
               '<div class="menu-panel tools-menu" id="nav-understand-menu" hidden>' + understandItems + '</div>' +
             '</div>' +
             '<div class="menu-wrap" id="nav-analysis-wrap">' +
-              '<button type="button" class="menu-toggle' + ((currentId === 'sanity-check' || currentId === 'about' || currentId === 'task-report') ? ' active' : '') + '" id="nav-analysis-toggle" style="--nav-color:' + MENU_COLORS.analysis + ';">📊 Analysis <span class="menu-caret">▾</span></button>' +
+              '<button type="button" class="menu-toggle' + ((currentId === 'sanity-check' || currentId === 'about' || currentId === 'task-report' || currentId === 'script-v2-report') ? ' active' : '') + '" id="nav-analysis-toggle" style="--nav-color:' + MENU_COLORS.analysis + ';">📊 Analysis <span class="menu-caret">▾</span></button>' +
               '<div class="menu-panel tools-menu" id="nav-analysis-menu" hidden>' +
                 '<a class="tools-item' + (currentId === 'about' ? ' active' : '') + '" href="about.html">' +
                   '<span class="ti-label">🎬 About this video</span>' +
@@ -402,6 +402,10 @@
                 '<a class="tools-item' + (currentId === 'task-report' ? ' active' : '') + '" href="task-report.html">' +
                   '<span class="ti-label">📊 Task Report</span>' +
                   '<span class="ti-desc">Progress by stage & recommended focus</span>' +
+                '</a>' +
+                '<a class="tools-item' + (currentId === 'script-v2-report' ? ' active' : '') + '" href="script-v2-report.html">' +
+                  '<span class="ti-label">📏 Script v2 Sanity Check</span>' +
+                  '<span class="ti-desc">Length audit & trim recommendations</span>' +
                 '</a>' +
               '</div>' +
             '</div>' +
@@ -425,6 +429,10 @@
             '<div class="menu-wrap" id="nav-create-wrap">' +
               '<button type="button" class="menu-toggle' + (tasksActive ? ' active' : '') + '" id="nav-create-toggle" style="--nav-color:' + MENU_COLORS.create + ';">✨ Create <span class="menu-caret">▾</span></button>' +
               '<div class="menu-panel tools-menu" id="nav-create-menu" hidden>' +
+                '<a class="tools-item" href="todo.html?newTask=1">' +
+                  '<span class="ti-label">➕ Create Task</span>' +
+                  '<span class="ti-desc">Quick-add a task to the Production Plan</span>' +
+                '</a>' +
                 '<a class="tools-item" href="https://www.canva.com/design/DAHTV1XbvSs/uyMkcD8cZwdHn03nhVnC_w/edit" target="_blank" rel="noopener">' +
                   '<span class="ti-label">🎨 Canva Workshop</span>' +
                   '<span class="ti-desc">Visual design pipeline</span>' +

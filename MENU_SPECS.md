@@ -93,12 +93,22 @@ Non-pipeline pages (`about.html`, `sanity-check.html`, `task-report.html`,
 
 ## 3. ✨ Create → Tools groups (`TOOL_GROUPS`)
 
-✨ Create's dropdown holds, in order: the two static Create links (Canva
-Workshop, YouTube Studio), then the ✅ Tasks group, then every
-`TOOL_GROUPS` entry — each an independently-collapsible `<details open>`
-accordion. This folds what used to be a separate top-level 🧰 Tools menu
-into Create, so Create is now the single place to reach both making
-things and the tools that support making them.
+✨ Create's dropdown holds, in order: **➕ Create Task** (a deep link to
+`todo.html?newTask=1`), the two static Create links (Canva Workshop,
+YouTube Studio), then the ✅ Tasks group, then every `TOOL_GROUPS` entry —
+each an independently-collapsible `<details open>` accordion. This folds
+what used to be a separate top-level 🧰 Tools menu into Create, so Create
+is now the single place to reach both making things and the tools that
+support making them.
+
+**➕ Create Task** is the one item that isn't just a link: `todo.html`
+checks `location.search` for `newTask=1` on load, immediately opens its
+existing `#new-task-popover` (the same one behind the page's own
+"➕ New Task" button), and then strips the query param via
+`history.replaceState` so a refresh doesn't reopen it. This gives every
+page a one-click path to add a Production Plan task without hand-copying
+the popover markup elsewhere — the popover and its `addCustomTask` logic
+stay owned by `todo.html`.
 
 1. 🚀 **Deployment** — Cloudflare Worker Live, GitHub Pages, GitHub Repo
 2. 🗄️ **Data & Storage** — Supabase Dashboard, Supabase Table Editor,
