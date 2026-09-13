@@ -11,10 +11,13 @@
   var RECENT_MAX = 5;
 
   var MENU_COLORS = {
-    pipeline: '#5ab0ff',
-    search:   '#e8b94a',
-    tools:    '#7be08a',
-    analysis: '#b388ff'
+    remember:   '#5ab0ff',
+    understand: '#4bcfa1',
+    search:     '#e8b94a',
+    tools:      '#7be08a',
+    analysis:   '#b388ff',
+    evaluate:   '#ffab40',
+    create:     '#ff5252'
   };
 
   // Single-hue ramp (light -> dark) across the menu in this order, so each
@@ -30,7 +33,8 @@
     { id: 'todo',             emoji: '✅', label: 'Production Plan',  file: 'todo.html',             color: '#7be08a' }
   ];
 
-  var PIPELINE_PAGES = PAGES.filter(function(p){ return p.id !== 'todo'; });
+  var REMEMBER_PAGES = PAGES.filter(function(p){ return p.id === 'arguments' || p.id === 'research'; });
+  var UNDERSTAND_PAGES = PAGES.filter(function(p){ return p.id === 'script' || p.id === 'design' || p.id === 'previsualisation'; });
   var TASKS_PAGE = PAGES.filter(function(p){ return p.id === 'todo'; })[0];
 
   // Tools the production pipeline actually depends on — surfaced inside the
@@ -315,8 +319,17 @@
     var mount = document.getElementById('nav-mount');
     if(!mount) return;
 
-    var pipelineActive = PIPELINE_PAGES.some(function(p){ return p.id === currentId; });
-    var pipelineItems = PIPELINE_PAGES.map(function(p){
+    var rememberActive = REMEMBER_PAGES.some(function(p){ return p.id === currentId; });
+    var rememberItems = REMEMBER_PAGES.map(function(p){
+      var cls = p.id === currentId ? ' class="tools-item active"' : ' class="tools-item"';
+      var style = ' style="--nav-color:' + p.color + ';"';
+      return '<a href="' + p.file + '"' + cls + style + '>' +
+        '<span class="ti-label">' + p.emoji + ' ' + p.label + '</span>' +
+      '</a>';
+    }).join('');
+
+    var understandActive = UNDERSTAND_PAGES.some(function(p){ return p.id === currentId; });
+    var understandItems = UNDERSTAND_PAGES.map(function(p){
       var cls = p.id === currentId ? ' class="tools-item active"' : ' class="tools-item"';
       var style = ' style="--nav-color:' + p.color + ';"';
       return '<a href="' + p.file + '"' + cls + style + '>' +
@@ -367,15 +380,19 @@
         '<div class="topnav-inner">' +
           '<a class="brand" href="index.html">🎬 Job Apocalypse <span>· Debunked</span></a>' +
           '<div class="links">' +
-            '<div class="menu-wrap" id="nav-pipeline-wrap">' +
-              '<button type="button" class="menu-toggle' + (pipelineActive ? ' active' : '') + '" id="nav-pipeline-toggle" style="--nav-color:' + MENU_COLORS.pipeline + ';">📂 Pipeline <span class="menu-caret">▾</span></button>' +
-              '<div class="menu-panel tools-menu" id="nav-pipeline-menu" hidden>' + pipelineItems + '</div>' +
+            '<div class="menu-wrap" id="nav-remember-wrap">' +
+              '<button type="button" class="menu-toggle' + (rememberActive ? ' active' : '') + '" id="nav-remember-toggle" style="--nav-color:' + MENU_COLORS.remember + ';">🧠 Remember <span class="menu-caret">▾</span></button>' +
+              '<div class="menu-panel tools-menu" id="nav-remember-menu" hidden>' + rememberItems + '</div>' +
+            '</div>' +
+            '<div class="menu-wrap" id="nav-understand-wrap">' +
+              '<button type="button" class="menu-toggle' + (understandActive ? ' active' : '') + '" id="nav-understand-toggle" style="--nav-color:' + MENU_COLORS.understand + ';">💡 Understand <span class="menu-caret">▾</span></button>' +
+              '<div class="menu-panel tools-menu" id="nav-understand-menu" hidden>' + understandItems + '</div>' +
             '</div>' +
             '<div class="menu-wrap" id="nav-search-wrap">' +
               '<button type="button" class="menu-toggle" id="nav-search-toggle" style="--nav-color:' + MENU_COLORS.search + ';">🔎 Search <span class="menu-shortcut">⌘K</span></button>' +
             '</div>' +
             '<div class="menu-wrap" id="nav-analysis-wrap">' +
-              '<button type="button" class="menu-toggle' + ((currentId === 'sanity-check' || currentId === 'about') ? ' active' : '') + '" id="nav-analysis-toggle" style="--nav-color:' + MENU_COLORS.analysis + ';">📊 Analysis <span class="menu-caret">▾</span></button>' +
+              '<button type="button" class="menu-toggle' + ((currentId === 'sanity-check' || currentId === 'about' || currentId === 'task-report') ? ' active' : '') + '" id="nav-analysis-toggle" style="--nav-color:' + MENU_COLORS.analysis + ';">📊 Analysis <span class="menu-caret">▾</span></button>' +
               '<div class="menu-panel tools-menu" id="nav-analysis-menu" hidden>' +
                 '<a class="tools-item' + (currentId === 'about' ? ' active' : '') + '" href="about.html">' +
                   '<span class="ti-label">🎬 About this video</span>' +
@@ -385,11 +402,48 @@
                   '<span class="ti-label">🩺 Sanity Check Report</span>' +
                   '<span class="ti-desc">Project health & logic checks</span>' +
                 '</a>' +
+                '<a class="tools-item' + (currentId === 'task-report' ? ' active' : '') + '" href="task-report.html">' +
+                  '<span class="ti-label">📊 Task Report</span>' +
+                  '<span class="ti-desc">Progress by stage & recommended focus</span>' +
+                '</a>' +
+              '</div>' +
+            '</div>' +
+            '<div class="menu-wrap" id="nav-evaluate-wrap">' +
+              '<button type="button" class="menu-toggle' + ((currentId === 'assets' || currentId === 'plain-english') ? ' active' : '') + '" id="nav-evaluate-toggle" style="--nav-color:' + MENU_COLORS.evaluate + ';">⚖️ Evaluate <span class="menu-caret">▾</span></button>' +
+              '<div class="menu-panel tools-menu" id="nav-evaluate-menu" hidden>' +
+                '<a class="tools-item' + (currentId === 'assets' ? ' active' : '') + '" href="assets.html">' +
+                  '<span class="ti-label">🗂️ Assets</span>' +
+                  '<span class="ti-desc">Review & evaluate production assets</span>' +
+                '</a>' +
+                '<a class="tools-item' + (currentId === 'plain-english' ? ' active' : '') + '" href="plain-english.html">' +
+                  '<span class="ti-label">🗣️ Plain English Review</span>' +
+                  '<span class="ti-desc">Before/after: script jargon vs. layman\'s terms</span>' +
+                '</a>' +
+              '</div>' +
+            '</div>' +
+            '<div class="menu-wrap" id="nav-create-wrap">' +
+              '<button type="button" class="menu-toggle" id="nav-create-toggle" style="--nav-color:' + MENU_COLORS.create + ';">✨ Create <span class="menu-caret">▾</span></button>' +
+              '<div class="menu-panel tools-menu" id="nav-create-menu" hidden>' +
+                '<a class="tools-item" href="https://www.canva.com/design/DAHTV1XbvSs/uyMkcD8cZwdHn03nhVnC_w/edit" target="_blank" rel="noopener">' +
+                  '<span class="ti-label">🎨 Canva Workshop</span>' +
+                  '<span class="ti-desc">Visual design pipeline</span>' +
+                '</a>' +
+                '<a class="tools-item" href="https://studio.youtube.com/" target="_blank" rel="noopener">' +
+                  '<span class="ti-label">▶️ YouTube Studio</span>' +
+                  '<span class="ti-desc">Upload and publish</span>' +
+                '</a>' +
               '</div>' +
             '</div>' +
             '<div class="menu-wrap" id="nav-tools-wrap">' +
               '<button type="button" class="menu-toggle' + (tasksActive ? ' active' : '') + '" id="nav-tools-toggle" style="--nav-color:' + MENU_COLORS.tools + ';">🧰 Tools <span class="menu-caret">▾</span></button>' +
-              '<div class="menu-panel tools-menu" id="nav-tools-menu" hidden>' + tasksGroup + toolGroups + '</div>' +
+              '<div class="menu-panel tools-menu" id="nav-tools-menu" hidden>' +
+                tasksGroup + toolGroups +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="right-links" style="display:flex;align-items:center;gap:12px;">' +
+            '<div class="menu-wrap" id="nav-search-wrap">' +
+              '<button type="button" class="menu-toggle" id="nav-search-toggle" style="--nav-color:' + MENU_COLORS.search + ';">🔎 Search <span class="menu-shortcut">⌘K</span></button>' +
             '</div>' +
             gamifiedBadge +
             '<a class="live" href="' + liveHref + '" target="_blank" rel="noopener">🌐 Live</a>' +
@@ -412,8 +466,11 @@
         '</div>' +
       '</div>';
 
-    wireDropdown('nav-pipeline-toggle', 'nav-pipeline-menu', 'nav-pipeline-wrap');
+    wireDropdown('nav-remember-toggle', 'nav-remember-menu', 'nav-remember-wrap');
+    wireDropdown('nav-understand-toggle', 'nav-understand-menu', 'nav-understand-wrap');
     wireDropdown('nav-analysis-toggle', 'nav-analysis-menu', 'nav-analysis-wrap');
+    wireDropdown('nav-evaluate-toggle', 'nav-evaluate-menu', 'nav-evaluate-wrap');
+    wireDropdown('nav-create-toggle', 'nav-create-menu', 'nav-create-wrap');
     wireDropdown('nav-tools-toggle', 'nav-tools-menu', 'nav-tools-wrap');
     wireSearchModal();
   }

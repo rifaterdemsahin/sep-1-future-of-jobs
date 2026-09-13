@@ -45,8 +45,8 @@ body{
   letter-spacing:.02em;
 }
 .topnav .brand span{color:var(--accent);}
-.topnav .links{display:flex;gap:8px;flex-wrap:wrap;}
-.topnav .links a{
+.topnav .links, .topnav .right-links{display:flex;gap:8px;flex-wrap:wrap;}
+.topnav .links a, .topnav .right-links a{
   font-size:13px;
   color:var(--nav-color, var(--text-dim));
   text-decoration:none;
@@ -55,10 +55,10 @@ body{
   border:1px solid transparent;
   transition:border-color .15s ease, color .15s ease;
 }
-.topnav .links a:hover{color:var(--text);border-color:var(--panel-border);}
-.topnav .links a.active{color:var(--nav-color, var(--text));}
-.topnav .links a.live{color:var(--accent);border-color:var(--accent);}
-.topnav .links a.live:hover{color:var(--bg);background:var(--accent);}
+.topnav .links a:hover, .topnav .right-links a:hover{color:var(--text);border-color:var(--panel-border);}
+.topnav .links a.active, .topnav .right-links a.active{color:var(--nav-color, var(--text));}
+.topnav .links a.live, .topnav .right-links a.live{color:var(--accent);border-color:var(--accent);}
+.topnav .links a.live:hover, .topnav .right-links a.live:hover{color:var(--bg);background:var(--accent);}
 
 /* Three collapsible top-level menus, mounted in the top nav — 📂 Pipeline
    (production-stage pages), 🔎 Search (site-wide search), 🧰 Tools (Tasks +

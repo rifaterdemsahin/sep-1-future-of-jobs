@@ -397,6 +397,114 @@ const previsualisationBlocks = [
   })
 ];
 
+// ---------------------------------------------------------------------
+// plain-english.html — before/after layman's-terms pass on the script VO
+// ---------------------------------------------------------------------
+const plainEnglishBlocks = [
+  {
+    id: 'plain-english-intro', page: 'plain-english.html', section: 'intro', position: 0, type: 'layman-intro',
+    data: {
+      title: '🗣️ Layman\'s Terms Pass — Before &amp; After',
+      body: 'This is the plain-English review of the read-aloud script (<a href="script.html">script.html</a>): every beat\'s original VO ("Before") next to a rewrite ("After") that swaps out jargon, idioms, and stacked clauses for words a non-technical viewer will get on the first listen. Reference: <a href="https://www.youtube.com/watch?v=zU_H8mcFqpQ" target="_blank" rel="noopener">"What Does \'Layman\'s Terms\' Mean?" (YouTube)</a>.'
+    }
+  },
+  ...[
+    {
+      sectionId: 'hook', title: '🪝 Hook', tc: '0:00 – 0:30',
+      before: [
+        'Elon Musk recently made a massive prediction: over the next five years, as AI and humanoid robotics scale, total global productivity will soar, but human labor as we know it will become largely optional — or flat-out obsolete.',
+        "He sees a world run by machines. But I'm here to argue the exact opposite: <strong>humans are going to have more jobs, not fewer.</strong>",
+        "And look, this isn't just wishful thinking. I have skin in the game — I have two daughters growing up in this exact world. When I look at where technology is heading, I don't see a job apocalypse. I see an explosion of brand-new possibilities.",
+        'Here is why the future is bright, and why my kids — and yours — are going to thrive.'
+      ],
+      after: [
+        "Elon Musk just made a big claim: within five years, AI and human-like robots will do so much of the work that people won't really need jobs anymore — work becomes optional, or just disappears.",
+        "He thinks machines will run the show. I think the opposite: <strong>people are going to end up with more jobs, not fewer.</strong>",
+        "This isn't just me being hopeful — I've got two daughters growing up in this world, so I have a real stake in getting this right. And when I look at where things are heading, I don't see machines wiping out work. I see a wave of brand-new opportunities opening up.",
+        "Here's why I think the future looks good — for my kids, and for yours."
+      ],
+      swaps: ["\"massive prediction\" → \"big claim\"", "\"total global productivity will soar\" → folded into plain terms", "\"skin in the game\" → \"a real stake in getting this right\"", "\"explosion of brand-new possibilities\" → \"wave of brand-new opportunities\""]
+    },
+    {
+      sectionId: 'section1', title: '🪨 Section 1 — Historical Proof', tc: '0:30 – 1:45',
+      before: [
+        "Let's give credit where it's due: Elon is right about productivity rising. When you combine human capability with robotics and artificial intelligence, total economic output goes through the roof. Where he gets it wrong is what happens to us afterward.",
+        'Every single time humanity undergoes a massive technological leap, doom-sayers predict the end of work.',
+        'Think about the transition from hunter-gatherers in the Stone Age to early agriculture.',
+        'Think about the Industrial Revolution, or when electronic calculators and mainframe computers entered offices.',
+        'When calculators were invented, people thought mathematicians and accountants would disappear. Instead, financial modeling blew up. The cost of doing math dropped to zero, which allowed us to build hyper-complex global financial systems, modern architecture, and space programs.',
+        "<strong>Tools don't destroy human intent; they multiply the permutations of what humans can create.</strong>"
+      ],
+      after: [
+        "Let's be fair to Elon on one point: he's right that things will get more productive. When you mix human skill with robots and AI, the amount the world can produce shoots way up. Where I think he's wrong is what that means for us afterward.",
+        "Every single time a big new technology shows up, people predict it'll end work for good.",
+        'Think about when we went from hunting and gathering to farming.',
+        'Think about the Industrial Revolution, or the moment calculators and computers first showed up in offices.',
+        "When calculators came out, people worried accountants and mathematicians would be out of a job. Instead, the opposite happened: doing math got so cheap that we could build huge financial systems, modern buildings, and space programs that would've been impossible by hand.",
+        "<strong>New tools don't kill off what people want to do — they just give us more ways to do it.</strong>"
+      ],
+      swaps: ["\"total economic output goes through the roof\" → \"the amount the world can produce shoots way up\"", "\"doom-sayers\" → \"people\"", "\"massive technological leap\" → \"big new technology\"", "\"multiply the permutations of what humans can create\" → \"give us more ways to do it\""]
+    },
+    {
+      sectionId: 'section2', title: '🌳 Section 2 — Infinite Permutation Principle', tc: '1:45 – 2:45',
+      before: [
+        "Here's the mechanism people miss: technology lowers the cost of basic tasks, which creates brand-new industries that couldn't exist before.",
+        'Before the internet, nobody\'s job title was "App Developer," "Cloud Architect," or "YouTube Creator."',
+        'When robotics handle repetitive physical labor and AI handles raw baseline calculations, humans are freed up to move into vastly more complex, creative, and highly specialized multi-disciplinary roles.',
+        "Instead of a fixed pie of jobs that gets taken away, automation creates an infinite number of new permutations. We won't just be doing the old jobs faster; we'll be solving entirely new categories of problems."
+      ],
+      after: [
+        "Here's the part people miss: when technology makes everyday tasks cheaper, it doesn't just speed up old jobs — it opens the door to entirely new ones.",
+        'Before the internet existed, nobody had a job called "App Developer," "Cloud Architect," or "YouTube Creator."',
+        'When robots take over repetitive physical work and AI handles routine number-crunching, people are freed up to move into much more interesting, creative jobs that mix several skills together.',
+        "Jobs aren't a fixed-size pie that machines slowly eat away at — new technology keeps baking more pies. We won't just do the old jobs faster; we'll be solving whole new kinds of problems."
+      ],
+      swaps: ["\"the mechanism\" → \"the part\"", "\"highly specialized multi-disciplinary roles\" → \"creative jobs that mix several skills together\"", "\"a fixed pie of jobs\" analogy kept but spelled out plainly", "\"an infinite number of new permutations\" → \"new technology keeps baking more pies\""]
+    },
+    {
+      sectionId: 'section3', title: '🧮 Section 3 — Education & Human Insight', tc: '2:45 – 3:45',
+      before: [
+        'Which brings me back to my daughters — and families everywhere.',
+        "There's a massive economic transformation taking place that doom-sayers completely miss: <strong>the cost of high-quality education is collapsing toward zero because of AI.</strong>",
+        'For generations, elite tutoring and advanced technical education were expensive luxuries, causing immense academic anxiety and locking millions of households out of the modern economy. But with AI-driven personalized learning, the cost barrier evaporates. Most families who were previously priced out will now be able to participate, learn at their own pace, and master complex disciplines.',
+        'Some people ask: "If AI can calculate and code anything instantly, why bother teaching our kids advanced math and technical skills?"',
+        "Because tools don't eliminate the need for understanding — they elevate it. My daughters won't be wasting hours on tedious rote memorization or manual arithmetic. Instead, they'll use mathematical logic, systems thinking, and data modeling to command AI and solve real-world problems.",
+        "Math isn't just arithmetic; it's the language of problem-solving. When you combine democratized, accessible education with human judgment, empathy, and creative direction, human potential explodes."
+      ],
+      after: [
+        'Which brings me back to my daughters — and to families everywhere.',
+        "Here's a huge shift that the doom-and-gloom crowd is missing: <strong>good education is becoming almost free, thanks to AI.</strong>",
+        "For generations, top-tier tutoring and technical education cost a fortune, causing a lot of stress and shutting a lot of families out of the modern economy. AI-powered personalized learning is knocking that cost down close to zero. Families who used to be priced out can now learn at their own pace and pick up hard skills.",
+        'Some people ask: "If AI can do the math and write the code instantly, why bother teaching kids that stuff?"',
+        "Because tools don't remove the need to understand things — they raise the bar on what understanding gets you. My daughters won't waste hours on rote memorization or long division. They'll use logical thinking and data skills to direct AI and solve real problems.",
+        "Math isn't just arithmetic — it's how you learn to solve problems. Pair widely available education with human judgment, empathy, and creative direction, and there's no limit to what people can do."
+      ],
+      swaps: ["\"massive economic transformation\" → \"huge shift\"", "\"the cost of high-quality education is collapsing toward zero\" → \"good education is becoming almost free\"", "\"elite tutoring\" → \"top-tier tutoring\"", "\"human potential explodes\" → \"there's no limit to what people can do\""]
+    },
+    {
+      sectionId: 'outro', title: '🎬 Conclusion & Outro', tc: '3:45 – 4:30',
+      before: [
+        "The narrative that robotics will leave humans with nothing to do ignores the entire history of human ambition. We don't run out of things to do when tasks get easier; we just set our sights higher.",
+        "The future isn't a dark dystopia where humans are rendered useless by machines. It's an era where the barrier to entry for building great things has never been lower.",
+        "<strong>The future is bright, jobs will evolve and expand, and the next generation is going to accomplish things we haven't even dreamed of yet.</strong>",
+        "If you want to stay ahead of this curve and future-proof your own career, we've built a dedicated <strong>Skool community</strong> focused entirely on helping you get certified, master modern AI and cloud tools, and land high-demand future roles. You'll get step-by-step roadmaps, hands-on certification guidance, and real-world project support.",
+        'Check the link in the description or pinned comment below to join our Skool community today. What do you think about Elon\'s prediction? Let me know in the comments below, hit that like button, and subscribe for more. Thanks for watching! 🙌'
+      ],
+      after: [
+        "The idea that robots will leave humans with nothing to do ignores all of human history. When tasks get easier, we don't stop working — we just aim higher.",
+        "The future isn't some dark world where machines make people useless. It's a time when it's easier than ever to build something great.",
+        "<strong>The future is bright. Jobs will change and grow, and the next generation will do things we can't even imagine yet.</strong>",
+        "If you want to stay ahead of all this and future-proof your career, we've built a <strong>Skool community</strong> focused on getting you certified, teaching you today's AI and cloud tools, and helping you land in-demand jobs. You'll get clear roadmaps, hands-on certification help, and real project support.",
+        'Check the link in the description or pinned comment to join. What do you think of Elon\'s prediction? Let me know in the comments, hit like, and subscribe for more. Thanks for watching! 🙌'
+      ],
+      swaps: ["\"the entire history of human ambition\" → \"all of human history\"", "\"dark dystopia where humans are rendered useless\" → \"dark world where machines make people useless\"", "\"the barrier to entry for building great things has never been lower\" → \"it's easier than ever to build something great\""]
+    }
+  ].map((d, i) => ({
+    id: 'plain-english-' + d.sectionId, page: 'plain-english.html', section: 'beats', position: i, type: 'before-after',
+    data: { sectionId: d.sectionId, title: d.title, tc: d.tc, before: d.before, after: d.after, swaps: d.swaps }
+  }))
+];
+
 async function main() {
   const env = loadEnv(path.join(__dirname, '..', '.env'));
   const connectionString = env.SUPABASE_DB_URL;
@@ -408,7 +516,7 @@ async function main() {
   const client = new Client({ connectionString });
   await client.connect();
 
-  const allBlocks = [...indexBlocks, ...argumentsBlocks, ...scriptBlocks, ...designBlocks, ...previsualisationBlocks];
+  const allBlocks = [...indexBlocks, ...argumentsBlocks, ...scriptBlocks, ...designBlocks, ...previsualisationBlocks, ...plainEnglishBlocks];
 
   for (const b of allBlocks) {
     await client.query(
