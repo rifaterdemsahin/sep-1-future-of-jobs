@@ -529,7 +529,7 @@
         { title: 'Section 2 — Infinite Permutation (1:45–2:45)', status: 'done' },
         { title: 'Section 3 — Education Democratization (2:45–3:45)', status: 'done' },
         { title: 'Conclusion & Outro (3:45–4:30)', status: 'done' },
-        { title: 'Convert script into layman\'s terms', status: 'todo' },
+        { title: 'Convert script into layman\'s terms', status: 'done' },
         { title: 'Commit + push beat-timing refresh', status: 'progress' }
       ]
     },
