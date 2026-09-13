@@ -1,0 +1,23 @@
+{
+  "name": "sep-1-future-of-jobs",
+  "version": "1.0.0",
+  "description": "Why Elon Musk is Wrong About the Job Apocalypse — A Father's Perspective",
+  "main": "js/nav.js",
+  "scripts": {
+    "test": "node scripts/check-links.js",
+    "test:links": "node scripts/check-links.js",
+    "fix:links": "node scripts/fix-links.js",
+    "serve": "python3 -m http.server 30080"
+  },
+  "keywords": [
+    "future-of-jobs",
+    "elon-musk-debunked",
+    "previsualisation",
+    "production-pipeline"
+  ],
+  "author": "Rifat Erdem Sahin",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^25.10.0"
+  }
+}

@@ -4,9 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>
-  // Canonical host is now Cloudflare Workers; GitHub Pages just forwards visitors there.
+  // Canonical host is Cloudflare Workers; GitHub Pages forwards visitors with repo subpath cleaned.
   if(location.hostname.endsWith('github.io')){
-    location.replace('https://sep-1-future-of-jobs.polished-boat-17b2.workers.dev' + location.pathname + location.search + location.hash);
+    var cleanPath = location.pathname.replace(/^\/sep-1-future-of-jobs/, '').replace(/^\/[^/]+(?=\/html\/)/, '');
+    if(!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
+    location.replace('https://sep-1-future-of-jobs.polished-boat-17b2.workers.dev' + cleanPath + location.search + location.hash);
   }
 </script>
 <title>📝 Script — Why Elon Musk is Wrong About the Job Apocalypse</title>
@@ -570,6 +572,72 @@
     color:var(--text);
   }
 
+  /* Argument Usage Summary */
+  .argument-usage{
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    border-left:4px solid var(--accent-2);
+    border-radius:12px;
+    padding:16px 22px;
+    margin-top:32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .argument-usage[hidden]{display:none;}
+  .argument-usage-title{
+    font-size:14px;
+    font-weight:700;
+    color:var(--text);
+    white-space:nowrap;
+  }
+  .argument-usage-stats{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    font-size:12.5px;
+    color:var(--text-dim);
+  }
+  .usage-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:4px 12px;
+    border-radius:999px;
+    font-weight:700;
+    font-size:12.5px;
+    border:1px solid;
+  }
+  .usage-pill.used{
+    background:rgba(52,211,153,.1);
+    border-color:rgba(52,211,153,.35);
+    color:#34d399;
+  }
+  .usage-pill.pending{
+    background:rgba(232,185,74,.1);
+    border-color:rgba(232,185,74,.35);
+    color:var(--accent);
+  }
+  .argument-usage-link{
+    font-size:12px;
+    font-weight:600;
+    color:var(--accent-2);
+    text-decoration:none;
+    background:rgba(90,176,255,.1);
+    border:1px solid rgba(90,176,255,.3);
+    padding:5px 12px;
+    border-radius:16px;
+    white-space:nowrap;
+    transition:all .15s ease;
+  }
+  .argument-usage-link:hover{
+    background:var(--accent-2);
+    color:var(--bg);
+  }
+
   footer{
     max-width:840px;
     margin:0 auto;
@@ -700,6 +768,12 @@
   </div>
 
   <div id="beats-container"></div>
+
+  <div class="argument-usage" id="argument-usage" hidden>
+    <div class="argument-usage-title">🧩 Argument Usage</div>
+    <div class="argument-usage-stats" id="argument-usage-stats"></div>
+    <a class="argument-usage-link" href="arguments.html">View Arguments →</a>
+  </div>
 </main>
 
 <footer>
@@ -738,6 +812,48 @@
         '<div class="vo"><div class="vo-label">🎙️ Host VO</div>' + vo + '</div>' +
       '</section>';
     }).join('');
+  }
+
+  // Bottom summary: which of the arguments.html cards are wired into this
+  // script via the per-beat 🔗 links (links table: "script.html|beat-<id>"),
+  // and how many are still pending as analysis.
+  function renderArgumentUsage(){
+    var usageEl = document.getElementById('argument-usage');
+    if(!usageEl) return;
+
+    var argCards = ContentDB.getBlocks('arguments.html', 'arguments');
+    if(!argCards.length) return;
+
+    var argIds = {};
+    argCards.forEach(function(a){ argIds[a.id] = true; });
+
+    var usedIds = {};
+    var perBeat = [];
+    ContentDB.getBlocks('script.html', 'beats').forEach(function(beat){
+      var linked = PipelineLinks.getSelected('script.html|' + beat.id).filter(function(id){
+        return argIds[id];
+      });
+      linked.forEach(function(id){ usedIds[id] = true; });
+      if(linked.length){
+        perBeat.push(beat.data.sectionId + ': ' + linked.map(function(id){
+          return '#' + id.replace('argument-', '');
+        }).join(', '));
+      }
+    });
+
+    var total = argCards.length;
+    var used = Object.keys(usedIds).length;
+    var pending = total - used;
+
+    document.getElementById('argument-usage-stats').innerHTML =
+      '<span class="usage-pill used">✅ ' + used + ' used in this script</span>' +
+      '<span class="usage-pill pending">⏳ ' + pending + ' pending as analysis</span>' +
+      '<span>of ' + total + ' argument cards</span>';
+
+    usageEl.title = perBeat.length
+      ? 'Linked to beats — ' + perBeat.join(' · ')
+      : 'No arguments are linked to script beats yet';
+    usageEl.hidden = false;
   }
 
   // Script Review Checklist Controller
@@ -801,6 +917,8 @@
     AssetDB.initAddButtons();
     ScriptReviewChecklist.init();
   });
+
+  Promise.all([ContentDB.ready, PipelineLinks.ready]).then(renderArgumentUsage);
 
   // Shared clipboard helper
   function copyTextToClipboard(text, onDone){

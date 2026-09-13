@@ -4,9 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>
-  // Canonical host is now Cloudflare Workers; GitHub Pages just forwards visitors there.
+  // Canonical host is Cloudflare Workers; GitHub Pages forwards visitors with repo subpath cleaned.
   if(location.hostname.endsWith('github.io')){
-    location.replace('https://sep-1-future-of-jobs.polished-boat-17b2.workers.dev' + location.pathname + location.search + location.hash);
+    var cleanPath = location.pathname.replace(/^\/sep-1-future-of-jobs/, '').replace(/^\/[^/]+(?=\/html\/)/, '');
+    if(!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
+    location.replace('https://sep-1-future-of-jobs.polished-boat-17b2.workers.dev' + cleanPath + location.search + location.hash);
   }
 </script>
 <title>🧩 Arguments — Why Elon Musk is Wrong About the Job Apocalypse</title>

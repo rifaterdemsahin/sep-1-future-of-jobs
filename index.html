@@ -2,13 +2,19 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="refresh" content="0; url=html/index.html">
 <title>Job Apocalypse · Debunked</title>
 <script>
-  location.replace('html/index.html' + location.search + location.hash);
+  var cleanPath = location.pathname.replace(/^\/sep-1-future-of-jobs/, '');
+  if(!cleanPath || cleanPath === '/') cleanPath = '/html/index.html';
+  if(location.hostname.endsWith('github.io')){
+    location.replace('https://sep-1-future-of-jobs.polished-boat-17b2.workers.dev' + cleanPath + location.search + location.hash);
+  } else {
+    location.replace('html/index.html' + location.search + location.hash);
+  }
 </script>
 </head>
 <body>
-<p>Redirecting to <a href="html/index.html">html/index.html</a>…</p>
+  <p>Redirecting to <a href="html/index.html">Job Apocalypse · Debunked</a>...</p>
 </body>
 </html>
