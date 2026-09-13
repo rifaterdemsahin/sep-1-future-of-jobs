@@ -406,7 +406,7 @@
               '</div>' +
             '</div>' +
             '<div class="menu-wrap" id="nav-evaluate-wrap">' +
-              '<button type="button" class="menu-toggle' + ((currentId === 'assets' || currentId === 'plain-english') ? ' active' : '') + '" id="nav-evaluate-toggle" style="--nav-color:' + MENU_COLORS.evaluate + ';">⚖️ Evaluate <span class="menu-caret">▾</span></button>' +
+              '<button type="button" class="menu-toggle' + ((currentId === 'assets' || currentId === 'plain-english' || currentId === 'script-v2') ? ' active' : '') + '" id="nav-evaluate-toggle" style="--nav-color:' + MENU_COLORS.evaluate + ';">⚖️ Evaluate <span class="menu-caret">▾</span></button>' +
               '<div class="menu-panel tools-menu" id="nav-evaluate-menu" hidden>' +
                 '<a class="tools-item' + (currentId === 'assets' ? ' active' : '') + '" href="assets.html">' +
                   '<span class="ti-label">🗂️ Assets</span>' +
@@ -415,6 +415,10 @@
                 '<a class="tools-item' + (currentId === 'plain-english' ? ' active' : '') + '" href="plain-english.html">' +
                   '<span class="ti-label">🗣️ Plain English Review</span>' +
                   '<span class="ti-desc">Before/after: script jargon vs. layman\'s terms</span>' +
+                '</a>' +
+                '<a class="tools-item' + (currentId === 'script-v2' ? ' active' : '') + '" href="script-v2.html">' +
+                  '<span class="ti-label">📝 Script v2</span>' +
+                  '<span class="ti-desc">Full-argument rewrite: all 22 arguments, cherry-picked</span>' +
                 '</a>' +
               '</div>' +
             '</div>' +
@@ -438,6 +442,7 @@
               '<button type="button" class="menu-toggle" id="nav-search-toggle" style="--nav-color:' + MENU_COLORS.search + ';">🔎 Search <span class="menu-shortcut">⌘K</span></button>' +
             '</div>' +
             gamifiedBadge +
+            '<div class="menu-wrap" id="nav-theme-wrap"></div>' +
             '<a class="live" href="' + liveHref + '" target="_blank" rel="noopener">🌐 Live</a>' +
           '</div>' +
         '</div>' +

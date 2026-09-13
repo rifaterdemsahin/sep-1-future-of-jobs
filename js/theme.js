@@ -99,20 +99,7 @@
     var style = document.createElement('style');
     style.id = 'theme-ui-styles';
     style.textContent =
-      '.theme-toggle{position:fixed;bottom:20px;right:20px;z-index:500;' +
-        'width:46px;height:46px;border-radius:50%;border:1px solid var(--panel-border,#232838);' +
-        'background:var(--panel,#13161f);color:var(--text,#eef0f4);font-size:19px;cursor:pointer;' +
-        'display:flex;align-items:center;justify-content:center;padding:0;' +
-        'box-shadow:0 6px 20px rgba(0,0,0,.35);transition:transform .15s ease,border-color .15s ease;}' +
-      '.theme-toggle:hover{transform:translateY(-2px);border-color:var(--accent-2,#5ab0ff);}' +
-      '.theme-menu{position:fixed;bottom:74px;right:20px;z-index:500;' +
-        'background:var(--panel,#13161f);border:1px solid var(--panel-border,#232838);' +
-        'border-radius:12px;padding:8px;box-shadow:0 12px 40px rgba(0,0,0,.45);' +
-        'display:flex;flex-direction:column;gap:2px;min-width:180px;' +
-        'font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}' +
-      '.theme-menu[hidden]{display:none;}' +
-      '.theme-menu .tm-title{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;' +
-        'color:var(--text-dim,#9aa1b0);font-weight:700;padding:4px 10px 6px;}' +
+      '.topnav #nav-theme-menu{left:auto;right:0;width:200px;}' +
       '.theme-option{display:flex;align-items:center;gap:9px;font-size:13px;' +
         'padding:8px 10px;border-radius:8px;border:1px solid transparent;background:none;' +
         'color:var(--text-dim,#9aa1b0);cursor:pointer;text-align:left;width:100%;font-family:inherit;}' +
@@ -123,25 +110,34 @@
     document.head.appendChild(style);
   }
 
+  // Mounts into the "#nav-theme-wrap" slot nav.js renders next to the
+  // 🌐 Live link, reusing the same .menu-toggle/.menu-panel look as every
+  // other nav dropdown instead of a separate floating button.
   function buildUi(){
+    var wrap = document.getElementById('nav-theme-wrap');
+    if(!wrap) return;
     injectUiStyles();
 
+    var current = document.documentElement.getAttribute('data-theme') || 'dark';
+    var currentTheme = THEMES.filter(function(t){ return t.id === current; })[0] || THEMES[0];
+
     var btn = document.createElement('button');
-    btn.className = 'theme-toggle';
     btn.type = 'button';
+    btn.className = 'menu-toggle';
+    btn.id = 'nav-theme-toggle';
     btn.title = 'Change theme';
     btn.setAttribute('aria-label', 'Change theme');
-    btn.textContent = '🎨';
+    btn.innerHTML = currentTheme.emoji + ' Theme <span class="menu-caret">▾</span>';
 
     var menu = document.createElement('div');
-    menu.className = 'theme-menu';
+    menu.className = 'menu-panel tools-menu';
+    menu.id = 'nav-theme-menu';
     menu.hidden = true;
-    menu.innerHTML = '<div class="tm-title">🎨 Theme</div>';
 
     function refreshActive(){
-      var current = document.documentElement.getAttribute('data-theme') || 'dark';
+      var activeId = document.documentElement.getAttribute('data-theme') || 'dark';
       menu.querySelectorAll('.theme-option').forEach(function(opt){
-        opt.classList.toggle('active', opt.dataset.id === current);
+        opt.classList.toggle('active', opt.dataset.id === activeId);
       });
     }
 
@@ -156,6 +152,7 @@
       opt.addEventListener('click', function(){
         apply(t.id);
         save(t.id);
+        btn.innerHTML = t.emoji + ' Theme <span class="menu-caret">▾</span>';
         refreshActive();
       });
       menu.appendChild(opt);
@@ -163,20 +160,22 @@
 
     btn.addEventListener('click', function(e){
       e.stopPropagation();
-      menu.hidden = !menu.hidden;
+      var opening = menu.hidden;
+      document.querySelectorAll('.topnav .menu-panel').forEach(function(m){
+        if(m !== menu) m.hidden = true;
+      });
+      menu.hidden = !opening;
       if(!menu.hidden) refreshActive();
     });
     document.addEventListener('click', function(e){
-      if(!menu.hidden && !menu.contains(e.target) && e.target !== btn){
-        menu.hidden = true;
-      }
+      if(!wrap.contains(e.target)) menu.hidden = true;
     });
     document.addEventListener('keydown', function(e){
       if(e.key === 'Escape') menu.hidden = true;
     });
 
-    document.body.appendChild(menu);
-    document.body.appendChild(btn);
+    wrap.appendChild(btn);
+    wrap.appendChild(menu);
   }
 
   document.addEventListener('DOMContentLoaded', buildUi);

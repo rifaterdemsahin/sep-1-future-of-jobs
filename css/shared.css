@@ -60,11 +60,12 @@ body{
 .topnav .links a.live, .topnav .right-links a.live{color:var(--accent);border-color:var(--accent);}
 .topnav .links a.live:hover, .topnav .right-links a.live:hover{color:var(--bg);background:var(--accent);}
 
-/* Three collapsible top-level menus, mounted in the top nav — 📂 Pipeline
-   (production-stage pages), 🔎 Search (site-wide search), 🧰 Tools (Tasks +
-   grouped external tools). Each menu gets its own accent color via the
-   --nav-color custom property set inline per toggle, so they read as
-   distinct sections at a glance while sharing one toggle/panel system. */
+/* Collapsible top-level menus, mounted in the top nav — 🧠 Remember,
+   💡 Understand, 📊 Analysis, ⚖️ Evaluate, ✨ Create (which also holds
+   Tasks + grouped external tools), plus the 🎨 Theme picker on the right.
+   Each menu gets its own accent color via the --nav-color custom property
+   set inline per toggle, so they read as distinct sections at a glance
+   while sharing one toggle/panel system. */
 .topnav .menu-wrap{position:relative;}
 .topnav .menu-toggle{
   display:flex;align-items:center;gap:6px;
@@ -91,7 +92,7 @@ body{
   display:flex;flex-direction:column;gap:2px;
 }
 .topnav .menu-panel[hidden]{display:none;}
-.topnav #nav-tools-menu{left:auto;right:0;width:300px;}
+.topnav #nav-create-menu{left:auto;right:0;width:300px;}
 
 /* Each tool group is a native <details>/<summary> accordion — collapsible
    on its own, no extra JS wiring needed. */

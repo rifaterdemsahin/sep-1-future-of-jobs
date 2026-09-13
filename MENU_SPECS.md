@@ -12,7 +12,7 @@ this fits into the rest of the project's documentation.
 ```
 🎬 Job Apocalypse · Debunked   🧠 Remember ▾  💡 Understand ▾
                                 📊 Analysis ▾  ⚖️ Evaluate ▾  ✨ Create ▾
-                                                          🔎 Search ⌘K  ⭐ Lvl N badge  🌐 Live
+                                        🔎 Search ⌘K  ⭐ Lvl N badge  🎨 Theme ▾  🌐 Live
 [ ▓▓▓▓▓▓▓▓░░░░░░░░░░ ]  ← nav-xp-bar (production progress, done/in-progress)
 ```
 
@@ -20,11 +20,11 @@ this fits into the rest of the project's documentation.
 - Center-left: five top-level menu buttons, each a collapsible
   `<details>`-style dropdown panel (`menu-toggle` + `menu-panel`), with its
   own accent color from `MENU_COLORS`.
-- Right: the single Search entry point, the gamified level badge, and a
-  `🌐 Live` link to the current page's Cloudflare Workers equivalent.
-  Search lives only here now — the previous copy duplicated inside the
-  center row was a leftover `id="nav-search-wrap"` clash and has been
-  removed.
+- Right: the single Search entry point, the gamified level badge, the
+  🎨 Theme picker, and a `🌐 Live` link to the current page's Cloudflare
+  Workers equivalent — Theme sits directly next to Live. Search lives only
+  here now — the previous copy duplicated inside the center row was a
+  leftover `id="nav-search-wrap"` clash and has been removed.
 - Bottom: an XP progress bar reflecting production-plan completion.
 - A separate bottom-of-viewport bar (`renderBottomBar`) lists any tasks
   currently `in progress`, independent of the top nav.
@@ -150,13 +150,37 @@ inside it.
   page listing tasks currently `progress`, with a click-through modal to
   mark done / revert / jump to Production Plan.
 
-## 6. Editing rule
+## 6. 🎨 Theme picker
+
+- Owned by `js/theme.js`, not `js/nav.js` — but it mounts *into* a nav
+  slot rather than floating on its own. `Nav.render()` leaves an empty
+  `<div class="menu-wrap" id="nav-theme-wrap"></div>` right before the
+  `🌐 Live` link; on `DOMContentLoaded`, `theme.js` finds that slot and
+  builds a `.menu-toggle` + `.menu-panel` pair into it, reusing the same
+  dropdown look as every other nav menu (open/close on click, close on
+  outside click or Escape, closes sibling menus when opened).
+- The toggle's label always shows the active theme's emoji (`🌑 Theme`,
+  `🌊 Theme`, …), refreshed on every pick.
+- Picking a theme calls `Theme.apply(id)` (sets `data-theme` on `<html>`
+  and fires a `themechange` event) and `Theme.save(id)` (persists to both
+  `localStorage` and a 365-day cookie so the choice survives across pages
+  and repeat visits) — unchanged from before this move, only *where* the
+  control lives changed.
+- Previously this was a floating circular button fixed to the
+  bottom-right corner of the viewport, independent of the nav bar, and it
+  was missing entirely from `sanity-check.html`, `task-report.html`, and
+  `todo.html` (no `<script src="../js/theme.js">` tag). All three now
+  include it, so the picker is present in the nav on every page.
+
+## 7. Editing rule
 
 **Only edit `js/nav.js`.** Never hand-copy nav markup into an `html/*.html`
 file — every page renders it from `PAGES` / `TOOL_GROUPS` /
 `PRODUCTION_PLAN` via `Nav.render(currentId)` on a `#nav-mount` element,
 which is exactly what keeps all pages in sync (see the file's own header
-comment, `js/nav.js:1-7`).
+comment, `js/nav.js:1-7`). The one exception is the theme picker (§6),
+which mounts into a slot nav.js reserves for it but is built by
+`js/theme.js` so theme data/logic stays in one place.
 
 ---
 
