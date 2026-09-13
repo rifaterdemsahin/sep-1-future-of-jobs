@@ -10,61 +10,95 @@ this fits into the rest of the project's documentation.
 ## 1. Layout
 
 ```
-🎬 Job Apocalypse · Debunked   🧠 Remember ▾  💡 Understand ▾  🔎 Search ⌘K
-                                📊 Analysis ▾  ⚖️ Evaluate ▾  ✨ Create ▾  🧰 Tools ▾
+🎬 Job Apocalypse · Debunked   🧠 Remember ▾  💡 Understand ▾
+                                📊 Analysis ▾  ⚖️ Evaluate ▾  ✨ Create ▾
                                                           🔎 Search ⌘K  ⭐ Lvl N badge  🌐 Live
 [ ▓▓▓▓▓▓▓▓░░░░░░░░░░ ]  ← nav-xp-bar (production progress, done/in-progress)
 ```
 
 - Left: brand link (`index.html`).
-- Center-left: seven top-level menu buttons, most as collapsible
-  `<details>`/dropdown panels (`menu-toggle` + `menu-panel`), each with its
+- Center-left: five top-level menu buttons, each a collapsible
+  `<details>`-style dropdown panel (`menu-toggle` + `menu-panel`), with its
   own accent color from `MENU_COLORS`.
-- Right: a second Search entry point, the gamified level badge, and a
+- Right: the single Search entry point, the gamified level badge, and a
   `🌐 Live` link to the current page's Cloudflare Workers equivalent.
+  Search lives only here now — the previous copy duplicated inside the
+  center row was a leftover `id="nav-search-wrap"` clash and has been
+  removed.
 - Bottom: an XP progress bar reflecting production-plan completion.
 - A separate bottom-of-viewport bar (`renderBottomBar`) lists any tasks
   currently `in progress`, independent of the top nav.
 
 ## 2. Top-level menus
 
-| Menu | Color | Type | Contents |
-|---|---|---|---|
-| 🧠 Remember | `#5ab0ff` | dropdown | Research, Arguments — source-gathering pages |
-| 💡 Understand | `#4bcfa1` | dropdown | Script, Design, Previsualisation — synthesis pages |
-| 🔎 Search | `#e8b94a` | modal (⌘K) | Command-palette search (see §4) |
-| 📊 Analysis | `#b388ff` | dropdown | About this video, Sanity Check Report, Task Report |
-| ⚖️ Evaluate | `#ffab40` | dropdown | Assets, Plain English Review |
-| ✨ Create | `#ff5252` | dropdown | Canva Workshop, YouTube Studio (external, `_blank`) |
-| 🧰 Tools | `#7be08a` | dropdown | ✅ Tasks + 6 collapsible tool groups (see §3) |
+| Menu | Color | Contents |
+|---|---|---|
+| 🧠 Remember | `#5ab0ff` | Research, Arguments — source-gathering pages |
+| 💡 Understand | `#4bcfa1` | Script, Design, Previsualisation — synthesis pages |
+| 📊 Analysis | `#b388ff` | **Reports:** About this video, Sanity Check Report, Task Report |
+| ⚖️ Evaluate | `#ffab40` | **Comparisons:** Assets, Plain English Review |
+| ✨ Create | `#ff5252` | Canva Workshop, YouTube Studio, **+ ✅ Tasks and the 6 tool groups** (see §3) |
 
-The grouping (Remember/Understand/Analysis/Evaluate) is a *cognitive*
-grouping layered on top of the 7-stage pipeline defined in
+🔎 Search is not a dropdown menu — it's a command-palette modal, kept as
+its own entry point on the right (see §4).
+
+The grouping (Remember/Understand/Analysis/Evaluate/Create) is a
+*cognitive* grouping layered on top of the 7-stage pipeline defined in
 `PROJECT_TEMPLATE_SPECS.md` §1 — it is not a new set of pages, just a
 different lens for reaching the same `html/*.html` files. `todo.html`
 (Production Plan) is deliberately excluded from Remember/Understand and
-surfaced only as "✅ Tasks" inside 🧰 Tools.
+surfaced only as "✅ Tasks" inside ✨ Create.
 
-### Pipeline pages (`PAGES` array)
+### Pages by menu (`PAGES` array)
 
-| id | emoji | label | file | menu |
-|---|---|---|---|---|
-| research | 🔍 | Research | `index.html` | Remember |
-| arguments | 🧩 | Arguments | `arguments.html` | Remember |
-| script | 📝 | Script | `script.html` | Understand |
-| design | 🎨 | Design | `design.html` | Understand |
-| previsualisation | 🎞️ | Previsualisation | `previsualisation.html` | Understand |
-| assets | 🗂️ | Assets | `assets.html` | Evaluate |
-| todo | ✅ | Production Plan | `todo.html` | Tools → Tasks |
+**Remember**
+
+| id | emoji | label | file |
+|---|---|---|---|
+| research | 🔍 | Research | `index.html` |
+| arguments | 🧩 | Arguments | `arguments.html` |
+
+**Understand**
+
+| id | emoji | label | file |
+|---|---|---|---|
+| script | 📝 | Script | `script.html` |
+| design | 🎨 | Design | `design.html` |
+| previsualisation | 🎞️ | Previsualisation | `previsualisation.html` |
+
+**Analysis — Reports** *(not in `PAGES`; see note below)*
+
+- `about.html` — About this video
+- `sanity-check.html` — Sanity Check Report
+- `task-report.html` — Task Report
+
+**Evaluate — Comparisons**
+
+| id | emoji | label | file |
+|---|---|---|---|
+| assets | 🗂️ | Assets | `assets.html` |
+
+- `plain-english.html` — Plain English Review *(not in `PAGES`)*
+
+**Create → Tasks**
+
+| id | emoji | label | file |
+|---|---|---|---|
+| todo | ✅ | Production Plan | `todo.html` |
 
 Non-pipeline pages (`about.html`, `sanity-check.html`, `task-report.html`,
 `plain-english.html`) live only inside Analysis/Evaluate — they are not in
 `PAGES` and are not indexed by the search palette's page results, but
 **are** reachable and highlighted as `active` via `currentId` checks.
 
-## 3. 🧰 Tools groups (`TOOL_GROUPS`)
+## 3. ✨ Create → Tools groups (`TOOL_GROUPS`)
 
-Each group is an independently-collapsible `<details open>` accordion:
+✨ Create's dropdown holds, in order: the two static Create links (Canva
+Workshop, YouTube Studio), then the ✅ Tasks group, then every
+`TOOL_GROUPS` entry — each an independently-collapsible `<details open>`
+accordion. This folds what used to be a separate top-level 🧰 Tools menu
+into Create, so Create is now the single place to reach both making
+things and the tools that support making them.
 
 1. 🚀 **Deployment** — Cloudflare Worker Live, GitHub Pages, GitHub Repo
 2. 🗄️ **Data & Storage** — Supabase Dashboard, Supabase Table Editor,
@@ -78,13 +112,15 @@ Each group is an independently-collapsible `<details open>` accordion:
 6. 🧰 **Browser Utilities** — Tab to Top extension
 
 Adding/removing a tool means editing one entry in `TOOL_GROUPS` in
-`js/nav.js` — it automatically appears in both the Tools dropdown *and*
-the search index (§4).
+`js/nav.js` — it automatically appears in both the Create dropdown *and*
+the search index (§4). Being on `todo.html` (or any in-progress Tasks
+item) now highlights the ✨ Create button as active, since Tasks lives
+inside it.
 
 ## 4. 🔎 Search (command palette)
 
-- Opens as a centered modal (`⌘K`/`Ctrl+K` from anywhere, or the Search
-  button), not an anchored dropdown.
+- Opens as a centered modal (`⌘K`/`Ctrl+K` from anywhere, or the single
+  Search button on the right), not an anchored dropdown.
 - Index is three sources merged at load time:
   1. `pageIndex` — the 7 `PAGES` entries (`kind: 'page'`)
   2. `toolIndex` — every tool inside `TOOL_GROUPS` (`kind: 'tool'`)
@@ -130,11 +166,11 @@ comment, `js/nav.js:1-7`).
   architecture this menu sits on top of: the 7-stage `html/` pipeline
   (§1), the `content_blocks` table this menu's search indexes live-content
   from (§2), and the local-preview command (`python3 -m http.server 30080`)
-  that the Tools → Data & Storage → Second Brain Server entry assumes is
+  that the Create → Data & Storage → Second Brain Server entry assumes is
   already running (§3 step 5, and this repo's `CLAUDE.md`).
 - **[`README.md`](README.md)** — the canonical live URLs this menu's
-  🌐 Live link and 🚀 Deployment tool group point to, and confirms content
-  (not nav structure) lives in Supabase.
+  🌐 Live link and Create → Deployment tool group point to, and confirms
+  content (not nav structure) lives in Supabase.
 - **[`REPORT.md`](REPORT.md)** — migration history explaining *why*
   assets/notes/ratings moved to Supabase tables that back the Evaluate →
   Assets page and the search palette's content index.

@@ -1,10 +1,11 @@
 // Shared top navigation bar, rendered identically on every page so the menu
-// only needs to be edited in one place. Three collapsible top-level menus,
-// each with its own color: 📂 Pipeline (production-stage pages), 🔎 Search
-// (a centered command-palette style search over pages, tools, AND every
-// piece of Supabase content), and 🧰 Tools (Tasks + grouped external tools,
-// each group itself collapsible) — all built once here so every page stays
-// in sync automatically.
+// only needs to be edited in one place. Five collapsible top-level menus,
+// each with its own color — 🧠 Remember, 💡 Understand, 📊 Analysis,
+// ⚖️ Evaluate, ✨ Create (which also holds Tasks + grouped external tools,
+// each group itself collapsible) — plus one 🔎 Search entry point (a
+// centered command-palette style search over pages, tools, AND every piece
+// of Supabase content) — all built once here so every page stays in sync
+// automatically.
 (function(){
   var LIVE_BASE = 'https://sep-1-future-of-jobs.polished-boat-17b2.workers.dev/html/';
   var RECENT_KEY = 'navSearchRecent';
@@ -14,7 +15,6 @@
     remember:   '#5ab0ff',
     understand: '#4bcfa1',
     search:     '#e8b94a',
-    tools:      '#7be08a',
     analysis:   '#b388ff',
     evaluate:   '#ffab40',
     create:     '#ff5252'
@@ -388,9 +388,6 @@
               '<button type="button" class="menu-toggle' + (understandActive ? ' active' : '') + '" id="nav-understand-toggle" style="--nav-color:' + MENU_COLORS.understand + ';">💡 Understand <span class="menu-caret">▾</span></button>' +
               '<div class="menu-panel tools-menu" id="nav-understand-menu" hidden>' + understandItems + '</div>' +
             '</div>' +
-            '<div class="menu-wrap" id="nav-search-wrap">' +
-              '<button type="button" class="menu-toggle" id="nav-search-toggle" style="--nav-color:' + MENU_COLORS.search + ';">🔎 Search <span class="menu-shortcut">⌘K</span></button>' +
-            '</div>' +
             '<div class="menu-wrap" id="nav-analysis-wrap">' +
               '<button type="button" class="menu-toggle' + ((currentId === 'sanity-check' || currentId === 'about' || currentId === 'task-report') ? ' active' : '') + '" id="nav-analysis-toggle" style="--nav-color:' + MENU_COLORS.analysis + ';">📊 Analysis <span class="menu-caret">▾</span></button>' +
               '<div class="menu-panel tools-menu" id="nav-analysis-menu" hidden>' +
@@ -422,7 +419,7 @@
               '</div>' +
             '</div>' +
             '<div class="menu-wrap" id="nav-create-wrap">' +
-              '<button type="button" class="menu-toggle" id="nav-create-toggle" style="--nav-color:' + MENU_COLORS.create + ';">✨ Create <span class="menu-caret">▾</span></button>' +
+              '<button type="button" class="menu-toggle' + (tasksActive ? ' active' : '') + '" id="nav-create-toggle" style="--nav-color:' + MENU_COLORS.create + ';">✨ Create <span class="menu-caret">▾</span></button>' +
               '<div class="menu-panel tools-menu" id="nav-create-menu" hidden>' +
                 '<a class="tools-item" href="https://www.canva.com/design/DAHTV1XbvSs/uyMkcD8cZwdHn03nhVnC_w/edit" target="_blank" rel="noopener">' +
                   '<span class="ti-label">🎨 Canva Workshop</span>' +
@@ -432,11 +429,6 @@
                   '<span class="ti-label">▶️ YouTube Studio</span>' +
                   '<span class="ti-desc">Upload and publish</span>' +
                 '</a>' +
-              '</div>' +
-            '</div>' +
-            '<div class="menu-wrap" id="nav-tools-wrap">' +
-              '<button type="button" class="menu-toggle' + (tasksActive ? ' active' : '') + '" id="nav-tools-toggle" style="--nav-color:' + MENU_COLORS.tools + ';">🧰 Tools <span class="menu-caret">▾</span></button>' +
-              '<div class="menu-panel tools-menu" id="nav-tools-menu" hidden>' +
                 tasksGroup + toolGroups +
               '</div>' +
             '</div>' +
@@ -471,7 +463,6 @@
     wireDropdown('nav-analysis-toggle', 'nav-analysis-menu', 'nav-analysis-wrap');
     wireDropdown('nav-evaluate-toggle', 'nav-evaluate-menu', 'nav-evaluate-wrap');
     wireDropdown('nav-create-toggle', 'nav-create-menu', 'nav-create-wrap');
-    wireDropdown('nav-tools-toggle', 'nav-tools-menu', 'nav-tools-wrap');
     wireSearchModal();
   }
 
