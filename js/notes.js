@@ -56,8 +56,7 @@
     var style = document.createElement('style');
     style.id = 'notes-styles';
     style.textContent =
-      '.notes-bar{position:fixed;left:0;right:0;bottom:0;z-index:490;' +
-        'background:var(--panel,#13161f);border-top:1px solid var(--panel-border,#232838);' +
+      '.notes-bar{width:100%;box-sizing:border-box;background:var(--panel,#13161f);border-top:1px solid var(--panel-border,#232838);' +
         'box-shadow:0 -6px 20px rgba(0,0,0,.35);' +
         'font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}' +
       '.notes-bar-header{display:flex;align-items:center;gap:8px;padding:8px 14px;cursor:pointer;' +
@@ -357,7 +356,21 @@
     });
 
     renderList();
-    document.body.appendChild(bar);
+    
+    var container = document.getElementById('agent-bottom-bars');
+    if(!container){
+      container = document.createElement('div');
+      container.id = 'agent-bottom-bars';
+      container.style.position = 'fixed';
+      container.style.bottom = '0';
+      container.style.left = '0';
+      container.style.right = '0';
+      container.style.zIndex = '9999';
+      container.style.display = 'flex';
+      container.style.flexDirection = 'column-reverse'; // Stack them from bottom up
+      document.body.appendChild(container);
+    }
+    container.appendChild(bar);
   }
 
   document.addEventListener('DOMContentLoaded', function(){
