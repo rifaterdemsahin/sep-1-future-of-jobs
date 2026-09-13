@@ -17,6 +17,7 @@ touching markup.
 
 | Table | Replaces | Columns |
 |---|---|---|
+| `videos` | Project catalog for multi-video pipelines | `id, title, description, slug, status, created_at, updated_at` |
 | `content_blocks` | Hand-authored HTML per stage page | `id, page, section, position, type, data (jsonb), updated_at` |
 | `assets` | `assets.js` localStorage (`jobApocalypse_assets_v1`) | `id, type, title, description, source, url, comment, added_at` |
 | `notes` | `notes.js` cookie (`jobApocalypse_notes_v1`) + Azure blob sync | `id (uuid), page, text, created_at` |

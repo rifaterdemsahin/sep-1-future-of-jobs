@@ -77,7 +77,24 @@ async function main() {
     console.log('--- Applying Schema ---');
     const schemaSql = fs.readFileSync(path.join(__dirname, 'schema.sql'), 'utf8');
     await client.query(schemaSql);
-    console.log('Schema verified & updated.');
+    console.log('--- Seeding Videos Catalog ---');
+    await client.query(`
+      INSERT INTO public.videos (id, title, description, slug, status, updated_at)
+      VALUES ($1, $2, $3, $4, $5, NOW())
+      ON CONFLICT (id) DO UPDATE SET
+        title = EXCLUDED.title,
+        description = EXCLUDED.description,
+        slug = EXCLUDED.slug,
+        status = EXCLUDED.status,
+        updated_at = NOW()
+    `, [
+      'sep-1-future-of-jobs',
+      'Why Elon Musk is Wrong About the Job Apocalypse',
+      'A Father\'s Perspective — comprehensive video pre-production and argument architecture demonstrating why AI expands rather than contracts human opportunity.',
+      'sep-1-future-of-jobs',
+      'production'
+    ]);
+    console.log('Seeded default video record: sep-1-future-of-jobs');
 
     console.log('--- Seeding Assets ---');
     for (const item of allAssets) {
@@ -97,6 +114,8 @@ async function main() {
 
     console.log('--- Seeding Ratings ---');
     const sampleRatings = [
+      { id: 'cmp-sunak-musk', stars: 5 },
+      { id: 'link-yt-r2meht', stars: 5 },
       { id: 'cmp-musk-optional', stars: 5 },
       { id: 'cmp-musk-big-prediction', stars: 5 },
       { id: 'cmp-altman', stars: 4 },

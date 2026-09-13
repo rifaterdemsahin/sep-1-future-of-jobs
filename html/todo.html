@@ -493,16 +493,14 @@ var PRODUCTION_PLAN = [
       { title: 'Core message', status: 'done' },
       { title: 'Premise', status: 'done', note: 'Reworded to "Key Premise Locked" in the pending diff.' },
       { title: 'Audience transformation (before/after)', status: 'done', note: 'New section added in the uncommitted diff — not yet pushed.' },
-      { title: '14 argument cards', status: 'done', note: 'Added Argument 14: Schools at the civilizational core & peak education, healthcare, and politics.' },
-      { title: 'Argument 7 reframed: I-shaped → T-shaped → X-shaped skills', status: 'done', note: 'Sharpened to name the three skill shapes explicitly and center creative multi-skilling as the AI-era differentiator. Reseeded to Supabase.' },
-      { title: 'Argument 9 added: Wages rise with capability permutations', status: 'done', note: 'Added Argument 9 proving superlinear compensation returns as execution friction collapses.' },
-      { title: 'Argument 10 added: Regulation accelerates AI like traffic rules', status: 'done', note: 'Added Argument 10 illustrating how clear guardrails and safety standards accelerate institutional scale and public trust.' },
-      { title: 'Argument 11 added: IT self-learning & university expansion', status: 'done', note: 'Added Argument 11 showing how self-directed IT learning unlocks AI leverage and expands the global role of universities.' },
-      { title: 'Argument 12 added: Real-world projects get harder & skill expectations skyrocket', status: 'done', note: 'Added Argument 12 drawing on Erdem\'s frontline engineering experience showing how AI raises the complexity ceiling.' },
-      { title: 'Argument 13 added: Bicycle for the mind on steroids & infinite divergence', status: 'done', note: 'Added Argument 13: Positronic threshold where AI convergence sparks exponential divergence into new human jobs.' },
-      { title: 'Argument 14 added: Schools at the core & peak public institutions', status: 'done', note: 'Added Argument 14 showing how AI empowers schools as community epicenters delivering peak education, universal healthcare, and enlightened governance.' },
+      { title: '20 argument cards (including Moravec\'s Paradox, Money Velocity, Stripe Indicator, Africa Leapfrog, and Steelman Rebuttal)', status: 'done', note: 'Expanded to 20 comprehensive argument cards spanning historical proof, micro-business velocity, sensorimotor moats, and global TAM expansion.' },
+      { title: 'Argument 16 added: Moravec\'s Paradox & physical dexterity moat', status: 'done', note: 'Added Argument 16: Abstract cognition is easy for AI, but messy physical dexterity is hard for robotics.' },
+      { title: 'Argument 17 added: Velocity of money (M × V = P × Y) & micro-business boom', status: 'done', note: 'Added Argument 17 showing how zero startup friction turns workers into micro-business units, accelerating money circulation.' },
+      { title: 'Argument 18 added: The Stripe Indicator ($1.9T payment proof)', status: 'done', note: 'Added Argument 18 using Stripe\'s $1.9T volume and 57% non-US cohort growth to prove micro-commerce explosion.' },
+      { title: 'Argument 19 added: Digital Leapfrog in emerging markets (satellite + mobile AI)', status: 'done', note: 'Added Argument 19 showing how Africa and emerging regions skip 30 years of IT friction to unlock 2B+ new economic actors.' },
+      { title: 'Argument 20 added: Steelman Rebuttal & Long-Tail Economics', status: 'done', note: 'Added Argument 20 answering speed gaps, winner-take-most, substitute labor, and capital distribution.' },
       { title: 'Conclusion', status: 'done' },
-      { title: 'Sanity-check cards', status: 'done' },
+      { title: '7 Sanity-check cards', status: 'done', note: '7 stress-tests fully validated including Moravec\'s Paradox and Money Velocity.' },
       { title: 'Commit + push wording refresh', status: 'progress', note: 'html/arguments.html and seed-content.js currently modified but uncommitted.' }
     ]
   },
@@ -514,6 +512,7 @@ var PRODUCTION_PLAN = [
       { title: 'Section 2 — Infinite Permutation Principle (1:45–2:45)', status: 'done' },
       { title: 'Section 3 — Education Democratization, Math & Human Insight (2:45–3:45)', status: 'done' },
       { title: 'Conclusion & Outro (3:45–4:30)', status: 'done' },
+      { title: 'Convert script into layman\'s terms (plain English review)', status: 'todo', note: 'Translate technical jargon and economic concepts (J-curves, permutations, positronic divergence) into clear layman\'s terms. Reference: https://www.youtube.com/watch?v=zU_H8mcFqpQ ("What Does ‘Layman’s Terms’ Mean?").' },
       { title: 'Commit + push beat-timing refresh', status: 'progress', note: 'html/script.html and seed-content.js currently modified but uncommitted.' }
     ]
   },
@@ -544,8 +543,10 @@ var PRODUCTION_PLAN = [
       { title: 'B-roll categories mapped to script sections', status: 'done' },
       { title: 'YouTube search terms per category', status: 'done' },
       { title: 'Save-to-assets + Azure Blob image upload', status: 'done' },
+      { title: 'Generate visual assets with Google Flow (AI video & motion graphics)', status: 'todo', note: 'Generate motion graphics, video segments, and concept assets via Google Flow project. Project URL: https://flow.google.com/u/1/project/ec557d11-2773-4887-babb-f12b65e4b7b7/edit/88f11cfc-17da-476b-8ff3-7e8bb5790963' },
+      { title: 'Generate asset creation tasks with relative order sorting', status: 'todo', note: 'Establish an asset creation task workflow with an explicit order/sequence value on each asset item so they can be sorted relative to each other on the timeline. Reference: https://rifaterdemsahin.github.io/sep-1-future-of-jobs/assets.html' },
       { title: 'Source/license actual footage for each saved item', status: 'todo' },
-      { title: 'Sort & finalize by expected time-code', status: 'progress' }
+      { title: 'Sort & finalize by expected time-code and relative order', status: 'progress' }
     ]
   },
   {
@@ -561,7 +562,7 @@ var PRODUCTION_PLAN = [
   {
     id: 'footage', emoji: '🎥', name: 'Footage & Graphics Sourcing', status: 'todo',
     tasks: [
-      { title: 'Generate/commission motion graphics from previz prompts', status: 'todo' },
+      { title: 'Generate/commission motion graphics from previz prompts in Google Flow', status: 'todo', note: 'Create shot board video clips in Google Flow: https://flow.google.com/u/1/project/ec557d11-2773-4887-babb-f12b65e4b7b7/edit/88f11cfc-17da-476b-8ff3-7e8bb5790963' },
       { title: 'Shoot or source talking-head footage (host + daughter shots)', status: 'todo' },
       { title: 'Pull licensed news-headline montage clips', status: 'todo' },
       { title: 'Verify usage rights on every sourced clip', status: 'todo' }
@@ -582,6 +583,7 @@ var PRODUCTION_PLAN = [
     tasks: [
       { title: 'Fact-check every on-screen claim against Research sources', status: 'todo' },
       { title: 'Walk the 3 sanity-check items against the final cut', status: 'todo' },
+      { title: 'Layman\'s terms & clarity review pass (convert jargon to everyday language)', status: 'todo', note: 'Verify script and on-screen copy are easily understood by non-technical viewers using plain language. Reference: https://www.youtube.com/watch?v=zU_H8mcFqpQ' },
       { title: 'Full watch-through pass for pacing vs. the pacing bar', status: 'todo' },
       { title: 'Accessibility pass (captions, contrast)', status: 'todo' }
     ]
@@ -593,7 +595,12 @@ var PRODUCTION_PLAN = [
       { title: 'Title, description, thumbnail', status: 'todo' },
       { title: 'Upload to YouTube', status: 'todo' },
       { title: 'Skool community CTA cross-link', status: 'todo' },
-      { title: 'Redeploy site (wrangler deploy) with any last content edits', status: 'todo' }
+      { title: 'Redeploy site (wrangler deploy) with any last content edits', status: 'todo' },
+      { title: 'Convert table structure to generic multi-video architecture (add videos table & link tables)', status: 'todo', note: 'Migrate Supabase schema to support multiple videos: add a `videos` table (id, title, description, slug, status, created_at) and link content_blocks, assets, notes, ratings, and audio_clips via video_id foreign keys. Supabase Dashboard: https://supabase.com/dashboard/project/mdsykpdkdprtmkccukle/editor/17522?schema=public' },
+      { title: 'Create project template specs to scaffold new video projects', status: 'todo', note: 'Document end-to-end project specifications, directory structure, Supabase schema blueprint, and scaffolding workflow to spin up new video production projects seamlessly. Reference: https://github.com/rifaterdemsahin/sep-1-future-of-jobs/tree/main' },
+      { title: 'Post-production YouTube & multi-channel promotion (conversation trigger)', status: 'todo', note: 'Execute post-release community engagement pass on YouTube comments, pinned question prompts, and professional network threads to ignite discussion around AI job creation vs. apocalypse. Reference: https://www.linkedin.com/messaging/thread/2-ZjE5ZTE1NmItN2M4MC00ZTcxLTk5YzgtNTg1YzJjNzg4NmE5XzAxMA==/' },
+      { title: 'Update the pipeline with what we learned', status: 'todo', note: 'Reference: https://www.canva.com/design/DAHTV1XbvSs/uyMkcD8cZwdHn03nhVnC_w/edit' },
+      { title: 'Review GitHub commits & extract streamlined tasks for the next video', status: 'todo', note: 'Walk the commit history since the last video shipped, pull out what actually worked vs. what caused rework, and turn that into a leaner task list for the next production cycle. Reference: https://github.com/rifaterdemsahin/sep-1-future-of-jobs/commits/main' }
     ]
   }
 ];

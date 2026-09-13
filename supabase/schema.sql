@@ -9,6 +9,19 @@
 create extension if not exists "pgcrypto";
 
 -- ---------------------------------------------------------------------
+-- videos: catalog of video production projects (multi-video support)
+-- ---------------------------------------------------------------------
+create table if not exists public.videos (
+  id          text primary key,          -- e.g. "sep-1-future-of-jobs"
+  title       text not null default '',
+  description text not null default '',
+  slug        text not null default '',
+  status      text not null default 'draft', -- draft, production, review, published
+  created_at  timestamptz not null default now(),
+  updated_at  timestamptz not null default now()
+);
+
+-- ---------------------------------------------------------------------
 -- assets: items saved via the "Add to Assets" buttons across pages
 -- ---------------------------------------------------------------------
 create table if not exists public.assets (
@@ -104,6 +117,7 @@ create table if not exists public.audio_clips (
 -- ---------------------------------------------------------------------
 -- Row Level Security: public tool, no auth, anon key does everything.
 -- ---------------------------------------------------------------------
+alter table public.videos         enable row level security;
 alter table public.assets         enable row level security;
 alter table public.notes          enable row level security;
 alter table public.item_notes     enable row level security;
@@ -111,6 +125,10 @@ alter table public.ratings        enable row level security;
 alter table public.links          enable row level security;
 alter table public.content_blocks enable row level security;
 alter table public.audio_clips    enable row level security;
+
+drop policy if exists "anon full access" on public.videos;
+create policy "anon full access" on public.videos
+  for all using (true) with check (true);
 
 drop policy if exists "anon full access" on public.assets;
 create policy "anon full access" on public.assets

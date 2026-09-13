@@ -441,6 +441,135 @@
     transform:translateY(0);
   }
 
+  /* ElevenLabs Bar */
+  .elevenlabs-bar{
+    background:linear-gradient(135deg, rgba(232,185,74,.08), rgba(90,176,255,.06));
+    border:1px solid rgba(232,185,74,.3);
+    border-radius:12px;
+    padding:12px 18px;
+    margin-bottom:22px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .elevenlabs-info{
+    font-size:13px;
+    color:var(--text);
+  }
+  .copy-elevenlabs-btn{
+    background:var(--accent);
+    color:var(--bg);
+    border:1px solid var(--accent);
+    padding:7px 16px;
+    border-radius:8px;
+    font-size:12.5px;
+    font-weight:700;
+    cursor:pointer;
+    font-family:inherit;
+    transition:all .18s ease;
+  }
+  .copy-elevenlabs-btn:hover{
+    background:transparent;
+    color:var(--accent);
+  }
+
+  /* Script Review Checklist & Layman's Terms Bar */
+  .review-checklist-bar{
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    border-left:4px solid var(--warm);
+    border-radius:12px;
+    padding:18px 22px;
+    margin-bottom:24px;
+  }
+  .review-checklist-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:14px;
+    flex-wrap:wrap;
+  }
+  .review-checklist-title{
+    font-size:14px;
+    font-weight:700;
+    color:var(--text);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .review-checklist-title .ref-link{
+    font-size:11.5px;
+    font-weight:600;
+    color:var(--accent-2);
+    text-decoration:none;
+    background:rgba(90,176,255,.1);
+    border:1px solid rgba(90,176,255,.3);
+    padding:3px 9px;
+    border-radius:14px;
+    transition:all .15s ease;
+  }
+  .review-checklist-title .ref-link:hover{
+    background:var(--accent-2);
+    color:var(--bg);
+  }
+  .checklist-progress-badge{
+    font-size:11.5px;
+    font-weight:700;
+    padding:3px 10px;
+    border-radius:999px;
+    background:rgba(123,224,138,.12);
+    color:#7be08a;
+    border:1px solid rgba(123,224,138,.3);
+  }
+  .checklist-progress-badge.incomplete{
+    background:rgba(232,185,74,.12);
+    color:var(--accent);
+    border-color:rgba(232,185,74,.3);
+  }
+  .review-checklist-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
+    gap:10px;
+  }
+  .check-item{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    background:rgba(255,255,255,.02);
+    border:1px solid var(--panel-border);
+    padding:10px 12px;
+    border-radius:8px;
+    font-size:13px;
+    line-height:1.45;
+    cursor:pointer;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .check-item:hover{
+    background:rgba(255,255,255,.04);
+    border-color:rgba(255,255,255,.15);
+  }
+  .check-item input[type="checkbox"]{
+    margin-top:2px;
+    accent-color:var(--accent);
+    cursor:pointer;
+    flex-shrink:0;
+    width:15px;
+    height:15px;
+  }
+  .check-item.checked span{
+    color:var(--text);
+  }
+  .check-item span{
+    color:var(--text-dim);
+  }
+  .check-item strong{
+    color:var(--text);
+  }
+
   footer{
     max-width:840px;
     margin:0 auto;
@@ -531,6 +660,34 @@
     </button>
   </div>
 
+  <div class="review-checklist-bar" id="review-checklist-bar">
+    <div class="review-checklist-head">
+      <div class="review-checklist-title">
+        <span>🔎 Script Review Checklist · Layman's Terms &amp; Clarity</span>
+        <a class="ref-link" href="https://www.youtube.com/watch?v=zU_H8mcFqpQ" target="_blank" rel="noopener">📺 Ref: "What Does 'Layman's Terms' Mean?" (YouTube)</a>
+      </div>
+      <span class="checklist-progress-badge" id="checklist-progress-badge">4/4 Checks Passed</span>
+    </div>
+    <div class="review-checklist-grid">
+      <label class="check-item checked" id="label-check-layman">
+        <input type="checkbox" checked id="check-layman" onchange="ScriptReviewChecklist.onChange()">
+        <span><strong>Convert into Layman's Terms:</strong> Translate technical jargon (e.g., J-curve, permutations, positronic divergence) into everyday plain English that any viewer can immediately grasp.</span>
+      </label>
+      <label class="check-item checked" id="label-check-analogies">
+        <input type="checkbox" checked id="check-analogies" onchange="ScriptReviewChecklist.onChange()">
+        <span><strong>Grounded Everyday Analogies:</strong> Anchor abstract claims with familiar real-world comparisons (calculators, bicycles, traffic lights, fatherhood).</span>
+      </label>
+      <label class="check-item checked" id="label-check-pacing">
+        <input type="checkbox" checked id="check-pacing" onchange="ScriptReviewChecklist.onChange()">
+        <span><strong>Conversational Rhythm &amp; Flow:</strong> Maintain natural cadence, punchy line lengths, and engaging spoken audio delivery.</span>
+      </label>
+      <label class="check-item checked" id="label-check-clarity">
+        <input type="checkbox" checked id="check-clarity" onchange="ScriptReviewChecklist.onChange()">
+        <span><strong>Core Thesis Clarity:</strong> Ensure every beat reinforces the central message: AI multiplies human potential and expands job opportunities rather than destroying them.</span>
+      </label>
+    </div>
+  </div>
+
   <div class="toc">
     <h2>Beats &amp; Pacing</h2>
     <ol>
@@ -583,9 +740,66 @@
     }).join('');
   }
 
+  // Script Review Checklist Controller
+  var ScriptReviewChecklist = {
+    key: 'jobApocalypse_scriptReviewChecks',
+    defaults: {
+      'check-layman': true,
+      'check-analogies': true,
+      'check-pacing': true,
+      'check-clarity': true
+    },
+    init: function(){
+      var saved = {};
+      try{ saved = JSON.parse(localStorage.getItem(this.key) || '{}'); }catch(e){ saved = {}; }
+      var keys = Object.keys(this.defaults);
+      keys.forEach(function(k){
+        var el = document.getElementById(k);
+        if(!el) return;
+        var val = (saved[k] !== undefined) ? saved[k] : ScriptReviewChecklist.defaults[k];
+        el.checked = !!val;
+        var lbl = el.closest('.check-item');
+        if(lbl) lbl.classList.toggle('checked', el.checked);
+      });
+      this.updateBadge();
+    },
+    onChange: function(){
+      var data = {};
+      var keys = Object.keys(this.defaults);
+      keys.forEach(function(k){
+        var el = document.getElementById(k);
+        if(!el) return;
+        data[k] = el.checked;
+        var lbl = el.closest('.check-item');
+        if(lbl) lbl.classList.toggle('checked', el.checked);
+      });
+      try{ localStorage.setItem(this.key, JSON.stringify(data)); }catch(e){}
+      this.updateBadge();
+    },
+    updateBadge: function(){
+      var keys = Object.keys(this.defaults);
+      var total = keys.length;
+      var count = 0;
+      keys.forEach(function(k){
+        var el = document.getElementById(k);
+        if(el && el.checked) count++;
+      });
+      var badge = document.getElementById('checklist-progress-badge');
+      if(!badge) return;
+      if(count === total){
+        badge.textContent = '✅ ' + count + '/' + total + ' Checks Passed';
+        badge.className = 'checklist-progress-badge';
+      }else{
+        badge.textContent = '🟡 ' + count + '/' + total + ' Checks Complete';
+        badge.className = 'checklist-progress-badge incomplete';
+      }
+    }
+  };
+
   Promise.all([ContentDB.ready, AssetDB.ready]).then(function(){
     renderBeats();
     AssetDB.initAddButtons();
+    ScriptReviewChecklist.init();
   });
 
   // Shared clipboard helper

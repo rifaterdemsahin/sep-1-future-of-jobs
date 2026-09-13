@@ -9,6 +9,17 @@ Per-page content (source links, arguments, script beats, design specs,
 shot panels) is stored in Supabase's `content_blocks` table and rendered
 client-side — see `supabase/seed-content.js` to edit it, not the HTML.
 
+## Before opening any local page
+
+Always make sure the Second Brain server at `http://localhost:30080/` is
+running before opening any page from this project (locally or otherwise).
+Start it if it isn't already up.
+
+## Single-branch rule
+
+This repo only ever has one branch: `main`. Never create, push to, or check
+out any other branch — commit and push directly to `main`.
+
 ## After making changes
 
 Always finish a change with this sequence:
